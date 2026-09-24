@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card System Showcase — WCAG 2.1 AA Accessible</title>
+    <link rel="stylesheet" href="../components/cards.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #05070C 0%, #161D2B 100%);
+            color: white;
+            padding: 2rem;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 3rem; color: #38BDF8; }
+        .section { margin-bottom: 4rem; }
+        .section h2 { color: #6EE7B7; margin-bottom: 2rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Card System Showcase</h1>
+
+        <section class="section" aria-labelledby="product-cards-title">
+            <h2 id="product-cards-title">Product Cards</h2>
+            <div class="grid">
+                <article class="hq-card-product">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"
+                             alt="Premium black wireless headphones with cushioned ear cups" class="hq-card-product-image">
+                        <span class="hq-card-product-badge" aria-label="On sale">Sale</span>
+                    </div>
+                    <div class="hq-card-product-content">
+                        <div class="hq-card-product-category">Audio</div>
+                        <h3 class="hq-card-product-title">Premium Headphones</h3>
+                        <p class="hq-card-product-description">Active noise cancellation with 30hr battery.</p>
+                        <div class="hq-card-product-footer">
+                            <div class="hq-card-product-price">
+                                <span class="hq-card-product-price-current" aria-label="Sale price $249">$249</span>
+                                <span class="hq-card-product-price-old" aria-label="Original price $349">$349</span>
+                            </div>
+                            <button class="hq-card-product-button" aria-label="Add Premium Headphones to cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="profile-cards-title">
+            <h2 id="profile-cards-title">Profile Cards</h2>
+            <div class="grid">
+                <article class="hq-card-profile">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="Sarah Johnson profile picture" class="hq-card-profile-avatar">
+                    <h3 class="hq-card-profile-name">Sarah Chen</h3>
+                    <p class="hq-card-profile-role">Product Designer</p>
+                    <p class="hq-card-profile-bio">Crafting beautiful user experiences with focus on accessibility.</p>
+                    <div class="hq-card-profile-stats" role="group" aria-label="Sarah Chen's statistics">
+                        <div class="hq-card-profile-stat">
+                            <div class="hq-card-profile-stat-value" aria-label="127 projects">127</div>
+                            <div class="hq-card-profile-stat-label">Projects</div>
+                        </div>
+                        <div class="hq-card-profile-stat">
+                            <div class="hq-card-profile-stat-value" aria-label="8,200 followers">8.2k</div>
+                            <div class="hq-card-profile-stat-label">Followers</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="pricing-cards-title">
+            <h2 id="pricing-cards-title">Pricing Cards</h2>
+            <div class="grid">
+                <article class="hq-card-pricing featured">
+                    <span class="hq-card-pricing-badge" aria-label="Most popular plan">Popular</span>
+                    <div class="hq-card-pricing-header">
+                        <h3 class="hq-card-pricing-name">Professional</h3>
+                        <p class="hq-card-pricing-description">For growing teams</p>
+                    </div>
+                    <div class="hq-card-pricing-price">
+                        <span class="hq-card-pricing-price-amount">$29</span>
+                        <span class="hq-card-pricing-price-period">/month</span>
+                    </div>
+                    <ul class="hq-card-pricing-features" aria-label="Professional plan features">
+                        <li class="hq-card-pricing-feature">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Unlimited projects
+                        </li>
+                        <li class="hq-card-pricing-feature">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Priority support
+                        </li>
+                    </ul>
+                    <button class="hq-card-pricing-button" aria-label="Start trial for Professional plan">Start Trial</button>
+                </article>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

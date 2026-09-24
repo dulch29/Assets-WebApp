@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal & Overlay Kit</title>
+    <link rel="stylesheet" href="components/overlays.css">
+    <style>
+        body { font-family: system-ui; background: linear-gradient(135deg, #05070C 0%, #161D2B 100%); color: white; margin: 0; padding: 2rem; }
+        .skip-link { position: absolute; left: -9999px; top: 0.5rem; background: #38BDF8; color: #05070C; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; z-index: 9999; }
+        .skip-link:focus { left: 0.5rem; }
+        .demo { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #6EE7B7; margin-bottom: 3rem; }
+        h2 { color: #38BDF8; margin: 2rem 0 1rem; }
+        .demo-section { margin-bottom: 3rem; }
+        .demo-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
+        .btn { padding: 0.75rem 1.5rem; background: #38BDF8; color: #05070C; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; min-height: 44px; min-width: 44px; }
+        .btn:hover { background: #6EE7B7; }
+        .btn:focus { outline: none; }
+        .btn:focus-visible { outline: 2px solid #38BDF8; outline-offset: 2px; }
+        @media (prefers-contrast: high) { .btn:focus-visible { outline-width: 3px; outline-color: #fff; } }
+        @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="demo" role="banner">
+        <h1>Modal &amp; Overlay Kit</h1>
+    </div>
+    <main id="main-content">
+        <section class="demo-section" aria-labelledby="section-modal">
+            <h2 id="section-modal">Modal Dialog</h2>
+            <button class="btn" id="openModalBtn" onclick="openModal()">Open Modal</button>
+        </section>
+        <section class="demo-section" aria-labelledby="section-toast">
+            <h2 id="section-toast">Toast Notifications</h2>
+            <div class="demo-buttons" role="group" aria-label="Show toast notifications">
+                <button class="btn" onclick="showToast('success')">Success</button>
+                <button class="btn" onclick="showToast('error')">Error</button>
+                <button class="btn" onclick="showToast('info')">Info</button>
+            </div>
+        </section>
+        <section class="demo-section" aria-labelledby="section-tooltip">
+            <h2 id="section-tooltip">Tooltip</h2>
+            <div class="hq-tooltip-wrapper">
+                <button class="btn" aria-describedby="tooltip-demo">Hover me</button>
+                <div class="hq-tooltip" id="tooltip-demo" role="tooltip">Helpful tooltip!</div>
+            </div>
+        </section>
+        <section class="demo-section" aria-labelledby="section-dropdown">
+            <h2 id="section-dropdown">Dropdown Menu</h2>
+            <div class="hq-dropdown" id="dropdown">
+                <button class="hq-dropdown-trigger"
+                        id="dropdownTrigger"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        aria-controls="dropdownMenu"
+                        onclick="toggleDropdown()">Options</button>
+                <div class="hq-dropdown-menu" id="dropdownMenu" role="menu" aria-labelledby="dropdownTrigger">
+                    <a href="#" class="hq-dropdown-item" role="menuitem">Edit</a>
+                    <a href="#" class="hq-dropdown-item" role="menuitem">Duplicate</a>
+                    <div class="hq-dropdown-divider" role="separator"></div>
+                    <a href="#" class="hq-dropdown-item" role="menuitem">Delete</a>
+                </div>
+            </div>
+        </section>
+        <section class="demo-section" aria-labelledby="section-alerts">
+            <h2 id="section-alerts">Alert Banners</h2>
+            <div class="hq-alert info" role="note" aria-label="Info alert">
+                <div class="hq-alert-icon" aria-hidden="true">ℹ</div>
+                <div class="hq-alert-content">
+                    <div class="hq-alert-title">Info</div>
+                    <div class="hq-alert-message">Informational message.</div>
+                </div>
+            </div>
+            <div class="hq-alert success" role="note" aria-label="Success alert">
+                <div class="hq-alert-icon" aria-hidden="true">✓</div>
+                <div class="hq-alert-content">
+                    <div class="hq-alert-title">Success</div>
+                    <div class="hq-alert-message">Operation completed!</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="hq-modal-backdrop"
+         id="modalBackdrop"
+         role="presentation"
+         onclick="closeModal(event)">
+        <div class="hq-modal"
+             id="modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalTitle"
+             onclick="event.stopPropagation()">
+            <div class="hq-modal-header">
+                <h3 class="hq-modal-title" id="modalTitle">Modal Title</h3>
+                <button class="hq-modal-close" aria-label="Close modal" onclick="closeModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="hq-modal-body"><p>Modal content here.</p></div>
+            <div class="hq-modal-footer">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn" onclick="closeModal()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hq-toast-container"
+         id="toastContainer"
+         aria-live="polite"
+         aria-atomic="false"
+         aria-label="Notifications"></div>
+
+    <script>
+        var _prevFocus = null;
+
+        function openModal() {
+            _prevFocus = document.activeElement;
+            var backdrop = document.getElementById('modalBackdrop');
+            backdrop.classList.add('open');
+            var modal = document.getElementById('modal');
+            modal.removeAttribute('aria-hidden');
+            var first = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (first) first.focus();
+        }
+
+        function closeModal(e) {
+            if (e && e.target.id !== 'modalBackdrop') return;
+            var backdrop = document.getElementById('modalBackdrop');
+            backdrop.classList.remove('open');
+            document.getElementById('modal').setAttribute('aria-hidden', 'true');
+            if (_prevFocus) _prevFocus.focus();
+        }
+
+        document.getElementById('modal').setAttribute('aria-hidden', 'true');
+
+        document.getElementById('modal').addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') { closeModal(); return; }
+            if (e.key !== 'Tab') return;
+            var focusable = Array.from(this.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+            if (!focusable.length) return;
+            var first = focusable[0], last = focusable[focusable.length - 1];
+            if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+            else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+        });
+
+        function toggleDropdown() {
+            var d = document.getElementById('dropdown');
+            var trigger = document.getElementById('dropdownTrigger');
+            var open = d.classList.toggle('open');
+            trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (open) {
+                var first = d.querySelector('.hq-dropdown-item');
+                if (first) first.focus();
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            var d = document.getElementById('dropdown');
+            if (!d.contains(e.target)) {
+                d.classList.remove('open');
+                document.getElementById('dropdownTrigger').setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.getElementById('dropdown').addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                this.classList.remove('open');
+                document.getElementById('dropdownTrigger').setAttribute('aria-expanded', 'false');
+                document.getElementById('dropdownTrigger').focus();
+            }
+        });
+
+        function showToast(type) {
+            var c = document.getElementById('toastContainer');
+            var t = document.createElement('div');
+            t.className = 'hq-toast ' + type;
+            t.setAttribute('role', 'status');
+            var icon = type === 'error' ? '✕' : type === 'info' ? 'ℹ' : '✓';
+            var msg = type === 'success' ? 'Operation completed successfully.' : type === 'error' ? 'An error occurred.' : 'Here is some information.';
+            t.innerHTML =
+                '<div class="hq-toast-icon" aria-hidden="true">' + icon + '</div>' +
+                '<div class="hq-toast-content">' +
+                    '<div class="hq-toast-title">' + (type.charAt(0).toUpperCase() + type.slice(1)) + '</div>' +
+                    '<div class="hq-toast-message">' + msg + '</div>' +
+                '</div>' +
+                '<button class="hq-toast-close" aria-label="Dismiss notification">✕</button>';
+            t.querySelector('.hq-toast-close').addEventListener('click', function() { t.remove(); });
+            c.appendChild(t);
+            setTimeout(function() { if (t.parentNode) t.remove(); }, 5000);
+        }
+    </script>
+</body>
+</html>

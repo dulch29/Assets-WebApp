@@ -1,0 +1,227 @@
+/* ===== EXTRACT THIS: Glass Navbar Component ===== */
+
+/* CSS Variables - Add to your :root */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --accent-primary: hsl(195, 100%, 45%);
+    --accent-hover: hsl(195, 100%, 55%);
+    --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+    --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --radius-sm: clamp(8px, 1vw, 12px);
+    --radius-pill: 999px;
+}
+
+/* Glass Navbar Styles */
+.hq-glass-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.hq-glass-navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.hq-glass-navbar-brand {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.hq-glass-navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hq-glass-navbar-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.hq-glass-navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+.hq-glass-navbar-link:hover {
+    color: white;
+}
+
+.hq-glass-navbar-link:hover::after {
+    width: 100%;
+}
+
+.hq-glass-navbar-btn {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.hq-glass-navbar-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+}
+
+.hq-glass-navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-xs);
+}
+
+/* Mobile Responsive (Below 768px) */
+@media (max-width: 768px) {
+    .hq-glass-navbar-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border-bottom: 1px solid var(--glass-border);
+        padding: var(--space-md);
+        gap: var(--space-md);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .hq-glass-navbar-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .hq-glass-navbar-toggle {
+        display: block;
+    }
+
+    .hq-glass-navbar-link::after {
+        display: none; /* Hide underline animation on mobile */
+    }
+}
+
+/* ===== HTML STRUCTURE ===== */
+
+/*
+<nav class="hq-glass-navbar">
+    <div class="hq-glass-navbar-container">
+        <a href="#" class="hq-glass-navbar-brand">
+            <!-- Optional: Add logo/icon here -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Brand Name
+        </a>
+        <button class="hq-glass-navbar-toggle" aria-label="Toggle navigation menu">
+            ☰
+        </button>
+        <ul class="hq-glass-navbar-menu">
+            <li><a href="#home" class="hq-glass-navbar-link">Home</a></li>
+            <li><a href="#about" class="hq-glass-navbar-link">About</a></li>
+            <li><a href="#services" class="hq-glass-navbar-link">Services</a></li>
+            <li><a href="#contact" class="hq-glass-navbar-link">Contact</a></li>
+            <li><button class="hq-glass-navbar-btn">Get Started</button></li>
+        </ul>
+    </div>
+</nav>
+*/
+
+/* ===== JAVASCRIPT (Required for Mobile Toggle) ===== */
+
+/*
+<script>
+// Toggle mobile menu
+document.querySelector('.hq-glass-navbar-toggle').addEventListener('click', function() {
+    document.querySelector('.hq-glass-navbar-menu').classList.toggle('active');
+});
+
+// Optional: Close menu when clicking a link (better UX on mobile)
+document.querySelectorAll('.hq-glass-navbar-link').forEach(link => {
+    link.addEventListener('click', function() {
+        document.querySelector('.hq-glass-navbar-menu').classList.remove('active');
+    });
+});
+
+// Optional: Close menu when clicking outside (advanced)
+document.addEventListener('click', function(e) {
+    const navbar = document.querySelector('.hq-glass-navbar');
+    const toggle = document.querySelector('.hq-glass-navbar-toggle');
+    const menu = document.querySelector('.hq-glass-navbar-menu');
+
+    if (!navbar.contains(e.target) && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+    }
+});
+</script>
+*/
+
+/* ===== USAGE NOTES ===== */
+
+/*
+1. STICKY POSITIONING: Navbar stays at top while scrolling
+2. GLASS EFFECT: Blurs content behind it as page scrolls
+3. MOBILE MENU: Hamburger icon appears below 768px width
+4. HOVER ANIMATION: Links show underline on hover (desktop only)
+5. CTA BUTTON: Last item can be a button for call-to-action
+6. LOGO/ICON: Add SVG or image inside .hq-glass-navbar-brand
+7. MAX WIDTH: Container maxes at 1400px, change if needed
+8. ACCESSIBILITY: Toggle button has aria-label for screen readers
+
+CUSTOMIZATION TIPS:
+- Change breakpoint: Modify @media (max-width: 768px) to your preferred width
+- Add more links: Just add more <li> items in the menu
+- Change accent color: Modify --accent-primary variable
+- Remove button: Delete the <li><button> element if not needed
+*/

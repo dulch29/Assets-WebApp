@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Kit</title>
+    <link rel="stylesheet" href="components/navigation.css">
+    <style>
+        body { font-family: system-ui; background: linear-gradient(135deg, #05070C 0%, #161D2B 100%); color: white; margin: 0; }
+        .demo { padding: 3rem 2rem; max-width: 1400px; margin: 0 auto; }
+        h2 { color: #6EE7B7; margin: 2rem 0 1rem; }
+        .skip-link { position: absolute; left: -9999px; top: 0.5rem; background: #38BDF8; color: #05070C; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; z-index: 9999; }
+        .skip-link:focus { left: 0.5rem; }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="hq-nav-top" aria-label="Main navigation">
+        <a href="#" class="hq-nav-top-brand" aria-label="NavKit home">NavKit</a>
+        <ul class="hq-nav-top-menu" id="navMenu" role="list">
+            <li><a href="#" class="hq-nav-top-link active" aria-current="page">Home</a></li>
+            <li><a href="#" class="hq-nav-top-link">Products</a></li>
+            <li><a href="#" class="hq-nav-top-link">About</a></li>
+        </ul>
+        <button class="hq-nav-top-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation menu">
+            <span aria-hidden="true">☰</span>
+        </button>
+    </nav>
+
+    <main id="main-content">
+    <div class="demo">
+        <h2>Breadcrumbs</h2>
+        <nav aria-label="Breadcrumb">
+            <ol class="hq-breadcrumbs">
+                <li class="hq-breadcrumbs-item">
+                    <a href="#" class="hq-breadcrumbs-link">Home</a>
+                    <span class="hq-breadcrumbs-separator" aria-hidden="true">/</span>
+                </li>
+                <li class="hq-breadcrumbs-item">
+                    <a href="#" class="hq-breadcrumbs-link" aria-current="page">Products</a>
+                </li>
+            </ol>
+        </nav>
+
+        <h2>Tabs</h2>
+        <div class="hq-tabs">
+            <ul class="hq-tabs-list" role="tablist" aria-label="Content tabs">
+                <li role="presentation"><button class="hq-tabs-trigger active" role="tab" aria-selected="true" aria-controls="tab1" id="tab1-btn" data-tab="tab1">Overview</button></li>
+                <li role="presentation"><button class="hq-tabs-trigger" role="tab" aria-selected="false" aria-controls="tab2" id="tab2-btn" data-tab="tab2">Details</button></li>
+            </ul>
+            <div class="hq-tabs-content">
+                <div class="hq-tabs-panel active" id="tab1" role="tabpanel" aria-labelledby="tab1-btn">Overview content</div>
+                <div class="hq-tabs-panel" id="tab2" role="tabpanel" aria-labelledby="tab2-btn" hidden>Details content</div>
+            </div>
+        </div>
+
+        <h2>Pagination</h2>
+        <nav aria-label="Pagination">
+            <ul class="hq-pagination">
+                <li><a href="#" class="hq-pagination-link disabled" aria-disabled="true" tabindex="-1" aria-label="Previous page">←</a></li>
+                <li><a href="#" class="hq-pagination-link active" aria-current="page" aria-label="Page 1">1</a></li>
+                <li><a href="#" class="hq-pagination-link" aria-label="Page 2">2</a></li>
+                <li><a href="#" class="hq-pagination-link" aria-label="Next page">→</a></li>
+            </ul>
+        </nav>
+    </div>
+    </main>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.onclick = () => {
+            const isOpen = navMenu.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        };
+        document.querySelectorAll('.hq-tabs-trigger').forEach(t => t.onclick = () => {
+            document.querySelectorAll('.hq-tabs-trigger').forEach(x => {
+                x.classList.remove('active');
+                x.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.hq-tabs-panel').forEach(x => {
+                x.classList.remove('active');
+                x.hidden = true;
+            });
+            t.classList.add('active');
+            t.setAttribute('aria-selected', 'true');
+            const panel = document.getElementById(t.dataset.tab);
+            panel.classList.add('active');
+            panel.hidden = false;
+        });
+    </script>
+</body>
+</html>

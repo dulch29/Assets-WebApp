@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button System — All-Round UI Kit</title>
+    <style>
+        /* ============================================
+           DESIGN SYSTEM FOUNDATION
+           ============================================ */
+        :root {
+            /* Surface layers - deep tonal foundation */
+            --surface-0: #05070C;
+            --surface-1: #0A0D12;
+            --surface-2: #0F131C;
+            --surface-3: #161D2B;
+            --surface-4: #1E2636;
+            --surface-5: #2A3142;
+
+            /* Accent colors - luminous, high saturation */
+            --accent-primary: #3B6DFF;
+            --accent-primary-hover: #5B85FF;
+            --accent-primary-active: #2450E6;
+
+            --accent-success: #6EE7B7;
+            --accent-success-hover: #8EEDC7;
+            --accent-success-active: #4FD9A0;
+
+            --accent-danger: #FF6B6B;
+            --accent-danger-hover: #FF8585;
+            --accent-danger-active: #E65555;
+
+            --accent-warning: #FFA94D;
+            --accent-warning-hover: #FFB76D;
+            --accent-warning-active: #E69540;
+
+            /* Text hierarchy */
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.70);
+            --text-tertiary: rgba(255, 255, 255, 0.45);
+            --text-inverted: rgba(0, 0, 0, 0.90);
+
+            /* Typography scale - fluid sizing */
+            --font-display: clamp(2.5rem, 5vw, 4rem);
+            --font-h1: clamp(2rem, 4vw, 3rem);
+            --font-h2: clamp(1.5rem, 3vw, 2rem);
+            --font-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+            --font-body-lg: clamp(1.125rem, 2vw, 1.25rem);
+            --font-body: clamp(1rem, 1.5vw, 1.125rem);
+            --font-body-sm: clamp(0.875rem, 1.25vw, 1rem);
+            --font-caption: clamp(0.75rem, 1vw, 0.875rem);
+
+            /* Font families */
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+            /* Spacing scale */
+            --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+            --space-sm: clamp(0.5rem, 1vw, 0.75rem);
+            --space-md: clamp(0.75rem, 1.5vw, 1rem);
+            --space-lg: clamp(1rem, 2vw, 1.5rem);
+            --space-xl: clamp(1.5rem, 3vw, 2rem);
+            --space-2xl: clamp(2rem, 4vw, 3rem);
+            --space-3xl: clamp(3rem, 6vw, 4rem);
+
+            /* Border radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(59, 109, 255, 0.3);
+        }
+
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg,
+                #05070C 0%,
+                #0A0D12 25%,
+                #0F131C 50%,
+                #0A0D12 75%,
+                #05070C 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           DEMO PAGE LAYOUT
+           ============================================ */
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-lg);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .demo-title {
+            font-size: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-subtitle {
+            font-size: var(--font-body-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: var(--surface-2);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: var(--font-h2);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            font-size: var(--font-body);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .button-demo-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .button-label {
+            font-size: var(--font-body-sm);
+            color: var(--text-tertiary);
+            font-family: var(--font-mono);
+        }
+
+        /* ============================================
+           BUTTON SYSTEM - CORE COMPONENTS
+           ============================================ */
+
+        /* Base button reset and foundation */
+        .hq-btn {
+            /* Reset */
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            text-decoration: none;
+
+            /* Typography */
+            font-family: var(--font-sans);
+            font-size: var(--font-body);
+            font-weight: 500;
+            line-height: 1.5;
+
+            /* Layout */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 1.5rem);
+            border-radius: var(--radius-full);
+
+            /* Transitions */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Interaction */
+            user-select: none;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hq-btn:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           BUTTON VARIANTS - SEMANTIC STYLES
+           ============================================ */
+
+        /* PRIMARY - Main call-to-action */
+        .hq-btn-primary {
+            background: var(--accent-primary);
+            color: var(--text-inverted);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-primary:hover:not(:disabled) {
+            background: var(--accent-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .hq-btn-primary:active:not(:disabled) {
+            background: var(--accent-primary-active);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* SECONDARY - Alternative action */
+        .hq-btn-secondary {
+            background: var(--surface-4);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hq-btn-secondary:hover:not(:disabled) {
+            background: var(--surface-5);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-secondary:active:not(:disabled) {
+            background: var(--surface-3);
+            transform: translateY(0);
+        }
+
+        /* SUCCESS - Positive confirmation */
+        .hq-btn-success {
+            background: var(--accent-success);
+            color: var(--text-inverted);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-success:hover:not(:disabled) {
+            background: var(--accent-success-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(110, 231, 183, 0.3);
+        }
+
+        .hq-btn-success:active:not(:disabled) {
+            background: var(--accent-success-active);
+            transform: translateY(0);
+        }
+
+        /* DANGER - Destructive action */
+        .hq-btn-danger {
+            background: var(--accent-danger);
+            color: var(--text-inverted);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-danger:hover:not(:disabled) {
+            background: var(--accent-danger-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .hq-btn-danger:active:not(:disabled) {
+            background: var(--accent-danger-active);
+            transform: translateY(0);
+        }
+
+        /* WARNING - Caution required */
+        .hq-btn-warning {
+            background: var(--accent-warning);
+            color: var(--text-inverted);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-warning:hover:not(:disabled) {
+            background: var(--accent-warning-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(255, 169, 77, 0.3);
+        }
+
+        .hq-btn-warning:active:not(:disabled) {
+            background: var(--accent-warning-active);
+            transform: translateY(0);
+        }
+
+        /* GHOST - Minimal, text-like */
+        .hq-btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid transparent;
+        }
+
+        .hq-btn-ghost:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .hq-btn-ghost:active:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* OUTLINE - Bordered variant */
+        .hq-btn-outline {
+            background: transparent;
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .hq-btn-outline:hover:not(:disabled) {
+            background: var(--accent-primary);
+            color: var(--text-inverted);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hq-btn-outline:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           BUTTON SIZES
+           ============================================ */
+        .hq-btn-sm {
+            font-size: var(--font-body-sm);
+            padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.875rem, 2vw, 1rem);
+            gap: var(--space-xs);
+        }
+
+        .hq-btn-lg {
+            font-size: var(--font-body-lg);
+            padding: clamp(0.875rem, 2vw, 1rem) clamp(1.75rem, 4vw, 2rem);
+            gap: var(--space-md);
+        }
+
+        .hq-btn-xl {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            padding: clamp(1rem, 2.5vw, 1.25rem) clamp(2rem, 5vw, 2.5rem);
+            gap: var(--space-lg);
+        }
+
+        /* ============================================
+           BUTTON STATES
+           ============================================ */
+
+        /* Disabled state */
+        .hq-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Loading state */
+        .hq-btn-loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .hq-btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 1em;
+            height: 1em;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: hq-btn-spin 0.6s linear infinite;
+            color: var(--text-primary);
+        }
+
+        .hq-btn-primary.hq-btn-loading::after,
+        .hq-btn-success.hq-btn-loading::after,
+        .hq-btn-danger.hq-btn-loading::after,
+        .hq-btn-warning.hq-btn-loading::after {
+            color: var(--text-inverted);
+        }
+
+        @keyframes hq-btn-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           BUTTON GROUPS
+           ============================================ */
+        .hq-btn-group {
+            display: inline-flex;
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+            padding: 2px;
+        }
+
+        .hq-btn-group .hq-btn {
+            border-radius: var(--radius-full);
+        }
+
+        /* ============================================
+           ICON BUTTONS
+           ============================================ */
+        .hq-btn-icon {
+            padding: clamp(0.625rem, 1.5vw, 0.75rem);
+            width: clamp(2.5rem, 5vw, 3rem);
+            height: clamp(2.5rem, 5vw, 3rem);
+            border-radius: 50%;
+        }
+
+        .hq-btn-icon-sm {
+            padding: clamp(0.375rem, 1vw, 0.5rem);
+            width: clamp(2rem, 4vw, 2.5rem);
+            height: clamp(2rem, 4vw, 2.5rem);
+        }
+
+        .hq-btn-icon-lg {
+            padding: clamp(0.875rem, 2vw, 1rem);
+            width: clamp(3rem, 6vw, 3.5rem);
+            height: clamp(3rem, 6vw, 3.5rem);
+        }
+
+        /* Icon SVG sizing */
+        .hq-btn svg {
+            width: 1.25em;
+            height: 1.25em;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           FULL WIDTH BUTTON
+           ============================================ */
+        .hq-btn-block {
+            width: 100%;
+            display: flex;
+        }
+
+        /* ============================================
+           RESPONSIVE BEHAVIOR
+           ============================================ */
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-section {
+                padding: var(--space-lg);
+            }
+        }
+
+        /* Demo-specific: Code display */
+        .code-block {
+            background: var(--surface-1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-top: var(--space-xl);
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: var(--font-body-sm);
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .code-block code {
+            color: var(--accent-success);
+        }
+
+        /* Demo: Interactive showcase */
+        .interactive-demo {
+            background: var(--surface-3);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .interactive-demo p {
+            margin-bottom: var(--space-lg);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <header class="demo-header">
+            <h1 class="demo-title">Button System</h1>
+            <p class="demo-subtitle">
+                Production-grade button components with semantic variants, all states, and zero dependencies.
+                Copy-paste ready for any framework or vanilla project.
+            </p>
+        </header>
+
+        <!-- Section: Semantic Variants -->
+        <section class="demo-section">
+            <h2 class="section-title">Semantic Variants</h2>
+            <p class="section-description">
+                Each button variant carries meaning — primary for main actions, danger for destructive operations,
+                ghost for minimal emphasis. Choose based on action priority, not just color preference.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-primary</span>
+                    <button class="hq-btn hq-btn-primary">Primary Action</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-secondary</span>
+                    <button class="hq-btn hq-btn-secondary">Secondary</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-success</span>
+                    <button class="hq-btn hq-btn-success">Confirm</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-danger</span>
+                    <button class="hq-btn hq-btn-danger">Delete</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-warning</span>
+                    <button class="hq-btn hq-btn-warning">Proceed with Caution</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-ghost</span>
+                    <button class="hq-btn hq-btn-ghost">Minimal</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-outline</span>
+                    <button class="hq-btn hq-btn-outline">Outlined</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Size Variants -->
+        <section class="demo-section">
+            <h2 class="section-title">Size Variants</h2>
+            <p class="section-description">
+                Four size options using fluid clamp() scaling — proportions hold at any viewport width.
+                No fixed pixels, fully responsive by default.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-sm</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-sm">Small Button</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn (default)</span>
+                    <button class="hq-btn hq-btn-primary">Default Button</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-lg</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-lg">Large Button</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-xl</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-xl">Extra Large</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Icon Buttons -->
+        <section class="demo-section">
+            <h2 class="section-title">Icon Buttons</h2>
+            <p class="section-description">
+                Circular buttons for actions represented by icons alone. Combine with tooltips for accessibility.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-icon-sm</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-icon hq-btn-icon-sm">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-icon</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-icon-lg</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-icon hq-btn-icon-lg">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Buttons with Icons -->
+        <section class="demo-section">
+            <h2 class="section-title">Buttons with Icons</h2>
+            <p class="section-description">
+                Icons inside text buttons enhance recognition and guide the eye. Place before or after text as needed.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">Icon + Text</span>
+                    <button class="hq-btn hq-btn-primary">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add Item
+                    </button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">Text + Icon</span>
+                    <button class="hq-btn hq-btn-secondary">
+                        Continue
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">Download</span>
+                    <button class="hq-btn hq-btn-success">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Download
+                    </button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">Delete</span>
+                    <button class="hq-btn hq-btn-danger">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Button States -->
+        <section class="demo-section">
+            <h2 class="section-title">Button States</h2>
+            <p class="section-description">
+                Disabled and loading states provide clear feedback. Loading state uses pure CSS animation, no images required.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">:disabled</span>
+                    <button class="hq-btn hq-btn-primary" disabled>Disabled Button</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-loading</span>
+                    <button class="hq-btn hq-btn-primary hq-btn-loading">Loading...</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">Secondary Loading</span>
+                    <button class="hq-btn hq-btn-secondary hq-btn-loading">Processing</button>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">Success Loading</span>
+                    <button class="hq-btn hq-btn-success hq-btn-loading">Saving...</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Button Groups -->
+        <section class="demo-section">
+            <h2 class="section-title">Button Groups</h2>
+            <p class="section-description">
+                Related actions grouped visually. Useful for toggles, filters, and segmented controls.
+            </p>
+
+            <div class="button-grid">
+                <div class="button-demo-item">
+                    <span class="button-label">.hq-btn-group</span>
+                    <div class="hq-btn-group">
+                        <button class="hq-btn hq-btn-primary">Left</button>
+                        <button class="hq-btn hq-btn-secondary">Center</button>
+                        <button class="hq-btn hq-btn-secondary">Right</button>
+                    </div>
+                </div>
+
+                <div class="button-demo-item">
+                    <span class="button-label">View Switcher</span>
+                    <div class="hq-btn-group">
+                        <button class="hq-btn hq-btn-ghost">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                            </svg>
+                        </button>
+                        <button class="hq-btn hq-btn-primary">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Full Width -->
+        <section class="demo-section">
+            <h2 class="section-title">Full Width Buttons</h2>
+            <p class="section-description">
+                Block-level buttons span their container width. Perfect for mobile layouts and form submissions.
+            </p>
+
+            <div style="max-width: 400px;">
+                <button class="hq-btn hq-btn-primary hq-btn-block hq-btn-lg" style="margin-bottom: var(--space-md);">
+                    Complete Purchase
+                </button>
+                <button class="hq-btn hq-btn-secondary hq-btn-block">
+                    Continue Shopping
+                </button>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Demo -->
+        <section class="demo-section">
+            <h2 class="section-title">Interactive Demo</h2>
+            <p class="section-description">
+                Click the button below to see loading state simulation. Kids wire their own logic — this is just UI.
+            </p>
+
+            <div class="interactive-demo">
+                <p>Try clicking this button to simulate a loading state:</p>
+                <button id="demo-btn" class="hq-btn hq-btn-primary hq-btn-lg">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Click Me
+                </button>
+            </div>
+        </section>
+
+        <!-- Section: Usage Example -->
+        <section class="demo-section">
+            <h2 class="section-title">Usage Example</h2>
+            <p class="section-description">
+                Copy-paste the HTML and CSS. No framework required. Kids add their own JavaScript for interactivity.
+            </p>
+
+            <div class="code-block">
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;button class="hq-btn hq-btn-primary"&gt;
+    &lt;svg fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;
+        &lt;path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" d="M12 4v16m8-8H4"/&gt;
+    &lt;/svg&gt;
+    Add to Cart
+&lt;/button&gt;
+
+&lt;!-- Kids wire their own logic --&gt;
+&lt;script&gt;
+document.querySelector('.hq-btn-primary').addEventListener('click', () => {
+    // Their custom logic here
+    console.log('Button clicked!');
+});
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+    </div>
+
+    <!-- Demo JavaScript (minimal - just for showcase) -->
+    <script>
+        // Interactive demo - simulate loading state
+        const demoBtn = document.getElementById('demo-btn');
+
+        demoBtn.addEventListener('click', () => {
+            // Add loading class
+            demoBtn.classList.add('hq-btn-loading');
+            demoBtn.disabled = true;
+
+            // Simulate async operation (2 seconds)
+            setTimeout(() => {
+                demoBtn.classList.remove('hq-btn-loading');
+                demoBtn.disabled = false;
+                demoBtn.innerHTML = `
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Success!
+                `;
+                demoBtn.classList.remove('hq-btn-primary');
+                demoBtn.classList.add('hq-btn-success');
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    demoBtn.innerHTML = `
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Click Me
+                    `;
+                    demoBtn.classList.remove('hq-btn-success');
+                    demoBtn.classList.add('hq-btn-primary');
+                }, 2000);
+            }, 2000);
+        });
+
+        // Log to console for students to inspect
+        console.log('🎨 Button System Kit loaded');
+        console.log('📦 Available classes:', [
+            '.hq-btn',
+            '.hq-btn-primary',
+            '.hq-btn-secondary',
+            '.hq-btn-success',
+            '.hq-btn-danger',
+            '.hq-btn-warning',
+            '.hq-btn-ghost',
+            '.hq-btn-outline',
+            '.hq-btn-sm / -lg / -xl',
+            '.hq-btn-icon',
+            '.hq-btn-loading',
+            '.hq-btn-block',
+            '.hq-btn-group'
+        ]);
+    </script>
+</body>
+</html>

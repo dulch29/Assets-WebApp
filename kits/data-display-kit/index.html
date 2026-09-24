@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display Kit</title>
+    <link rel="stylesheet" href="components/data-display.css">
+    <style>
+        body { font-family: system-ui; background: linear-gradient(135deg, #05070C 0%, #161D2B 100%); color: white; margin: 0; padding: 2rem; }
+        .demo { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #6EE7B7; margin-bottom: 3rem; }
+        h2 { color: #38BDF8; margin: 2rem 0 1rem; }
+        .demo-section { margin-bottom: 3rem; }
+        .demo-row { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <h1>Data Display Kit</h1>
+        <div class="demo-section">
+            <h2>Table</h2>
+            <table class="hq-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john@example.com</td>
+                        <td><span class="hq-badge success">Active</span></td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>jane@example.com</td>
+                        <td><span class="hq-badge primary">Pending</span></td>
+                        <td>User</td>
+                    </tr>
+                    <tr>
+                        <td>Bob Johnson</td>
+                        <td>bob@example.com</td>
+                        <td><span class="hq-badge warning">Away</span></td>
+                        <td>User</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="demo-section">
+            <h2>List</h2>
+            <ul class="hq-list">
+                <li class="hq-list-item">First item</li>
+                <li class="hq-list-item">Second item</li>
+                <li class="hq-list-item">Third item</li>
+            </ul>
+        </div>
+        <div class="demo-section">
+            <h2>Badges</h2>
+            <div class="demo-row">
+                <span class="hq-badge primary">Primary</span>
+                <span class="hq-badge success">Success</span>
+                <span class="hq-badge warning">Warning</span>
+                <span class="hq-badge error">Error</span>
+            </div>
+        </div>
+        <div class="demo-section">
+            <h2>Avatars</h2>
+            <div class="demo-row">
+                <div class="hq-avatar sm">JS</div>
+                <div class="hq-avatar">JD</div>
+                <div class="hq-avatar lg">AB</div>
+                <div class="hq-avatar xl">XL</div>
+            </div>
+        </div>
+        <div class="demo-section">
+            <h2>Progress Bars</h2>
+            <div style="margin-bottom: 1rem;">
+                <div class="hq-progress">
+                    <div class="hq-progress-bar" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <div class="hq-progress">
+                    <div class="hq-progress-bar" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div>
+                <div class="hq-progress">
+                    <div class="hq-progress-bar" style="width: 90%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-section">
+            <h2>Skeleton Loaders</h2>
+            <div class="hq-skeleton hq-skeleton-title"></div>
+            <div class="hq-skeleton hq-skeleton-text"></div>
+            <div class="hq-skeleton hq-skeleton-text" style="width: 80%;"></div>
+            <div class="hq-skeleton hq-skeleton-text" style="width: 90%;"></div>
+        </div>
+    </div>
+</body>
+</html>

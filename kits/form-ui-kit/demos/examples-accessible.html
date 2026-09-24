@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form UI Examples — Accessible & WCAG 2.1 AA Compliant</title>
+    <link rel="stylesheet" href="../components/forms.css">
+    <style>
+        :root {
+            --surface-0: #05070C;
+            --surface-1: #0A0D12;
+            --surface-2: #0F131C;
+            --font-display: clamp(2rem, 4vw, 3rem);
+            --font-h2: clamp(1.5rem, 3vw, 2rem);
+            --font-body: clamp(1rem, 1.5vw, 1.125rem);
+            --space-xl: clamp(1.5rem, 3vw, 2rem);
+            --space-2xl: clamp(2rem, 4vw, 3rem);
+            --space-3xl: clamp(3rem, 6vw, 4rem);
+            --radius-xl: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: var(--font-body);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, var(--surface-0), var(--surface-1), var(--surface-2));
+            min-height: 100vh;
+            padding: var(--space-3xl) var(--space-xl);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: var(--font-display);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            background: linear-gradient(135deg, #3B6DFF, #6EE7B7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .example-section {
+            background: var(--surface-2);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .example-title {
+            font-size: var(--font-h2);
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hq-btn {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(0.5rem, 1vw, 0.75rem);
+            padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 1.5rem);
+            border-radius: 999px;
+            transition: all 0.2s;
+        }
+
+        .hq-btn-primary {
+            background: #3B6DFF;
+            color: rgba(0, 0, 0, 0.90);
+        }
+
+        .hq-btn-primary:hover {
+            background: #5B85FF;
+            transform: translateY(-1px);
+        }
+
+        .hq-btn-primary:focus-visible {
+            outline: 2px solid #3B6DFF;
+            outline-offset: 2px;
+        }
+
+        .hq-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hq-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            flex-wrap: wrap;
+        }
+
+        .success-message {
+            background: rgba(110, 231, 183, 0.1);
+            border: 1px solid rgba(110, 231, 183, 0.3);
+            color: #6EE7B7;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Accessible Form UI Examples</h1>
+
+        <!-- Example 1: Login Form with Full ARIA -->
+        <section class="example-section">
+            <h2 class="example-title">1. Login Form (WCAG 2.1 AA)</h2>
+
+            <form id="login-form" novalidate>
+                <!-- Live region for screen reader announcements -->
+                <div role="status" aria-live="polite" aria-atomic="true" class="hq-sr-only" id="login-status"></div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="login-email">
+                        Email <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="email"
+                        class="hq-input"
+                        placeholder="you@example.com"
+                        required
+                        aria-required="true"
+                        aria-describedby="login-email-error"
+                        aria-invalid="false"
+                    >
+                    <span class="hq-error-text" id="login-email-error" role="alert">
+                        Please enter a valid email address.
+                    </span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="login-password">
+                        Password <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        class="hq-input"
+                        placeholder="••••••••"
+                        required
+                        aria-required="true"
+                        aria-describedby="login-password-error"
+                        aria-invalid="false"
+                        minlength="8"
+                    >
+                    <span class="hq-error-text" id="login-password-error" role="alert">
+                        Password must be at least 8 characters.
+                    </span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-checkbox-wrapper">
+                        <input
+                            type="checkbox"
+                            class="hq-checkbox"
+                            id="remember-me"
+                            name="remember"
+                            aria-label="Remember me for 30 days"
+                        >
+                        <span class="hq-checkbox-label">Remember me</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="hq-btn hq-btn-primary" style="width: 100%;">
+                    Sign In
+                </button>
+
+                <div class="success-message" id="login-success" role="alert">
+                    ✓ Login successful! Redirecting...
+                </div>
+            </form>
+        </section>
+
+        <!-- Example 2: Contact Form with Fieldset -->
+        <section class="example-section">
+            <h2 class="example-title">2. Contact Form</h2>
+
+            <form id="contact-form" novalidate>
+                <div role="status" aria-live="polite" aria-atomic="true" class="hq-sr-only" id="contact-status"></div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-name">
+                        Full Name <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="name"
+                        class="hq-input"
+                        placeholder="John Doe"
+                        required
+                        aria-required="true"
+                        aria-describedby="contact-name-error"
+                        aria-invalid="false"
+                        autocomplete="name"
+                    >
+                    <span class="hq-error-text" id="contact-name-error" role="alert">
+                        Please enter your full name.
+                    </span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-email">
+                        Email <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="email"
+                        class="hq-input"
+                        placeholder="you@example.com"
+                        required
+                        aria-required="true"
+                        aria-describedby="contact-email-error"
+                        aria-invalid="false"
+                        autocomplete="email"
+                    >
+                    <span class="hq-error-text" id="contact-email-error" role="alert">
+                        Please enter a valid email address.
+                    </span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-subject">
+                        Subject <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <select
+                        id="contact-subject"
+                        name="subject"
+                        class="hq-select"
+                        required
+                        aria-required="true"
+                        aria-describedby="contact-subject-error"
+                        aria-invalid="false"
+                    >
+                        <option value="">Select a topic...</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="billing">Billing Question</option>
+                        <option value="feedback">Feedback</option>
+                    </select>
+                    <span class="hq-error-text" id="contact-subject-error" role="alert">
+                        Please select a subject.
+                    </span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-message">
+                        Message <span class="hq-label-required" aria-label="required">*</span>
+                    </label>
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        class="hq-textarea"
+                        placeholder="Tell us how we can help..."
+                        required
+                        aria-required="true"
+                        aria-describedby="contact-message-help contact-message-error"
+                        aria-invalid="false"
+                        minlength="10"
+                    ></textarea>
+                    <span class="hq-helper-text" id="contact-message-help">
+                        Minimum 10 characters
+                    </span>
+                    <span class="hq-error-text" id="contact-message-error" role="alert">
+                        Message must be at least 10 characters.
+                    </span>
+                </div>
+
+                <button type="submit" class="hq-btn hq-btn-primary">
+                    Send Message
+                </button>
+
+                <div class="success-message" id="contact-success" role="alert">
+                    ✓ Message sent successfully!
+                </div>
+            </form>
+        </section>
+
+        <!-- Example 3: Preferences Form with Radio Buttons -->
+        <section class="example-section">
+            <h2 class="example-title">3. Preferences Form (Radio Groups)</h2>
+
+            <form id="preferences-form" novalidate>
+                <fieldset class="hq-fieldset">
+                    <legend class="hq-legend">
+                        Email Notifications <span class="hq-label-required" aria-label="required">*</span>
+                    </legend>
+
+                    <div class="hq-radio-group" role="radiogroup" aria-required="true" aria-describedby="email-pref-error">
+                        <label class="hq-radio-wrapper">
+                            <input
+                                type="radio"
+                                class="hq-radio"
+                                name="email-frequency"
+                                value="daily"
+                                id="email-daily"
+                                required
+                            >
+                            <span class="hq-radio-label">Daily digest</span>
+                        </label>
+
+                        <label class="hq-radio-wrapper">
+                            <input
+                                type="radio"
+                                class="hq-radio"
+                                name="email-frequency"
+                                value="weekly"
+                                id="email-weekly"
+                                required
+                            >
+                            <span class="hq-radio-label">Weekly summary</span>
+                        </label>
+
+                        <label class="hq-radio-wrapper">
+                            <input
+                                type="radio"
+                                class="hq-radio"
+                                name="email-frequency"
+                                value="never"
+                                id="email-never"
+                                required
+                            >
+                            <span class="hq-radio-label">Never</span>
+                        </label>
+                    </div>
+                    <span class="hq-error-text" id="email-pref-error" role="alert">
+                        Please select an email preference.
+                    </span>
+                </fieldset>
+
+                <fieldset class="hq-fieldset">
+                    <legend class="hq-legend">Privacy Settings</legend>
+
+                    <div class="hq-form-group">
+                        <label class="hq-checkbox-wrapper">
+                            <input
+                                type="checkbox"
+                                class="hq-checkbox"
+                                id="profile-public"
+                                name="profile-public"
+                                aria-describedby="profile-public-help"
+                            >
+                            <span class="hq-checkbox-label">Make my profile public</span>
+                        </label>
+                        <span class="hq-helper-text" id="profile-public-help">
+                            Your profile will be visible to other users
+                        </span>
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-checkbox-wrapper">
+                            <input
+                                type="checkbox"
+                                class="hq-checkbox"
+                                id="activity-visible"
+                                name="activity-visible"
+                                aria-describedby="activity-help"
+                            >
+                            <span class="hq-checkbox-label">Show my activity</span>
+                        </label>
+                        <span class="hq-helper-text" id="activity-help">
+                            Others can see your recent activity
+                        </span>
+                    </div>
+                </fieldset>
+
+                <div class="button-group">
+                    <button type="submit" class="hq-btn hq-btn-primary">
+                        Save Preferences
+                    </button>
+                    <button type="reset" class="hq-btn hq-btn-secondary">
+                        Reset to Defaults
+                    </button>
+                </div>
+
+                <div class="success-message" id="prefs-success" role="alert">
+                    ✓ Preferences saved successfully!
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // Accessible Form Validation JavaScript
+        // Students wire this to their own backend
+
+        // Helper: Show error state
+        function showError(inputEl, errorEl, message) {
+            const formGroup = inputEl.closest('.hq-form-group') || inputEl.closest('.hq-fieldset');
+            formGroup.classList.add('has-error');
+            inputEl.setAttribute('aria-invalid', 'true');
+            errorEl.textContent = message;
+
+            // Announce to screen readers
+            const statusEl = inputEl.form.querySelector('[role="status"]');
+            if (statusEl) {
+                statusEl.textContent = message;
+            }
+        }
+
+        // Helper: Clear error state
+        function clearError(inputEl, errorEl) {
+            const formGroup = inputEl.closest('.hq-form-group') || inputEl.closest('.hq-fieldset');
+            formGroup.classList.remove('has-error');
+            inputEl.setAttribute('aria-invalid', 'false');
+        }
+
+        // Helper: Show success
+        function showSuccess(formId, successId) {
+            const successEl = document.getElementById(successId);
+            successEl.classList.add('show');
+            successEl.focus(); // Move focus to success message
+
+            setTimeout(() => {
+                successEl.classList.remove('show');
+            }, 5000);
+        }
+
+        // Login Form Validation
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+            const emailError = document.getElementById('login-email-error');
+            const passwordError = document.getElementById('login-password-error');
+
+            let isValid = true;
+
+            // Validate email
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                showError(emailInput, emailError, 'Please enter a valid email address.');
+                isValid = false;
+            } else {
+                clearError(emailInput, emailError);
+            }
+
+            // Validate password
+            if (!passwordInput.value || passwordInput.value.length < 8) {
+                showError(passwordInput, passwordError, 'Password must be at least 8 characters.');
+                isValid = false;
+            } else {
+                clearError(passwordInput, passwordError);
+            }
+
+            if (isValid) {
+                // Simulate API call
+                console.log('Login submitted:', {
+                    email: emailInput.value,
+                    password: passwordInput.value
+                });
+                showSuccess('login-form', 'login-success');
+            }
+        });
+
+        // Contact Form Validation
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('contact-name');
+            const emailInput = document.getElementById('contact-email');
+            const subjectInput = document.getElementById('contact-subject');
+            const messageInput = document.getElementById('contact-message');
+
+            let isValid = true;
+
+            // Validate name
+            if (!nameInput.value.trim()) {
+                showError(nameInput, document.getElementById('contact-name-error'), 'Please enter your full name.');
+                isValid = false;
+            } else {
+                clearError(nameInput, document.getElementById('contact-name-error'));
+            }
+
+            // Validate email
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                showError(emailInput, document.getElementById('contact-email-error'), 'Please enter a valid email address.');
+                isValid = false;
+            } else {
+                clearError(emailInput, document.getElementById('contact-email-error'));
+            }
+
+            // Validate subject
+            if (!subjectInput.value) {
+                showError(subjectInput, document.getElementById('contact-subject-error'), 'Please select a subject.');
+                isValid = false;
+            } else {
+                clearError(subjectInput, document.getElementById('contact-subject-error'));
+            }
+
+            // Validate message
+            if (!messageInput.value.trim() || messageInput.value.length < 10) {
+                showError(messageInput, document.getElementById('contact-message-error'), 'Message must be at least 10 characters.');
+                isValid = false;
+            } else {
+                clearError(messageInput, document.getElementById('contact-message-error'));
+            }
+
+            if (isValid) {
+                console.log('Contact form submitted:', {
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    subject: subjectInput.value,
+                    message: messageInput.value
+                });
+                showSuccess('contact-form', 'contact-success');
+                contactForm.reset();
+            }
+        });
+
+        // Preferences Form Validation
+        const prefsForm = document.getElementById('preferences-form');
+        prefsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const emailFrequency = document.querySelector('input[name="email-frequency"]:checked');
+            const emailError = document.getElementById('email-pref-error');
+
+            let isValid = true;
+
+            // Validate radio group
+            if (!emailFrequency) {
+                const radioGroup = document.querySelector('[role="radiogroup"]');
+                showError(radioGroup.querySelector('input'), emailError, 'Please select an email preference.');
+                isValid = false;
+            } else {
+                clearError(emailFrequency, emailError);
+            }
+
+            if (isValid) {
+                console.log('Preferences saved:', {
+                    emailFrequency: emailFrequency.value,
+                    profilePublic: document.getElementById('profile-public').checked,
+                    activityVisible: document.getElementById('activity-visible').checked
+                });
+                showSuccess('preferences-form', 'prefs-success');
+            }
+        });
+
+        // Real-time validation on blur
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('blur', () => {
+                if (input.hasAttribute('required') && !input.value) {
+                    const errorId = input.getAttribute('aria-describedby');
+                    if (errorId) {
+                        const errorEl = document.getElementById(errorId.split(' ')[errorId.split(' ').length - 1]);
+                        if (errorEl && errorEl.classList.contains('hq-error-text')) {
+                            showError(input, errorEl, errorEl.textContent);
+                        }
+                    }
+                }
+            });
+
+            // Clear error on input
+            input.addEventListener('input', () => {
+                if (input.getAttribute('aria-invalid') === 'true') {
+                    const errorId = input.getAttribute('aria-describedby');
+                    if (errorId) {
+                        const errorEl = document.getElementById(errorId.split(' ')[errorId.split(' ').length - 1]);
+                        if (errorEl && errorEl.classList.contains('hq-error-text')) {
+                            clearError(input, errorEl);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

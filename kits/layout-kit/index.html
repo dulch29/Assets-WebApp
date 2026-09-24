@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Kit</title>
+    <link rel="stylesheet" href="components/layout.css">
+    <style>
+        body { font-family: system-ui; background: linear-gradient(135deg, #05070C 0%, #161D2B 100%); color: white; margin: 0; padding: 2rem; }
+        h1 { color: #6EE7B7; margin-bottom: 3rem; }
+        h2 { color: #38BDF8; margin: 2rem 0 1rem; }
+        .demo-box { background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 0.5rem; padding: 1rem; }
+        .demo-section { margin-bottom: 3rem; }
+    </style>
+</head>
+<body>
+    <div class="hq-container">
+        <h1>Layout Kit</h1>
+        
+        <div class="demo-section">
+            <h2>Container Sizes</h2>
+            <div class="hq-container-sm demo-box hq-mb-md">Container SM (640px)</div>
+            <div class="hq-container-md demo-box hq-mb-md">Container MD (768px)</div>
+            <div class="hq-container-lg demo-box">Container LG (1024px)</div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Grid System</h2>
+            <div class="hq-grid hq-grid-cols-3">
+                <div class="demo-box">Col 1</div>
+                <div class="demo-box">Col 2</div>
+                <div class="demo-box">Col 3</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Grid 4 Columns</h2>
+            <div class="hq-grid hq-grid-cols-4">
+                <div class="demo-box">1</div>
+                <div class="demo-box">2</div>
+                <div class="demo-box">3</div>
+                <div class="demo-box">4</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Column Spans</h2>
+            <div class="hq-grid hq-grid-cols-12">
+                <div class="demo-box hq-col-span-6">Span 6</div>
+                <div class="demo-box hq-col-span-6">Span 6</div>
+                <div class="demo-box hq-col-span-4">Span 4</div>
+                <div class="demo-box hq-col-span-4">Span 4</div>
+                <div class="demo-box hq-col-span-4">Span 4</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Flexbox Utilities</h2>
+            <div class="hq-flex hq-justify-between hq-items-center demo-box">
+                <div>Start</div>
+                <div>Center</div>
+                <div>End</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Flex Column with Gap</h2>
+            <div class="hq-flex hq-flex-col hq-gap-md">
+                <div class="demo-box">Item 1</div>
+                <div class="demo-box">Item 2</div>
+                <div class="demo-box">Item 3</div>
+            </div>
+        </div>
+
+        <div class="hq-divider"></div>
+
+        <div class="demo-section">
+            <h2>Spacing Utilities</h2>
+            <div class="demo-box hq-p-lg hq-mb-md">Padding Large</div>
+            <div class="demo-box hq-px-xl hq-py-sm">Horizontal XL, Vertical SM</div>
+        </div>
+
+        <div class="hq-section demo-box">
+            <h2 class="hq-mt-0">Section with Standard Padding</h2>
+            <p>This section uses the hq-section class for consistent vertical spacing.</p>
+        </div>
+    </div>
+</body>
+</html>

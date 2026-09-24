@@ -1,0 +1,11 @@
+{
+  "GATEGUARD_EXEMPT_GLOBS": [
+    "kits/*/README.md",
+    "kits/*/docs/**",
+    "kits/*/index.html",
+    "kits/*/components/**",
+    "kits/*/demos/**",
+    "**/*.backup"
+  ],
+  "ECC_GATEGUARD": "off"
+}

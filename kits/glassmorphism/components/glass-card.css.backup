@@ -1,0 +1,171 @@
+/* ===== EXTRACT THIS: Glass Card Component ===== */
+
+/* CSS Variables - Add to your :root */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --accent-primary: hsl(195, 100%, 45%);
+    --accent-hover: hsl(195, 100%, 55%);
+    --accent-secondary: rgba(255, 255, 255, 0.15);
+    --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+    --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --radius-sm: clamp(8px, 1vw, 12px);
+    --radius-md: clamp(12px, 1.5vw, 16px);
+    --radius-lg: clamp(16px, 2vw, 24px);
+    --radius-pill: 999px;
+}
+
+/* Glass Card Styles */
+.hq-glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.hq-glass-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 56px 0 rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.hq-glass-card-image {
+    width: 100%;
+    height: clamp(200px, 35vw, 280px);
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    background: linear-gradient(135deg,
+        rgba(56, 189, 248, 0.3) 0%,
+        rgba(14, 165, 233, 0.2) 50%,
+        rgba(6, 182, 212, 0.3) 100%
+    );
+}
+
+.hq-glass-card-title {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: white;
+    margin: 0;
+}
+
+.hq-glass-card-subtitle {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin: 0;
+}
+
+.hq-glass-card-description {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin: 0;
+}
+
+.hq-glass-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.hq-glass-card-tag {
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--accent-secondary);
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.hq-glass-card-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.hq-glass-card-btn {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+}
+
+.hq-glass-card-btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.hq-glass-card-btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.5);
+}
+
+.hq-glass-card-btn-secondary {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+.hq-glass-card-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== HTML STRUCTURE ===== */
+
+/*
+<article class="hq-glass-card">
+    <div class="hq-glass-card-image"></div>
+    <h3 class="hq-glass-card-title">Card Title</h3>
+    <p class="hq-glass-card-subtitle">Subtitle Text</p>
+    <p class="hq-glass-card-description">
+        Your description goes here. This is the main content of your card.
+    </p>
+    <div class="hq-glass-card-tags">
+        <span class="hq-glass-card-tag">Tag 1</span>
+        <span class="hq-glass-card-tag">Tag 2</span>
+        <span class="hq-glass-card-tag">Tag 3</span>
+    </div>
+    <div class="hq-glass-card-actions">
+        <button class="hq-glass-card-btn hq-glass-card-btn-primary">
+            Primary Action
+        </button>
+        <button class="hq-glass-card-btn hq-glass-card-btn-secondary">
+            Secondary
+        </button>
+    </div>
+</article>
+*/
+
+/* ===== USAGE NOTES ===== */
+
+/*
+1. BACKGROUND: Place cards over a colorful/patterned background to see the blur effect
+2. CUSTOMIZATION: Change --accent-primary to match your brand color
+3. IMAGES: Replace the gradient background with actual images using <img> tag
+4. OPTIONAL PARTS: Remove tags or subtitle if not needed
+5. GRID LAYOUT: Use CSS Grid for multiple cards:
+
+   .card-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+       gap: var(--space-lg);
+   }
+*/

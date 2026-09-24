@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Extraction Guide - Glassmorphism UI Kit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a1929 0%, #1e293b 100%);
+            color: #e2e8f0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #38bdf8;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #60a5fa;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        .component-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .file-list {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid #38bdf8;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .file-list li {
+            padding: 0.5rem 0;
+            color: #94a3b8;
+        }
+
+        .file-list code {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .step {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 3px solid #38bdf8;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .step strong {
+            color: #38bdf8;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #38bdf8;
+        }
+
+        .warning {
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 3px solid #fbbf24;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .success {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid #22c55e;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-btn {
+            display: inline-block;
+            background: #38bdf8;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+        }
+
+        .demo-section {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(56, 189, 248, 0.05);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Glassmorphism UI Kit</h1>
+        <p style="font-size: 1.125rem; color: #94a3b8;">Framework-agnostic glass components — zero dependencies, production-ready.</p>
+
+        <div class="demo-section">
+            <h3>🎯 Live Demos</h3>
+            <a href="index.html" class="demo-btn">Component Showcase</a>
+            <a href="hotel-booking.html" class="demo-btn">Hotel Booking Demo</a>
+        </div>
+
+        <h2>📁 What You Got</h2>
+        <div class="file-list">
+            <ul>
+                <li><code>index.html</code> — Component showcase with all 3 components</li>
+                <li><code>hotel-booking.html</code> — Real-world hotel booking example</li>
+                <li><code>EXTRACT-glass-card.css</code> — Copy-paste ready Card component</li>
+                <li><code>EXTRACT-glass-modal.css</code> — Copy-paste ready Modal component</li>
+                <li><code>EXTRACT-glass-navbar.css</code> — Copy-paste ready Navbar component</li>
+                <li><code>README.md</code> — Complete documentation</li>
+                <li><code>GUIDE.html</code> — This file (extraction guide)</li>
+            </ul>
+        </div>
+
+        <h2>🚀 Quick Start Options</h2>
+
+        <div class="component-card">
+            <h3>Option 1: Use the Full Demo</h3>
+            <p>Perfect for learning or prototyping:</p>
+            <ol>
+                <li>Open <code>index.html</code> or <code>hotel-booking.html</code> in your browser</li>
+                <li>Inspect with DevTools to see how everything works</li>
+                <li>Customize colors, content, and structure</li>
+            </ol>
+        </div>
+
+        <div class="component-card">
+            <h3>Option 2: Extract Individual Components</h3>
+            <p>Recommended for adding to existing projects:</p>
+            <ol>
+                <li>Open the <code>EXTRACT-*.css</code> file for your component</li>
+                <li>Copy the CSS variables to your <code>:root</code> section</li>
+                <li>Copy the component CSS styles</li>
+                <li>Copy the HTML structure (in comments)</li>
+                <li>Copy the JavaScript (if needed for modal/navbar)</li>
+            </ol>
+        </div>
+
+        <div class="component-card">
+            <h3>Option 3: Study from HTML</h3>
+            <p>Best for understanding the full implementation:</p>
+            <ol>
+                <li>Open <code>index.html</code> in your code editor</li>
+                <li>Look for <code>===== START: HQ GLASS [COMPONENT] =====</code> comments</li>
+                <li>Copy everything between START and END markers</li>
+                <li>Paste into your project</li>
+            </ol>
+        </div>
+
+        <h2>🎨 Component Breakdown</h2>
+
+        <div class="component-card">
+            <h3>1️⃣ Glass Card</h3>
+            <p><strong>File:</strong> <code>EXTRACT-glass-card.css</code></p>
+            <p><strong>Use for:</strong> Product cards, profile cards, blog previews, feature blocks</p>
+            <p><strong>Includes:</strong></p>
+            <ul>
+                <li>Image placeholder (replace with real images)</li>
+                <li>Title, subtitle, description</li>
+                <li>Tag system for metadata</li>
+                <li>Primary and secondary action buttons</li>
+                <li>Hover animations</li>
+            </ul>
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Cards need a colorful/patterned background to show the blur effect properly.
+            </div>
+        </div>
+
+        <div class="component-card">
+            <h3>2️⃣ Glass Modal</h3>
+            <p><strong>File:</strong> <code>EXTRACT-glass-modal.css</code></p>
+            <p><strong>Use for:</strong> Contact forms, login/signup, confirmations, popups</p>
+            <p><strong>Includes:</strong></p>
+            <ul>
+                <li>Backdrop blur overlay</li>
+                <li>Form fields with focus states</li>
+                <li>Close button with animation</li>
+                <li>Primary and secondary action buttons</li>
+                <li>Keyboard support (Escape key closes)</li>
+            </ul>
+            <div class="warning">
+                <strong>⚠️ JavaScript Required:</strong> Modal needs JS for open/close functionality.
+            </div>
+        </div>
+
+        <div class="component-card">
+            <h3>3️⃣ Glass Navbar</h3>
+            <p><strong>File:</strong> <code>EXTRACT-glass-navbar.css</code></p>
+            <p><strong>Use for:</strong> Site navigation, sticky headers</p>
+            <p><strong>Includes:</strong></p>
+            <ul>
+                <li>Sticky positioning (stays at top)</li>
+                <li>Responsive mobile menu (hamburger below 768px)</li>
+                <li>Link hover animations</li>
+                <li>CTA button</li>
+                <li>Logo/brand area</li>
+            </ul>
+            <div class="warning">
+                <strong>⚠️ JavaScript Required:</strong> Mobile menu toggle needs JS.
+            </div>
+        </div>
+
+        <h2>🛠️ Step-by-Step Integration</h2>
+
+        <div class="step">
+            <strong>Step 1:</strong> Choose your component — open the corresponding <code>EXTRACT-*.css</code> file
+        </div>
+
+        <div class="step">
+            <strong>Step 2:</strong> Copy CSS variables to your stylesheet's <code>:root</code> section (only once, shared by all components)
+        </div>
+
+        <div class="step">
+            <strong>Step 3:</strong> Copy the component's CSS styles to your stylesheet
+        </div>
+
+        <div class="step">
+            <strong>Step 4:</strong> Copy the HTML structure from the comments in the CSS file
+        </div>
+
+        <div class="step">
+            <strong>Step 5:</strong> If the component needs JavaScript (modal, navbar), copy the JS from the comments
+        </div>
+
+        <div class="step">
+            <strong>Step 6:</strong> Test on a colorful background to see the glass effect in action
+        </div>
+
+        <div class="success">
+            <strong>✅ Done!</strong> Your component is ready. Customize colors by changing <code>--accent-primary</code> in the CSS variables.
+        </div>
+
+        <h2>🎯 For Students & Learners</h2>
+
+        <p>This kit is designed to teach modern web development concepts:</p>
+
+        <ul>
+            <li><strong>Glassmorphism</strong> — Modern UI trend using <code>backdrop-filter</code></li>
+            <li><strong>CSS Custom Properties</strong> — Variables for easy theming</li>
+            <li><strong>Fluid Typography</strong> — Using <code>clamp()</code> for responsive sizes</li>
+            <li><strong>CSS Grid & Flexbox</strong> — Modern layout techniques</li>
+            <li><strong>Responsive Design</strong> — Mobile-first approach</li>
+            <li><strong>Animations</strong> — CSS transitions and keyframes</li>
+            <li><strong>Accessibility</strong> — Semantic HTML and ARIA labels</li>
+        </ul>
+
+        <h2>🎨 Customization Guide</h2>
+
+        <div class="component-card">
+            <h3>Change Accent Color</h3>
+            <p>Edit these variables in your CSS:</p>
+            <code>--accent-primary: hsl(270, 70%, 55%);</code> → Purple<br>
+            <code>--accent-primary: hsl(160, 80%, 45%);</code> → Green<br>
+            <code>--accent-primary: hsl(25, 95%, 55%);</code> → Orange
+        </div>
+
+        <div class="component-card">
+            <h3>Adjust Blur Intensity</h3>
+            <code>--glass-blur: 16px;</code> → Default<br>
+            <code>--glass-blur: 8px;</code> → Subtle<br>
+            <code>--glass-blur: 24px;</code> → Strong
+        </div>
+
+        <div class="component-card">
+            <h3>Change Background Opacity</h3>
+            <code>--glass-bg: rgba(255, 255, 255, 0.08);</code> → Lighter<br>
+            <code>--glass-bg: rgba(255, 255, 255, 0.05);</code> → More transparent
+        </div>
+
+        <h2>🐛 Troubleshooting</h2>
+
+        <div class="warning">
+            <strong>Blur not working?</strong><br>
+            - Make sure you have both <code>backdrop-filter</code> and <code>-webkit-backdrop-filter</code><br>
+            - Test on a colorful background (blur needs content behind it)<br>
+            - Check browser support (Chrome 76+, Safari 9+, Firefox 103+)
+        </div>
+
+        <div class="warning">
+            <strong>Mobile menu not toggling?</strong><br>
+            - Verify JavaScript is included at the bottom of your HTML<br>
+            - Check that element IDs/classes match exactly<br>
+            - Look for JavaScript errors in browser console
+        </div>
+
+        <div class="warning">
+            <strong>Components look broken?</strong><br>
+            - Make sure CSS variables are in <code>:root</code> section<br>
+            - Verify all class names match (they're prefixed with <code>hq-glass-*</code>)<br>
+            - Check that HTML structure matches the template exactly
+        </div>
+
+        <h2>📚 Additional Resources</h2>
+
+        <p>For complete documentation, customization examples, and use cases, see <code>README.md</code></p>
+
+        <div class="demo-section">
+            <h3>🎉 Ready to Build?</h3>
+            <p>Open the demos to see everything in action:</p>
+            <a href="index.html" class="demo-btn">Component Showcase</a>
+            <a href="hotel-booking.html" class="demo-btn">Hotel Example</a>
+        </div>
+
+        <hr style="border: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
+
+        <p style="text-align: center; color: #64748b;">
+            Built with ❤️ for students and developers<br>
+            Framework-agnostic • Zero dependencies • Production-ready
+        </p>
+    </div>
+</body>
+</html>

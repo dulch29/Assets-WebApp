@@ -1,0 +1,306 @@
+/* ===== EXTRACT THIS: Glass Modal Component ===== */
+
+/* CSS Variables - Add to your :root */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --accent-primary: hsl(195, 100%, 45%);
+    --accent-hover: hsl(195, 100%, 55%);
+    --accent-secondary: rgba(255, 255, 255, 0.15);
+    --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+    --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --space-xl: clamp(2rem, 4vw, 3rem);
+    --radius-sm: clamp(8px, 1vw, 12px);
+    --radius-lg: clamp(16px, 2vw, 24px);
+    --radius-pill: 999px;
+}
+
+/* Glass Modal Styles */
+.hq-glass-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    animation: fadeIn 0.3s ease;
+}
+
+.hq-glass-modal.active {
+    display: flex;
+}
+
+.hq-glass-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.hq-glass-modal-content {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--glass-shadow);
+    max-width: 540px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hq-glass-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.hq-glass-modal-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: white;
+    margin: 0;
+}
+
+.hq-glass-modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-xs);
+    line-height: 1;
+    transition: all 0.2s;
+    border-radius: var(--radius-sm);
+}
+
+.hq-glass-modal-close:hover {
+    background: var(--accent-secondary);
+    transform: rotate(90deg);
+}
+
+.hq-glass-modal-body {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hq-glass-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.hq-glass-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.hq-glass-modal-label {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hq-glass-modal-input,
+.hq-glass-modal-textarea {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.hq-glass-modal-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.hq-glass-modal-input:focus,
+.hq-glass-modal-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.hq-glass-modal-input::placeholder,
+.hq-glass-modal-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.hq-glass-modal-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.hq-glass-modal-btn {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+}
+
+.hq-glass-modal-btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.hq-glass-modal-btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.5);
+}
+
+.hq-glass-modal-btn-secondary {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+.hq-glass-modal-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== HTML STRUCTURE ===== */
+
+/*
+<div class="hq-glass-modal" id="myModal">
+    <div class="hq-glass-modal-backdrop" onclick="closeModal()"></div>
+    <div class="hq-glass-modal-content">
+        <div class="hq-glass-modal-header">
+            <h3 class="hq-glass-modal-title">Modal Title</h3>
+            <button class="hq-glass-modal-close" onclick="closeModal()" aria-label="Close">×</button>
+        </div>
+        <div class="hq-glass-modal-body">
+            <form class="hq-glass-modal-form" onsubmit="handleSubmit(event)">
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        class="hq-glass-modal-input"
+                        placeholder="Enter your name"
+                        required
+                    />
+                </div>
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        class="hq-glass-modal-input"
+                        placeholder="your@email.com"
+                        required
+                    />
+                </div>
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="message">Message</label>
+                    <textarea
+                        id="message"
+                        class="hq-glass-modal-textarea"
+                        placeholder="Your message here..."
+                        required
+                    ></textarea>
+                </div>
+                <div class="hq-glass-modal-actions">
+                    <button type="submit" class="hq-glass-modal-btn hq-glass-modal-btn-primary">
+                        Submit
+                    </button>
+                    <button type="button" class="hq-glass-modal-btn hq-glass-modal-btn-secondary" onclick="closeModal()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+*/
+
+/* ===== JAVASCRIPT (Required) ===== */
+
+/*
+<script>
+// Open modal
+function openModal() {
+    document.getElementById('myModal').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent body scroll
+}
+
+// Close modal
+function closeModal() {
+    document.getElementById('myModal').classList.remove('active');
+    document.body.style.overflow = ''; // Restore body scroll
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+// Handle form submission
+function handleSubmit(e) {
+    e.preventDefault();
+
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Your logic here (send to API, etc.)
+    console.log({ name, email, message });
+
+    // Close modal and reset form
+    closeModal();
+    e.target.reset();
+}
+</script>
+*/
+
+/* ===== USAGE NOTES ===== */
+
+/*
+1. TRIGGER: Add onclick="openModal()" to any button/link to open the modal
+2. BACKDROP CLICK: Clicking outside the modal closes it automatically
+3. ESCAPE KEY: Press ESC to close the modal
+4. PREVENT SCROLL: Body scroll is disabled when modal is open
+5. ACCESSIBILITY: Include aria-label on close button for screen readers
+6. MULTIPLE MODALS: Use different IDs for multiple modals on same page
+7. VALIDATION: Add HTML5 validation attributes (required, pattern, etc.)
+*/

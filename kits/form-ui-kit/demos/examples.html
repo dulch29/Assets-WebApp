@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form UI Examples — Real-World Patterns</title>
+    <link rel="stylesheet" href="../components/forms.css">
+    <style>
+        :root {
+            --surface-0: #05070C;
+            --surface-1: #0A0D12;
+            --surface-2: #0F131C;
+            --font-display: clamp(2rem, 4vw, 3rem);
+            --font-h2: clamp(1.5rem, 3vw, 2rem);
+            --font-body: clamp(1rem, 1.5vw, 1.125rem);
+            --space-xl: clamp(1.5rem, 3vw, 2rem);
+            --space-2xl: clamp(2rem, 4vw, 3rem);
+            --space-3xl: clamp(3rem, 6vw, 4rem);
+            --radius-xl: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: var(--font-body);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, var(--surface-0), var(--surface-1), var(--surface-2));
+            min-height: 100vh;
+            padding: var(--space-3xl) var(--space-xl);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: var(--font-display);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            background: linear-gradient(135deg, #3B6DFF, #6EE7B7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .example-section {
+            background: var(--surface-2);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .example-title {
+            font-size: var(--font-h2);
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Demo button styles */
+        .hq-btn {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(0.5rem, 1vw, 0.75rem);
+            padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 1.5rem);
+            border-radius: 999px;
+            transition: all 0.2s;
+        }
+
+        .hq-btn-primary {
+            background: #3B6DFF;
+            color: rgba(0, 0, 0, 0.90);
+        }
+
+        .hq-btn-primary:hover {
+            background: #5B85FF;
+            transform: translateY(-1px);
+        }
+
+        .hq-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hq-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            flex-wrap: wrap;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: var(--space-xl) 0;
+        }
+
+        .code-snippet {
+            background: var(--surface-0);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: var(--space-xl);
+            margin-top: var(--space-xl);
+            overflow-x: auto;
+        }
+
+        .code-snippet pre {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: clamp(0.875rem, 1.25vw, 1rem);
+            color: rgba(255, 255, 255, 0.70);
+            line-height: 1.8;
+        }
+
+        .code-snippet code {
+            color: #6EE7B7;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Form UI Examples</h1>
+
+        <!-- Example 1: Login Form -->
+        <section class="example-section">
+            <h2 class="example-title">1. Login Form</h2>
+
+            <form id="login-form">
+                <div class="hq-form-group">
+                    <label class="hq-label" for="login-email">
+                        Email <span class="hq-label-required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="login-email"
+                        class="hq-input"
+                        placeholder="you@example.com"
+                        required
+                    >
+                    <span class="hq-error-text">Please enter a valid email address.</span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="login-password">
+                        Password <span class="hq-label-required">*</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        class="hq-input"
+                        placeholder="••••••••"
+                        required
+                    >
+                    <span class="hq-error-text">Password must be at least 8 characters.</span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-checkbox-wrapper">
+                        <input type="checkbox" class="hq-checkbox" id="remember-me">
+                        <span class="hq-checkbox-label">Remember me</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="hq-btn hq-btn-primary" style="width: 100%;">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="code-snippet">
+                <pre><code>// Students wire their own validation
+const form = document.querySelector('#login-form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = form.querySelector('#login-email').value;
+    const password = form.querySelector('#login-password').value;
+
+    // API call (students write this)
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+    });
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- Example 2: Contact Form -->
+        <section class="example-section">
+            <h2 class="example-title">2. Contact Form</h2>
+
+            <form id="contact-form">
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-name">
+                        Full Name <span class="hq-label-required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="contact-name"
+                        class="hq-input"
+                        placeholder="John Doe"
+                        required
+                    >
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-email">
+                        Email <span class="hq-label-required">*</span>
+                    </label>
+                    <div class="hq-input-wrapper">
+                        <svg class="hq-input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <input
+                            type="email"
+                            id="contact-email"
+                            class="hq-input"
+                            placeholder="john@example.com"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-subject">Subject</label>
+                    <select id="contact-subject" class="hq-select">
+                        <option value="">Choose a topic</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="sales">Sales Question</option>
+                    </select>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="contact-message">
+                        Message <span class="hq-label-required">*</span>
+                    </label>
+                    <textarea
+                        id="contact-message"
+                        class="hq-textarea"
+                        placeholder="How can we help you?"
+                        required
+                    ></textarea>
+                    <span class="hq-helper-text">Maximum 500 characters</span>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="hq-btn hq-btn-primary">Send Message</button>
+                    <button type="reset" class="hq-btn hq-btn-secondary">Clear Form</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Example 3: Profile Settings -->
+        <section class="example-section">
+            <h2 class="example-title">3. Profile Settings</h2>
+
+            <form id="profile-form">
+                <div class="hq-form-group">
+                    <label class="hq-label" for="profile-username">Username</label>
+                    <input
+                        type="text"
+                        id="profile-username"
+                        class="hq-input"
+                        value="johndoe"
+                    >
+                    <span class="hq-helper-text">Your public username. Only letters, numbers, and underscores.</span>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="profile-bio">Bio</label>
+                    <textarea
+                        id="profile-bio"
+                        class="hq-textarea"
+                        placeholder="Tell us about yourself..."
+                    >Full-stack developer passionate about building great UX.</textarea>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label">Email Preferences</label>
+                    <label class="hq-checkbox-wrapper">
+                        <input type="checkbox" class="hq-checkbox" checked>
+                        <span class="hq-checkbox-label">Product updates and announcements</span>
+                    </label>
+                    <label class="hq-checkbox-wrapper">
+                        <input type="checkbox" class="hq-checkbox" checked>
+                        <span class="hq-checkbox-label">Weekly newsletter</span>
+                    </label>
+                    <label class="hq-checkbox-wrapper">
+                        <input type="checkbox" class="hq-checkbox">
+                        <span class="hq-checkbox-label">Marketing emails</span>
+                    </label>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label">Privacy Settings</label>
+                    <label class="hq-radio-wrapper">
+                        <input type="radio" name="privacy" class="hq-radio" checked>
+                        <span class="hq-radio-label">Public profile — anyone can see</span>
+                    </label>
+                    <label class="hq-radio-wrapper">
+                        <input type="radio" name="privacy" class="hq-radio">
+                        <span class="hq-radio-label">Private profile — only followers</span>
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="button-group">
+                    <button type="submit" class="hq-btn hq-btn-primary">Save Changes</button>
+                    <button type="button" class="hq-btn hq-btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Example 4: Checkout Form -->
+        <section class="example-section">
+            <h2 class="example-title">4. Checkout Form</h2>
+
+            <form id="checkout-form">
+                <h3 style="font-size: clamp(1.25rem, 2.5vw, 1.5rem); margin-bottom: clamp(1rem, 2vw, 1.5rem);">
+                    Shipping Information
+                </h3>
+
+                <div class="grid-2">
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="checkout-first">First Name</label>
+                        <input type="text" id="checkout-first" class="hq-input" placeholder="John">
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="checkout-last">Last Name</label>
+                        <input type="text" id="checkout-last" class="hq-input" placeholder="Doe">
+                    </div>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="checkout-address">Street Address</label>
+                    <input type="text" id="checkout-address" class="hq-input" placeholder="123 Main St">
+                </div>
+
+                <div class="grid-3">
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="checkout-city">City</label>
+                        <input type="text" id="checkout-city" class="hq-input" placeholder="New York">
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="checkout-state">State</label>
+                        <select id="checkout-state" class="hq-select">
+                            <option value="">Select</option>
+                            <option value="ny">NY</option>
+                            <option value="ca">CA</option>
+                        </select>
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="checkout-zip">ZIP</label>
+                        <input type="text" id="checkout-zip" class="hq-input" placeholder="10001">
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <h3 style="font-size: clamp(1.25rem, 2.5vw, 1.5rem); margin-bottom: clamp(1rem, 2vw, 1.5rem);">
+                    Shipping Method
+                </h3>
+
+                <div class="hq-form-group">
+                    <label class="hq-radio-wrapper">
+                        <input type="radio" name="shipping" class="hq-radio" checked>
+                        <span class="hq-radio-label">Standard (5-7 days) — Free</span>
+                    </label>
+                    <label class="hq-radio-wrapper">
+                        <input type="radio" name="shipping" class="hq-radio">
+                        <span class="hq-radio-label">Express (2-3 days) — $15</span>
+                    </label>
+                    <label class="hq-radio-wrapper">
+                        <input type="radio" name="shipping" class="hq-radio">
+                        <span class="hq-radio-label">Overnight (1 day) — $35</span>
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <button type="submit" class="hq-btn hq-btn-primary" style="width: 100%;">
+                    Continue to Payment
+                </button>
+            </form>
+        </section>
+
+        <!-- Example 5: Search & Filter -->
+        <section class="example-section">
+            <h2 class="example-title">5. Search & Filter UI</h2>
+
+            <form id="search-form" class="hq-form-inline">
+                <div class="hq-form-group">
+                    <label class="hq-label" for="search-query">Search</label>
+                    <div class="hq-input-wrapper">
+                        <svg class="hq-input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" id="search-query" class="hq-input" placeholder="Search products...">
+                    </div>
+                </div>
+
+                <div class="hq-form-group">
+                    <label class="hq-label" for="filter-category">Category</label>
+                    <select id="filter-category" class="hq-select">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="books">Books</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="hq-btn hq-btn-primary">Search</button>
+            </form>
+        </section>
+
+        <!-- Example 6: Validation Demo -->
+        <section class="example-section">
+            <h2 class="example-title">6. Form Validation (Interactive)</h2>
+
+            <form id="validation-demo">
+                <div class="hq-form-group" id="username-group">
+                    <label class="hq-label" for="demo-username">
+                        Username <span class="hq-label-required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="demo-username"
+                        class="hq-input"
+                        placeholder="At least 3 characters"
+                    >
+                    <span class="hq-helper-text">Must be 3-20 characters.</span>
+                    <span class="hq-error-text">Username must be at least 3 characters long.</span>
+                    <span class="hq-success-text">Username is available!</span>
+                </div>
+
+                <div class="hq-form-group" id="password-group">
+                    <label class="hq-label" for="demo-password">
+                        Password <span class="hq-label-required">*</span>
+                    </label>
+                    <input
+                        type="password"
+                        id="demo-password"
+                        class="hq-input"
+                        placeholder="At least 8 characters"
+                    >
+                    <span class="hq-error-text">Password must be at least 8 characters.</span>
+                    <span class="hq-success-text">Strong password!</span>
+                </div>
+
+                <button type="submit" class="hq-btn hq-btn-primary">Create Account</button>
+            </form>
+
+            <div class="code-snippet">
+                <pre><code>// Live validation example
+const input = document.querySelector('#demo-username');
+const group = document.querySelector('#username-group');
+
+input.addEventListener('input', () => {
+    group.classList.remove('has-error', 'has-success');
+
+    if (input.value.length < 3) {
+        group.classList.add('has-error');
+    } else {
+        group.classList.add('has-success');
+    }
+});</code></pre>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Example 6: Live validation
+        const usernameInput = document.querySelector('#demo-username');
+        const usernameGroup = document.querySelector('#username-group');
+        const passwordInput = document.querySelector('#demo-password');
+        const passwordGroup = document.querySelector('#password-group');
+
+        usernameInput.addEventListener('input', () => {
+            const value = usernameInput.value.trim();
+            usernameGroup.classList.remove('has-error', 'has-success');
+
+            if (value.length > 0 && value.length < 3) {
+                usernameGroup.classList.add('has-error');
+            } else if (value.length >= 3) {
+                usernameGroup.classList.add('has-success');
+            }
+        });
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+            passwordGroup.classList.remove('has-error', 'has-success');
+
+            if (value.length > 0 && value.length < 8) {
+                passwordGroup.classList.add('has-error');
+            } else if (value.length >= 8) {
+                passwordGroup.classList.add('has-success');
+            }
+        });
+
+        // Prevent actual submissions in demo
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.log('Form submitted:', form.id);
+                alert(`${form.id} submitted! (Demo mode)`);
+            });
+        });
+
+        console.log('🎨 Form UI Examples loaded - 6 real-world patterns');
+    </script>
+</body>
+</html>

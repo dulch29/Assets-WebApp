@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism UI Kit</title>
+    <style>
+        :root {
+            /* Glass effect variables */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-blur: 16px;
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+            /* Accent colors */
+            --accent-primary: hsl(195, 100%, 45%);
+            --accent-hover: hsl(195, 100%, 55%);
+            --accent-secondary: rgba(255, 255, 255, 0.15);
+
+            /* Typography */
+            --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+            /* Spacing scale */
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+            --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+            --space-md: clamp(1rem, 2vw, 1.5rem);
+            --space-lg: clamp(1.5rem, 3vw, 2rem);
+            --space-xl: clamp(2rem, 4vw, 3rem);
+
+            /* Border radius */
+            --radius-sm: clamp(8px, 1vw, 12px);
+            --radius-md: clamp(12px, 1.5vw, 16px);
+            --radius-lg: clamp(16px, 2vw, 24px);
+            --radius-pill: 999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #0a0e1a;
+            color: white;
+            position: relative;
+        }
+
+        /* Skip to main content link for keyboard users */
+        .hq-skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--accent-primary);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 0 0 var(--radius-sm) 0;
+        }
+
+        .hq-skip-link:focus {
+            top: 0;
+        }
+
+        /* Animated background with real depth */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #0f172a 100%);
+        }
+
+        .bg-canvas::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.03) 3px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.03) 3px);
+            opacity: 0.3;
+        }
+
+        /* Floating orbs for depth */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: clamp(200px, 30vw, 400px);
+            height: clamp(200px, 30vw, 400px);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.6) 0%, transparent 70%);
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: clamp(250px, 35vw, 500px);
+            height: clamp(250px, 35vw, 500px);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+            bottom: 15%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: clamp(180px, 25vw, 350px);
+            height: clamp(180px, 25vw, 350px);
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Content wrapper */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass Navbar */
+        .hq-glass-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .hq-glass-navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .hq-glass-navbar-brand {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .hq-glass-navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .hq-glass-navbar-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .hq-glass-navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+
+        .hq-glass-navbar-link:hover {
+            color: white;
+        }
+
+        .hq-glass-navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .hq-glass-navbar-btn {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-pill);
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .hq-glass-navbar-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .hq-glass-navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        @media (max-width: 768px) {
+            .hq-glass-navbar-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--glass-bg);
+                backdrop-filter: blur(var(--glass-blur));
+                -webkit-backdrop-filter: blur(var(--glass-blur));
+                border-bottom: 1px solid var(--glass-border);
+                padding: var(--space-md);
+                gap: var(--space-md);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            .hq-glass-navbar-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .hq-glass-navbar-toggle {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-md);
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-btn {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-pill);
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .hero-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Glass Card Grid */
+        .card-section {
+            padding: var(--space-xl) var(--space-lg);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            letter-spacing: -0.02em;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: var(--space-lg);
+        }
+
+        /* Glass Card Component */
+        .hq-glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .hq-glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hq-glass-card-image {
+            width: 100%;
+            height: clamp(180px, 30vw, 240px);
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+        }
+
+        .hq-glass-card-title {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: white;
+        }
+
+        .hq-glass-card-subtitle {
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .hq-glass-card-description {
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .hq-glass-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .hq-glass-card-tag {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--accent-secondary);
+            border-radius: var(--radius-pill);
+            font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .hq-glass-card-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+
+        .hq-glass-card-btn {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-pill);
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .hq-glass-card-btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .hq-glass-card-btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .hq-glass-card-btn-secondary {
+            background: var(--accent-secondary);
+            color: white;
+        }
+
+        .hq-glass-card-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Glass Modal Component */
+        .hq-glass-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .hq-glass-modal.active {
+            display: flex;
+        }
+
+        .hq-glass-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .hq-glass-modal-content {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--glass-shadow);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hq-glass-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hq-glass-modal-title {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .hq-glass-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--space-xs);
+            line-height: 1;
+            transition: all 0.2s;
+            border-radius: var(--radius-sm);
+        }
+
+        .hq-glass-modal-close:hover {
+            background: var(--accent-secondary);
+            transform: rotate(90deg);
+        }
+
+        .hq-glass-modal-body {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hq-glass-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .hq-glass-modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .hq-glass-modal-label {
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hq-glass-modal-input {
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .hq-glass-modal-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+        }
+
+        .hq-glass-modal-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hq-glass-modal-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .hq-glass-modal-btn {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-pill);
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .hq-glass-modal-btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .hq-glass-modal-btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .hq-glass-modal-btn-secondary {
+            background: var(--accent-secondary);
+            color: white;
+        }
+
+        .hq-glass-modal-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-canvas">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="hq-skip-link">Skip to main content</a>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- ===== START: HQ GLASS NAVBAR ===== -->
+        <nav class="hq-glass-navbar" role="navigation" aria-label="Main navigation">
+            <div class="hq-glass-navbar-container">
+                <a href="#" class="hq-glass-navbar-brand">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    GlassKit
+                </a>
+                <button class="hq-glass-navbar-toggle"
+                        aria-label="Toggle navigation menu"
+                        aria-expanded="false"
+                        aria-controls="main-menu">
+                    ☰
+                </button>
+                <ul class="hq-glass-navbar-menu" id="main-menu">
+                    <li><a href="#features" class="hq-glass-navbar-link">Features</a></li>
+                    <li><a href="#components" class="hq-glass-navbar-link">Components</a></li>
+                    <li><a href="#docs" class="hq-glass-navbar-link">Docs</a></li>
+                    <li><button class="hq-glass-navbar-btn">Get Started</button></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- ===== END: HQ GLASS NAVBAR ===== -->
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 id="main-content">Glassmorphism UI Kit</h1>
+                <p>Modern, elegant glass components for your next project. Framework-agnostic, copy-paste ready.</p>
+                <button class="hero-btn" onclick="openModal()">View Demo Modal</button>
+            </div>
+        </section>
+
+        <!-- ===== START: HQ GLASS CARD GRID ===== -->
+        <section class="card-section" id="components">
+            <h2 class="section-title">Featured Components</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <article class="hq-glass-card" aria-labelledby="card-1-title">
+                    <div class="hq-glass-card-image" role="img" aria-label="Glass card component preview"></div>
+                    <h3 id="card-1-title" class="hq-glass-card-title">Glass Card Component</h3>
+                    <p class="hq-glass-card-subtitle">Versatile Container</p>
+                    <p class="hq-glass-card-description">
+                        Perfect for showcasing products, profiles, or any content block. Fully responsive with smooth hover effects and customizable blur intensity.
+                    </p>
+                    <ul class="hq-glass-card-tags" role="list">
+                        <li class="hq-glass-card-tag" role="listitem">Responsive</li>
+                        <li class="hq-glass-card-tag" role="listitem">Customizable</li>
+                        <li class="hq-glass-card-tag" role="listitem">Modern</li>
+                    </ul>
+                    <div class="hq-glass-card-actions">
+                        <button class="hq-glass-card-btn hq-glass-card-btn-primary">Learn More</button>
+                        <button class="hq-glass-card-btn hq-glass-card-btn-secondary">Demo</button>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="hq-glass-card" aria-labelledby="card-2-title">
+                    <div class="hq-glass-card-image" role="img" aria-label="Glass modal component preview"></div>
+                    <h3 id="card-2-title" class="hq-glass-card-title">Glass Modal Dialog</h3>
+                    <p class="hq-glass-card-subtitle">Interactive Overlay</p>
+                    <p class="hq-glass-card-description">
+                        Beautiful popup dialogs with backdrop blur. Includes form support, keyboard navigation, and smooth animations. Click the hero button to test.
+                    </p>
+                    <ul class="hq-glass-card-tags" role="list">
+                        <li class="hq-glass-card-tag" role="listitem">Accessible</li>
+                        <li class="hq-glass-card-tag" role="listitem">Animated</li>
+                        <li class="hq-glass-card-tag" role="listitem">Forms</li>
+                    </ul>
+                    <div class="hq-glass-card-actions">
+                        <button class="hq-glass-card-btn hq-glass-card-btn-primary">Learn More</button>
+                        <button class="hq-glass-card-btn hq-glass-card-btn-secondary">Demo</button>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="hq-glass-card" aria-labelledby="card-3-title">
+                    <div class="hq-glass-card-image" role="img" aria-label="Glass navbar component preview"></div>
+                    <h3 id="card-3-title" class="hq-glass-card-title">Glass Navigation Bar</h3>
+                    <p class="hq-glass-card-subtitle">Sticky Header</p>
+                    <p class="hq-glass-card-description">
+                        Responsive navbar with mobile hamburger menu, hover effects, and smooth transitions. Sticks to the top and blurs content behind it as you scroll.
+                    </p>
+                    <ul class="hq-glass-card-tags" role="list">
+                        <li class="hq-glass-card-tag" role="listitem">Mobile-Ready</li>
+                        <li class="hq-glass-card-tag" role="listitem">Sticky</li>
+                        <li class="hq-glass-card-tag" role="listitem">Smooth</li>
+                    </ul>
+                    <div class="hq-glass-card-actions">
+                        <button class="hq-glass-card-btn hq-glass-card-btn-primary">Learn More</button>
+                        <button class="hq-glass-card-btn hq-glass-card-btn-secondary">Demo</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- ===== END: HQ GLASS CARD GRID ===== -->
+
+        <!-- Footer -->
+        <footer>
+            <p>Glassmorphism UI Kit &copy; 2026 • Framework-agnostic • Zero dependencies</p>
+        </footer>
+    </div>
+
+    <!-- ===== START: HQ GLASS MODAL ===== -->
+    <div class="hq-glass-modal"
+         id="demoModal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="modal-title"
+         aria-hidden="true">
+        <div class="hq-glass-modal-backdrop" onclick="closeModal()"></div>
+        <div class="hq-glass-modal-content">
+            <div class="hq-glass-modal-header">
+                <h3 id="modal-title" class="hq-glass-modal-title">Contact Form</h3>
+                <button class="hq-glass-modal-close"
+                        onclick="closeModal()"
+                        aria-label="Close dialog">×</button>
+            </div>
+            <div class="hq-glass-modal-body">
+                <form class="hq-glass-modal-form" onsubmit="handleSubmit(event)">
+                    <div class="hq-glass-modal-field">
+                        <label class="hq-glass-modal-label" for="name">Full Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            class="hq-glass-modal-input"
+                            placeholder="John Doe"
+                            required
+                            aria-required="true"
+                        />
+                    </div>
+                    <div class="hq-glass-modal-field">
+                        <label class="hq-glass-modal-label" for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="hq-glass-modal-input"
+                            placeholder="john@example.com"
+                            required
+                            aria-required="true"
+                        />
+                    </div>
+                    <div class="hq-glass-modal-field">
+                        <label class="hq-glass-modal-label" for="message">Message</label>
+                        <textarea
+                            id="message"
+                            class="hq-glass-modal-textarea"
+                            placeholder="Your message here..."
+                            required
+                            aria-required="true"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    <div class="hq-glass-modal-actions">
+                        <button type="submit" class="hq-glass-modal-btn hq-glass-modal-btn-primary">
+                            Submit
+                        </button>
+                        <button type="button" class="hq-glass-modal-btn hq-glass-modal-btn-secondary" onclick="closeModal()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END: HQ GLASS MODAL ===== -->
+
+    <script>
+        // ===== START: NAVBAR JS =====
+        const navToggle = document.querySelector('.hq-glass-navbar-toggle');
+        const navMenu = document.querySelector('.hq-glass-navbar-menu');
+
+        navToggle.addEventListener('click', function() {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+                navToggle.focus(); // Return focus to toggle button
+            }
+        });
+        // ===== END: NAVBAR JS =====
+
+        // ===== START: MODAL JS =====
+        let lastFocusedElement = null;
+
+        function openModal() {
+            const modal = document.getElementById('demoModal');
+
+            // Store the element that had focus before opening
+            lastFocusedElement = document.activeElement;
+
+            // Show modal
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            // Focus the first input after a brief delay
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input, textarea, button');
+                if (firstInput) firstInput.focus();
+            }, 100);
+
+            // Trap focus inside modal
+            trapFocus(modal);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('demoModal');
+
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+
+            // Restore focus to element that opened the modal
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        // Focus trap - keep focus inside modal
+        function trapFocus(modal) {
+            const focusableElements = modal.querySelectorAll(
+                'button, input, textarea, select, a[href]'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            modal.addEventListener('keydown', function(e) {
+                if (e.key !== 'Tab') return;
+
+                if (e.shiftKey) {
+                    // Shift + Tab
+                    if (document.activeElement === firstElement) {
+                        lastElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    // Tab
+                    if (document.activeElement === lastElement) {
+                        firstElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('demoModal');
+            if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+                closeModal();
+            }
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            alert(`Form submitted!\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+            closeModal();
+            e.target.reset();
+        }
+        // ===== END: MODAL JS =====
+    </script>
+</body>
+</html>

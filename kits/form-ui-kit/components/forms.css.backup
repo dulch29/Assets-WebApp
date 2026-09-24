@@ -1,0 +1,466 @@
+/* ============================================
+   FORM UI KIT — EXTRACT THIS FILE
+   Framework-agnostic form components
+   Zero dependencies • Copy-paste ready
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (TOKENS)
+   Override these to match your design system
+   ============================================ */
+:root {
+    /* Surface layers */
+    --hq-surface-base: #1E2636;
+    --hq-surface-elevated: #2A3142;
+    --hq-surface-sunken: #161D2B;
+
+    /* Accent colors */
+    --hq-accent-primary: #3B6DFF;
+    --hq-accent-primary-hover: #5B85FF;
+    --hq-accent-success: #6EE7B7;
+    --hq-accent-danger: #FF6B6B;
+    --hq-accent-warning: #FFA94D;
+
+    /* Text colors */
+    --hq-text-primary: rgba(255, 255, 255, 0.95);
+    --hq-text-secondary: rgba(255, 255, 255, 0.70);
+    --hq-text-tertiary: rgba(255, 255, 255, 0.45);
+
+    /* Border colors */
+    --hq-border-default: rgba(255, 255, 255, 0.1);
+    --hq-border-hover: rgba(255, 255, 255, 0.2);
+
+    /* Spacing */
+    --hq-space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+    --hq-space-sm: clamp(0.5rem, 1vw, 0.75rem);
+    --hq-space-md: clamp(0.75rem, 1.5vw, 1rem);
+
+    /* Border radius */
+    --hq-radius-sm: 0.375rem;
+    --hq-radius-md: 0.5rem;
+
+    /* Shadows */
+    --hq-shadow-focus: 0 0 0 3px rgba(59, 109, 255, 0.3);
+    --hq-shadow-error: 0 0 0 3px rgba(255, 107, 107, 0.3);
+    --hq-shadow-success: 0 0 0 3px rgba(110, 231, 183, 0.3);
+}
+
+/* ============================================
+   FORM GROUP CONTAINER
+   Wraps label + input + helper text
+   ============================================ */
+.hq-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--hq-space-sm);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* ============================================
+   LABEL
+   ============================================ */
+.hq-label {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    font-weight: 500;
+    color: var(--hq-text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--hq-space-xs);
+}
+
+.hq-label-required {
+    color: var(--hq-accent-danger);
+}
+
+/* ============================================
+   HELPER & ERROR TEXT
+   ============================================ */
+.hq-helper-text {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    color: var(--hq-text-secondary);
+    line-height: 1.5;
+}
+
+.hq-error-text {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    color: var(--hq-accent-danger);
+    display: none;
+    line-height: 1.5;
+}
+
+.hq-form-group.has-error .hq-error-text {
+    display: block;
+}
+
+.hq-success-text {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    color: var(--hq-accent-success);
+    display: none;
+    line-height: 1.5;
+}
+
+.hq-form-group.has-success .hq-success-text {
+    display: block;
+}
+
+/* ============================================
+   TEXT INPUT
+   ============================================ */
+.hq-input {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--hq-text-primary);
+    background: var(--hq-surface-base);
+    border: 2px solid var(--hq-border-default);
+    border-radius: var(--hq-radius-md);
+    padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(0.875rem, 2vw, 1rem);
+    width: 100%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.hq-input::placeholder {
+    color: var(--hq-text-tertiary);
+}
+
+.hq-input:hover:not(:disabled) {
+    border-color: var(--hq-border-hover);
+}
+
+.hq-input:focus {
+    border-color: var(--hq-accent-primary);
+    box-shadow: var(--hq-shadow-focus);
+    background: var(--hq-surface-elevated);
+}
+
+.hq-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--hq-surface-sunken);
+}
+
+/* Input with icon */
+.hq-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hq-input-icon {
+    position: absolute;
+    left: clamp(0.75rem, 1.5vw, 1rem);
+    width: 1.25em;
+    height: 1.25em;
+    color: var(--hq-text-tertiary);
+    pointer-events: none;
+}
+
+.hq-input-wrapper .hq-input {
+    padding-left: clamp(2.5rem, 5vw, 3rem);
+}
+
+/* Error state */
+.hq-form-group.has-error .hq-input {
+    border-color: var(--hq-accent-danger);
+}
+
+.hq-form-group.has-error .hq-input:focus {
+    box-shadow: var(--hq-shadow-error);
+}
+
+/* Success state */
+.hq-form-group.has-success .hq-input {
+    border-color: var(--hq-accent-success);
+}
+
+.hq-form-group.has-success .hq-input:focus {
+    box-shadow: var(--hq-shadow-success);
+}
+
+/* ============================================
+   INPUT SIZES
+   ============================================ */
+.hq-input-sm {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.hq-input-lg {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    padding: clamp(0.875rem, 2vw, 1rem) clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+/* ============================================
+   TEXTAREA
+   ============================================ */
+.hq-textarea {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--hq-text-primary);
+    background: var(--hq-surface-base);
+    border: 2px solid var(--hq-border-default);
+    border-radius: var(--hq-radius-md);
+    padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(0.875rem, 2vw, 1rem);
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    line-height: 1.6;
+}
+
+.hq-textarea::placeholder {
+    color: var(--hq-text-tertiary);
+}
+
+.hq-textarea:hover:not(:disabled) {
+    border-color: var(--hq-border-hover);
+}
+
+.hq-textarea:focus {
+    border-color: var(--hq-accent-primary);
+    box-shadow: var(--hq-shadow-focus);
+    background: var(--hq-surface-elevated);
+}
+
+.hq-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--hq-surface-sunken);
+}
+
+.hq-form-group.has-error .hq-textarea {
+    border-color: var(--hq-accent-danger);
+}
+
+.hq-form-group.has-error .hq-textarea:focus {
+    box-shadow: var(--hq-shadow-error);
+}
+
+/* Textarea sizes */
+.hq-textarea-sm {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 1.5vw, 0.875rem);
+    min-height: 80px;
+}
+
+.hq-textarea-lg {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    padding: clamp(0.875rem, 2vw, 1rem) clamp(1.25rem, 2.5vw, 1.5rem);
+    min-height: 160px;
+}
+
+/* ============================================
+   SELECT DROPDOWN
+   ============================================ */
+.hq-select {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--hq-text-primary);
+    background: var(--hq-surface-base);
+    border: 2px solid var(--hq-border-default);
+    border-radius: var(--hq-radius-md);
+    padding: clamp(0.625rem, 1.5vw, 0.75rem) clamp(2.5rem, 5vw, 3rem) clamp(0.625rem, 1.5vw, 0.75rem) clamp(0.875rem, 2vw, 1rem);
+    width: 100%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+
+    /* Custom dropdown arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.45)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right clamp(0.75rem, 1.5vw, 1rem) center;
+    background-size: 1.25em;
+}
+
+.hq-select:hover:not(:disabled) {
+    border-color: var(--hq-border-hover);
+}
+
+.hq-select:focus {
+    border-color: var(--hq-accent-primary);
+    box-shadow: var(--hq-shadow-focus);
+    background-color: var(--hq-surface-elevated);
+}
+
+.hq-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--hq-surface-sunken);
+}
+
+.hq-form-group.has-error .hq-select {
+    border-color: var(--hq-accent-danger);
+}
+
+.hq-form-group.has-error .hq-select:focus {
+    box-shadow: var(--hq-shadow-error);
+}
+
+/* Select sizes */
+.hq-select-sm {
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(2.5rem, 5vw, 3rem) clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.hq-select-lg {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    padding: clamp(0.875rem, 2vw, 1rem) clamp(2.5rem, 5vw, 3rem) clamp(0.875rem, 2vw, 1rem) clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+/* ============================================
+   CHECKBOX
+   ============================================ */
+.hq-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--hq-space-sm);
+    cursor: pointer;
+    user-select: none;
+}
+
+.hq-checkbox {
+    width: clamp(1.125rem, 2.5vw, 1.25rem);
+    height: clamp(1.125rem, 2.5vw, 1.25rem);
+    border: 2px solid var(--hq-border-hover);
+    border-radius: var(--hq-radius-sm);
+    background: var(--hq-surface-base);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    flex-shrink: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.hq-checkbox:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.hq-checkbox:focus {
+    border-color: var(--hq-accent-primary);
+    box-shadow: var(--hq-shadow-focus);
+}
+
+.hq-checkbox:checked {
+    border-color: var(--hq-accent-primary);
+    background-color: var(--hq-accent-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.9)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75%;
+}
+
+.hq-checkbox:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hq-checkbox-label {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--hq-text-primary);
+    line-height: 1.5;
+}
+
+/* ============================================
+   RADIO BUTTON
+   ============================================ */
+.hq-radio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--hq-space-sm);
+    cursor: pointer;
+    user-select: none;
+}
+
+.hq-radio {
+    width: clamp(1.125rem, 2.5vw, 1.25rem);
+    height: clamp(1.125rem, 2.5vw, 1.25rem);
+    border: 2px solid var(--hq-border-hover);
+    border-radius: 50%;
+    background: var(--hq-surface-base);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    flex-shrink: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.hq-radio:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.hq-radio:focus {
+    border-color: var(--hq-accent-primary);
+    box-shadow: var(--hq-shadow-focus);
+}
+
+.hq-radio:checked {
+    border-color: var(--hq-accent-primary);
+    background-color: var(--hq-accent-primary);
+    box-shadow: inset 0 0 0 3px var(--hq-surface-base);
+}
+
+.hq-radio:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hq-radio-label {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: var(--hq-text-primary);
+    line-height: 1.5;
+}
+
+/* ============================================
+   FORM LAYOUTS
+   ============================================ */
+
+/* Inline form - fields side-by-side */
+.hq-form-inline {
+    display: flex;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.hq-form-inline .hq-form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+/* Horizontal form - label on left, input on right */
+.hq-form-horizontal {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    align-items: start;
+}
+
+.hq-form-horizontal .hq-label {
+    padding-top: var(--hq-space-sm);
+}
+
+/* Responsive breakpoint */
+@media (max-width: 768px) {
+    .hq-form-inline {
+        flex-direction: column;
+    }
+
+    .hq-form-inline .hq-form-group {
+        width: 100%;
+    }
+
+    .hq-form-horizontal {
+        grid-template-columns: 1fr;
+    }
+
+    .hq-form-horizontal .hq-label {
+        padding-top: 0;
+    }
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button System — Real-World Examples — WCAG 2.1 AA Accessible</title>
+    <link rel="stylesheet" href="../components/buttons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #05070C 0%, #0F131C 50%, #05070C 100%);
+            color: rgba(255, 255, 255, 0.95);
+            padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 2vw, 1.5rem);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+            background: linear-gradient(135deg, #3B6DFF, #6EE7B7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: clamp(2rem, 4vw, 3rem);
+        }
+
+        .example-section {
+            background: #0F131C;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .example-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+
+        .example-desc {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+            font-size: clamp(0.875rem, 1.25vw, 1rem);
+        }
+
+        .example-demo {
+            background: #161D2B;
+            border-radius: 0.75rem;
+            padding: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        /* Example-specific styles */
+        .form-actions {
+            display: flex;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #1E2636;
+            border-radius: 0.75rem;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: clamp(1.125rem, 2vw, 1.25rem);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+
+        .card-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+            line-height: 1.6;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            padding: clamp(1rem, 2vw, 1.5rem);
+            background: #1E2636;
+            border-radius: 0.75rem;
+        }
+
+        .toolbar-left, .toolbar-right {
+            display: flex;
+            gap: clamp(0.5rem, 1vw, 0.75rem);
+            flex-wrap: wrap;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #161D2B;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .modal-title {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+
+        .modal-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            justify-content: flex-end;
+        }
+
+        .status-message {
+            padding: clamp(0.75rem, 1.5vw, 1rem);
+            border-radius: 0.5rem;
+            margin-top: clamp(1rem, 2vw, 1.5rem);
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        .status-success {
+            background: rgba(110, 231, 183, 0.1);
+            border: 1px solid rgba(110, 231, 183, 0.3);
+            color: #6EE7B7;
+        }
+
+        .status-error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #FF6B6B;
+        }
+
+        @media (max-width: 768px) {
+            .form-actions, .toolbar {
+                flex-direction: column;
+            }
+
+            .toolbar-left, .toolbar-right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-World Examples</h1>
+        <p class="subtitle">See how buttons work in actual use cases — forms, modals, toolbars, and more.</p>
+
+        <!-- Example 1: Form Actions -->
+        <section class="example-section" aria-labelledby="example-1-title">
+            <h2 class="example-title" id="example-1-title">1. Form Actions</h2>
+            <p class="example-desc">Classic submit/cancel pattern with loading state simulation.</p>
+
+            <div class="example-demo">
+                <div class="card">
+                    <h3 class="card-title">Create New Account</h3>
+                    <p class="card-text">Fill out the form below to create your account. All fields are required.</p>
+
+                    <div class="form-actions" role="group" aria-label="Form actions">
+                        <button class="hq-btn hq-btn-primary hq-btn-lg" id="form-submit" aria-label="Create account">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Create Account
+                        </button>
+                        <button class="hq-btn hq-btn-ghost hq-btn-lg" aria-label="Cancel account creation">Cancel</button>
+                    </div>
+
+                    <div class="status-message status-success" id="form-status" role="status" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 2: Confirmation Modal -->
+        <section class="example-section" aria-labelledby="example-2-title">
+            <h2 class="example-title" id="example-2-title">2. Destructive Action Confirmation</h2>
+            <p class="example-desc">Modal dialog for dangerous operations requiring confirmation.</p>
+
+            <div class="example-demo">
+                <button class="hq-btn hq-btn-danger" id="delete-trigger" aria-haspopup="dialog" aria-label="Delete project">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Delete Project
+                </button>
+            </div>
+        </section>
+
+        <!-- Example 3: Toolbar Actions -->
+        <section class="example-section" aria-labelledby="example-3-title">
+            <h2 class="example-title" id="example-3-title">3. Document Toolbar</h2>
+            <p class="example-desc">Editor toolbar with icon buttons and button groups.</p>
+
+            <div class="example-demo">
+                <div class="toolbar" role="toolbar" aria-label="Document editing toolbar">
+                    <div class="toolbar-left">
+                        <div class="hq-btn-group" role="group" aria-label="File operations">
+                            <button class="hq-btn hq-btn-ghost hq-btn-icon" aria-label="New document">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                            </button>
+                            <button class="hq-btn hq-btn-ghost hq-btn-icon" aria-label="Edit document">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                            <button class="hq-btn hq-btn-ghost hq-btn-icon" aria-label="Delete document">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="hq-btn-group" role="group" aria-label="Undo and redo">
+                            <button class="hq-btn hq-btn-secondary hq-btn-icon" aria-label="Undo">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+                                </svg>
+                            </button>
+                            <button class="hq-btn hq-btn-secondary hq-btn-icon" aria-label="Redo">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6-6m6 6l-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="toolbar-right">
+                        <button class="hq-btn hq-btn-secondary" aria-label="Save draft">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                            </svg>
+                            Save Draft
+                        </button>
+                        <button class="hq-btn hq-btn-primary" aria-label="Publish document">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Publish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 4: Action Cards -->
+        <section class="example-section" aria-labelledby="example-4-title">
+            <h2 class="example-title" id="example-4-title">4. Multi-Action Cards</h2>
+            <p class="example-desc">Cards with multiple action buttons showing semantic variants.</p>
+
+            <div class="example-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                <article class="card">
+                    <h3 class="card-title">Premium Plan</h3>
+                    <p class="card-text">Unlock all features and get priority support for your team.</p>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;" role="group" aria-label="Premium plan actions">
+                        <button class="hq-btn hq-btn-primary hq-btn-sm" aria-label="Upgrade to premium plan">
+                            Upgrade Now
+                        </button>
+                        <button class="hq-btn hq-btn-ghost hq-btn-sm" aria-label="Learn more about premium plan">
+                            Learn More
+                        </button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3 class="card-title">Pending Review</h3>
+                    <p class="card-text">Your submission is awaiting approval from the admin team.</p>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;" role="group" aria-label="Review actions">
+                        <button class="hq-btn hq-btn-success hq-btn-sm" aria-label="Approve submission">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Approve
+                        </button>
+                        <button class="hq-btn hq-btn-danger hq-btn-sm" aria-label="Reject submission">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            Reject
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Example 5: Loading States -->
+        <section class="example-section" aria-labelledby="example-5-title">
+            <h2 class="example-title" id="example-5-title">5. Async Operations</h2>
+            <p class="example-desc">Buttons with loading states for async operations.</p>
+
+            <div class="example-demo">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="hq-btn hq-btn-primary" id="async-btn-1" aria-label="Fetch data">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Download Report
+                    </button>
+                    <button class="hq-btn hq-btn-success" id="async-btn-2" aria-label="Save changes">
+                        Save Changes
+                    </button>
+                    <button class="hq-btn hq-btn-warning" id="async-btn-3" aria-label="Export data">
+                        Export Data
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example 6: Full-Width Mobile -->
+        <section class="example-section" aria-labelledby="example-6-title">
+            <h2 class="example-title" id="example-6-title">6. Mobile-First Actions</h2>
+            <p class="example-desc">Full-width buttons perfect for mobile layouts and CTAs.</p>
+
+            <div class="example-demo" style="max-width: 400px;">
+                <div class="card">
+                    <h3 class="card-title">Complete Your Order</h3>
+                    <p class="card-text">Review your cart and proceed to checkout.</p>
+                    <button class="hq-btn hq-btn-primary hq-btn-block hq-btn-lg" style="margin-bottom: 0.75rem;" aria-label="Proceed to checkout">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        Proceed to Checkout
+                    </button>
+                    <button class="hq-btn hq-btn-ghost hq-btn-block" aria-label="Continue shopping">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+        <div class="modal">
+            <h3 class="modal-title" id="modal-title">Delete Project?</h3>
+            <p class="modal-text" id="modal-desc">
+                This action cannot be undone. All project data, files, and settings will be permanently deleted.
+            </p>
+            <div class="modal-actions">
+                <button class="hq-btn hq-btn-ghost" id="modal-cancel" aria-label="Cancel deletion">Cancel</button>
+                <button class="hq-btn hq-btn-danger" id="modal-confirm" aria-label="Confirm deletion">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Delete Forever
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example 1: Form submission
+        document.getElementById('form-submit').addEventListener('click', function() {
+            const btn = this;
+            const status = document.getElementById('form-status');
+
+            btn.classList.add('hq-btn-loading');
+            btn.disabled = true;
+            btn.setAttribute('aria-busy', 'true');
+
+            setTimeout(() => {
+                btn.classList.remove('hq-btn-loading');
+                btn.disabled = false;
+                btn.setAttribute('aria-busy', 'false');
+
+                status.textContent = '✓ Account created successfully!';
+                status.classList.add('show');
+
+                setTimeout(() => status.classList.remove('show'), 3000);
+            }, 2000);
+        });
+
+        // Example 2: Confirmation modal
+        const modal = document.getElementById('delete-modal');
+        const deleteTrigger = document.getElementById('delete-trigger');
+        const modalCancel = document.getElementById('modal-cancel');
+        const modalConfirm = document.getElementById('modal-confirm');
+
+        deleteTrigger.addEventListener('click', () => {
+            modal.classList.add('active');
+            deleteTrigger.setAttribute('aria-expanded', 'true');
+            // Focus first focusable element in modal
+            setTimeout(() => modalCancel.focus(), 100);
+        });
+
+        modalCancel.addEventListener('click', () => {
+            modal.classList.remove('active');
+            deleteTrigger.setAttribute('aria-expanded', 'false');
+            deleteTrigger.focus();
+        });
+
+        modalConfirm.addEventListener('click', function() {
+            this.classList.add('hq-btn-loading');
+            this.disabled = true;
+            this.setAttribute('aria-busy', 'true');
+
+            setTimeout(() => {
+                modal.classList.remove('active');
+                this.classList.remove('hq-btn-loading');
+                this.disabled = false;
+                deleteTrigger.setAttribute('aria-expanded', 'false');
+                deleteTrigger.focus();
+                alert('Project deleted (demo only)');
+            }, 1500);
+        });
+
+        // Escape key closes modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                deleteTrigger.setAttribute('aria-expanded', 'false');
+                deleteTrigger.focus();
+            }
+        });
+
+        // Example 5: Async operations
+        [1, 2, 3].forEach(num => {
+            document.getElementById(`async-btn-${num}`).addEventListener('click', function() {
+                this.classList.add('hq-btn-loading');
+                this.disabled = true;
+                this.setAttribute('aria-busy', 'true');
+
+                setTimeout(() => {
+                    this.classList.remove('hq-btn-loading');
+                    this.disabled = false;
+                    this.setAttribute('aria-busy', 'false');
+                }, 2000);
+            });
+        });
+
+        console.log('✅ Real-world button examples loaded with WCAG 2.1 AA accessibility');
+    </script>
+</body>
+</html>
