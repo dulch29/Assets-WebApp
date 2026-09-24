@@ -22,8 +22,8 @@
   <main class="as-section-enter" style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
 
     <!-- User Profile Header (cards & data-display kit) -->
-    <div class="hq-card"
-      style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+    <div class="hq-card as-reveal"
+      style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
       <div style="display: flex; align-items: center; gap: 1.25rem;">
         <div class="hq-avatar"
           style="width: 56px; height: 56px; border-radius: 50%; background: #18181B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; border: 2px solid #FF6000;">
@@ -43,8 +43,40 @@
       </div>
     </div>
 
+    <!-- Account Stats Overview (layout kit hq-grid & glass-card / data-display kit) -->
+    <div class="hq-grid hq-grid-cols-4 as-reveal as-reveal-stagger" style="margin-bottom: 2rem;">
+      <div class="hq-glass-card as-reveal" style="padding: 1.25rem 1.5rem; gap: 0.5rem; border-radius: var(--as-radius);">
+        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--as-text-muted); font-weight: 600;">Library Assets</div>
+        <div id="stat-library-count" style="font-size: 1.6rem; font-weight: 800; color: #18181B; font-family: var(--as-font-mono);">—</div>
+        <div style="font-size: 0.72rem; color: #10B981; font-weight: 600;">● Ready to download</div>
+      </div>
+      <div class="hq-glass-card as-reveal" style="padding: 1.25rem 1.5rem; gap: 0.5rem; border-radius: var(--as-radius);">
+        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--as-text-muted); font-weight: 600;">Published Listings</div>
+        <div id="stat-listings-count" style="font-size: 1.6rem; font-weight: 800; color: #18181B; font-family: var(--as-font-mono);">—</div>
+        <div style="font-size: 0.72rem; color: var(--as-primary); font-weight: 600;">● Creator marketplace</div>
+      </div>
+      <div class="hq-glass-card as-reveal" style="padding: 1.25rem 1.5rem; gap: 0.5rem; border-radius: var(--as-radius);">
+        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--as-text-muted); font-weight: 600;">Publisher Tier</div>
+        <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+          <span style="font-size: 1.25rem; font-weight: 800; color: #18181B;">Tier 1</span>
+          <span class="hq-badge primary" style="font-size: 0.65rem; padding: 0.1rem 0.4rem;">Pro</span>
+        </div>
+        <div style="font-size: 0.72rem; color: var(--as-text-muted);">95% Revenue share</div>
+      </div>
+      <div class="hq-glass-card as-reveal" style="padding: 1.25rem 1.5rem; gap: 0.5rem; border-radius: var(--as-radius);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--as-text-muted); font-weight: 600;">Cloud Storage</span>
+          <span style="font-size: 0.72rem; font-family: var(--as-font-mono); color: var(--as-text-muted);">1.2 / 50 GB</span>
+        </div>
+        <div class="hq-progress sm" style="margin: 0.5rem 0 0.25rem;">
+          <div class="hq-progress-bar" style="width: 14%;"></div>
+        </div>
+        <div style="font-size: 0.72rem; color: #10B981; font-weight: 600;">48.8 GB available</div>
+      </div>
+    </div>
+
     <!-- Dashboard Tabs (navigation kit hq-tabs-list) -->
-    <div class="hq-tabs-list" style="margin-bottom: 2.25rem; border-bottom: 2px solid var(--as-border);">
+    <div class="hq-tabs-list as-reveal" style="margin-bottom: 2.25rem; border-bottom: 2px solid var(--as-border);">
       <button class="hq-tabs-trigger dash-tab active" data-tab="tab-assets">
         My Library (<span id="library-count-badge">0</span>)
       </button>
@@ -57,9 +89,37 @@
     </div>
 
     <!-- TAB 1: Purchased Assets -->
-    <section id="tab-assets" class="dash-content-panel">
+    <section id="tab-assets" class="dash-content-panel as-reveal">
       <div id="purchased-grid" class="as-grid-row" style="grid-template-columns: repeat(4, 1fr);">
-        <!-- Injected by JS -->
+        <!-- Skeleton placeholders during initial load -->
+        <div class="as-card">
+          <div class="as-skeleton-card"></div>
+          <div style="padding: 1rem 0.5rem 0.5rem;">
+            <div class="as-skeleton-text"></div>
+            <div class="as-skeleton-text short"></div>
+          </div>
+        </div>
+        <div class="as-card">
+          <div class="as-skeleton-card"></div>
+          <div style="padding: 1rem 0.5rem 0.5rem;">
+            <div class="as-skeleton-text"></div>
+            <div class="as-skeleton-text short"></div>
+          </div>
+        </div>
+        <div class="as-card">
+          <div class="as-skeleton-card"></div>
+          <div style="padding: 1rem 0.5rem 0.5rem;">
+            <div class="as-skeleton-text"></div>
+            <div class="as-skeleton-text short"></div>
+          </div>
+        </div>
+        <div class="as-card">
+          <div class="as-skeleton-card"></div>
+          <div style="padding: 1rem 0.5rem 0.5rem;">
+            <div class="as-skeleton-text"></div>
+            <div class="as-skeleton-text short"></div>
+          </div>
+        </div>
       </div>
       <div id="purchased-empty"
         style="display: none; text-align: center; padding: 4rem 2rem; background: var(--as-bg-subtle); border-radius: var(--as-radius); border: 1px dashed var(--as-border);">
@@ -70,7 +130,7 @@
     </section>
 
     <!-- TAB 2: User Listings Table (data-display kit hq-table) -->
-    <section id="tab-listings" class="dash-content-panel" style="display: none;">
+    <section id="tab-listings" class="dash-content-panel as-reveal" style="display: none;">
       <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden; background: #FFFFFF; box-shadow: 0 4px 16px rgba(0,0,0,0.02);">
         <table class="hq-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8125rem; background: #FFFFFF;">
           <thead style="background: var(--as-bg-subtle); border-bottom: 1px solid var(--as-border);">
@@ -83,7 +143,13 @@
             </tr>
           </thead>
           <tbody id="listings-table-body">
-            <!-- Injected by JS -->
+            <tr>
+              <td colspan="5" style="padding: 1.5rem;">
+                <div class="as-skeleton-text" style="margin-bottom: 0.75rem;"></div>
+                <div class="as-skeleton-text short" style="margin-bottom: 0.75rem;"></div>
+                <div class="as-skeleton-text xs"></div>
+              </td>
+            </tr>
           </tbody>
         </table>
         <div id="listings-empty"
@@ -179,8 +245,10 @@
       const grid = document.getElementById("purchased-grid");
       const empty = document.getElementById("purchased-empty");
       const badge = document.getElementById("library-count-badge");
+      const statBadge = document.getElementById("stat-library-count");
 
       badge.textContent = purchases.length;
+      if (statBadge) statBadge.textContent = purchases.length;
 
       if (purchases.length === 0) {
         grid.innerHTML = "";
@@ -188,7 +256,7 @@
       } else {
         empty.style.display = "none";
         grid.innerHTML = purchases.map(item => `
-          <div class="as-card">
+          <div class="as-card as-reveal">
             <div class="as-card-media">
               <img src="${item.image}" alt="${item.title}" class="as-card-img" />
               <span class="as-card-tag" style="background: #10B981;">OWNED</span>
@@ -208,7 +276,11 @@
         grid.querySelectorAll(".download-asset-btn").forEach(btn => {
           btn.onclick = () => {
             const title = btn.getAttribute("data-title");
-            showToast(`Downloading package for "${title}"...`, "info");
+            btn.classList.add("is-loading");
+            setTimeout(() => {
+              btn.classList.remove("is-loading");
+              showToast(`Downloaded package for "${title}".`, "success");
+            }, 600);
           };
         });
       }
@@ -219,8 +291,10 @@
       const tbody = document.getElementById("listings-table-body");
       const empty = document.getElementById("listings-empty");
       const badge = document.getElementById("listings-count-badge");
+      const statBadge = document.getElementById("stat-listings-count");
 
       badge.textContent = listings.length;
+      if (statBadge) statBadge.textContent = listings.length;
 
       if (listings.length === 0) {
         tbody.innerHTML = "";
@@ -266,8 +340,11 @@
       setTimeout(() => window.location.reload(), 800);
     };
 
-    renderPurchases();
-    renderListings();
+    // Hydrate after brief skeleton loading simulation
+    setTimeout(() => {
+      renderPurchases();
+      renderListings();
+    }, 350);
   </script>
 </body>
 

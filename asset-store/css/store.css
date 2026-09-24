@@ -932,13 +932,19 @@ button.hq-pagination-link[disabled] {
 /* -------------------------------------------------------------
    Kit Polish: Button Loading — buttons kit hq-btn-loading
 ------------------------------------------------------------- */
-.add-cart-btn.is-loading {
+.add-cart-btn.is-loading,
+.download-asset-btn.is-loading,
+.as-btn.is-loading,
+.hq-glass-modal-btn.is-loading {
   position: relative;
   color: transparent !important;
   pointer-events: none;
 }
 
-.add-cart-btn.is-loading::after {
+.add-cart-btn.is-loading::after,
+.download-asset-btn.is-loading::after,
+.as-btn.is-loading::after,
+.hq-glass-modal-btn.is-loading::after {
   content: '';
   position: absolute;
   width: 1em;
@@ -947,10 +953,36 @@ button.hq-pagination-link[disabled] {
   left: 50%;
   margin-left: -0.5em;
   margin-top: -0.5em;
-  border: 2px solid var(--as-primary);
+  border: 2px solid currentColor;
   border-radius: 50%;
   border-top-color: transparent;
   animation: hq-btn-spin 0.6s linear infinite;
+}
+
+.as-btn-primary.is-loading::after,
+.hq-glass-modal-btn-primary.is-loading::after {
+  border-color: #FFFFFF;
+  border-top-color: transparent;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Glass Card light mode overrides — glass-card kit
+------------------------------------------------------------- */
+.hq-glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--as-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  border-radius: var(--as-radius);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--as-text-primary);
+}
+
+.hq-glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: rgba(255, 96, 0, 0.35);
 }
 
 /* -------------------------------------------------------------

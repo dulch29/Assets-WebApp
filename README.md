@@ -27,8 +27,12 @@ Assets WebApp is designed for developers, students, and designers who want clean
 
 - **Signature `#FF6000` Design**: High-contrast, clean modern canvas with curated typography and zero emoji clutter.
 - **Glassmorphic Quick Preview**: Floating modal inspection powered by `kits/glassmorphism` and `kits/modal-overlay-kit`.
+- **Skeleton Shimmer Loading**: Smooth hydration placeholders for cards, text blocks, and tables using `kits/data-display-kit` and `kits/animation-kit`.
+- **Unified Toast System**: Accessible, animated notification toasts with per-status icons and progress timers powered by `kits/modal-overlay-kit`.
+- **Scroll Reveal & Micro-Interactions**: Viewport-triggered fade/slide animations (`kits/animation-kit`), button loading spinners (`kits/button-system`), and header tooltips.
+- **Interactive Multi-Step Publish Wizard**: Dynamic stepper navigation with synchronized progress bar (`kits/data-display-kit` + `kits/navigation-kit`).
+- **Creator Dashboard & Analytics**: Glassmorphic stat overview cards, library asset management, and cloud storage meter (`kits/glassmorphism` + `kits/card-system`).
 - **Layout Mode Switcher**: Instant switching between Grid and List view modes powered by `kits/layout-kit`.
-- **Pulse Deal Badges & Micro-animations**: Dynamic discount badges and toast feedback from `kits/animation-kit`.
 - **Cart & Wishlist Engine**: Working slide-in cart drawer and real-time state management.
 - **Firebase Auth & Vercel Ready**: Full Google & Email authentication support with local fallback.
 
