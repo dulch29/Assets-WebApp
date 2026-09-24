@@ -1,6 +1,8 @@
 /* HQ Asset Store - Professional Marketplace Design System */
 /* Inspired by Unity Asset Store & Unreal Fab */
 
+/* Load all 10 UI Kits */
+@import url('../kits/kits.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
@@ -315,13 +317,13 @@ body {
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .as-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--as-shadow-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
 .as-card-media {
@@ -399,7 +401,7 @@ body {
 }
 
 .as-stars {
-  color: #18181B;
+  color: var(--as-star);
   letter-spacing: -1px;
   font-size: 0.8rem;
 }
@@ -439,6 +441,11 @@ body {
   font-weight: 700;
   padding: 1px 4px;
   border-radius: 3px;
+}
+
+/* Pulsing sale badge — animation kit */
+.as-pulse-badge {
+  animation: hq-pulse 2s ease-in-out infinite;
 }
 
 .as-timer-badge {
@@ -629,4 +636,575 @@ body {
 
 .as-footer a:hover {
   color: #FFFFFF;
+}
+
+/* -------------------------------------------------------------
+   Page-load Entry Animations — animation kit
+------------------------------------------------------------- */
+.as-section-enter {
+  animation: hq-slide-up var(--anim-duration-slow) var(--anim-ease-smooth) both;
+}
+
+.as-section-enter:nth-child(1) { animation-delay: 0s; }
+.as-section-enter:nth-child(2) { animation-delay: 0.1s; }
+.as-section-enter:nth-child(3) { animation-delay: 0.2s; }
+
+/* Hero badge fade in */
+.as-hero-badge {
+  animation: hq-slide-down 0.4s var(--anim-ease-smooth) both;
+}
+
+.as-hero-content h1 {
+  animation: hq-slide-up 0.5s var(--anim-ease-smooth) 0.1s both;
+}
+
+.as-hero-content p {
+  animation: hq-slide-up 0.5s var(--anim-ease-smooth) 0.2s both;
+}
+
+.as-hero-content > div:last-child {
+  animation: hq-fade-in 0.5s var(--anim-ease-smooth) 0.35s both;
+}
+
+/* Card grid stagger — animation kit */
+.as-grid-row .as-card {
+  animation: hq-slide-up var(--anim-duration-slow) var(--anim-ease-smooth) both;
+}
+
+.as-grid-row .as-card:nth-child(1) { animation-delay: 0.05s; }
+.as-grid-row .as-card:nth-child(2) { animation-delay: 0.1s; }
+.as-grid-row .as-card:nth-child(3) { animation-delay: 0.15s; }
+.as-grid-row .as-card:nth-child(4) { animation-delay: 0.2s; }
+.as-grid-row .as-card:nth-child(5) { animation-delay: 0.25s; }
+
+/* Quick View Button — glass-card kit */
+.as-quickview-btn {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  background: var(--glass-bg, rgba(255,255,255,0.12));
+  backdrop-filter: blur(var(--glass-blur, 16px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 16px));
+  border: 1px solid var(--glass-border, rgba(255,255,255,0.22));
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 1rem;
+  border-radius: var(--as-radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.as-card-media:hover .as-quickview-btn,
+.as-hero-spotlight .as-quickview-btn {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.as-hero-spotlight .as-quickview-btn {
+  position: static;
+  transform: none;
+  opacity: 1;
+}
+
+.as-quickview-btn:hover {
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+
+/* Wishlist button — polished */
+.as-card-wishlist {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s var(--anim-ease-bounce);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.as-card-media:hover .as-card-wishlist {
+  opacity: 1;
+}
+
+.as-card-wishlist:hover {
+  transform: scale(1.15);
+}
+
+/* Category pill active — stronger signal */
+.as-pill-btn.active {
+  border-color: var(--as-text-primary);
+  color: var(--as-text-primary);
+  background: var(--as-bg-subtle);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.as-pill-btn:hover {
+  border-color: #A1A1AA;
+  color: var(--as-text-primary);
+  background: var(--as-bg-subtle);
+  transform: translateY(-1px);
+}
+
+/* Section heading labels — more vivid */
+.as-section-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--as-primary);
+}
+
+/* Stars — use amber from cards kit */
+.as-stars {
+  color: var(--hq-card-accent-amber, #F59E0B);
+  letter-spacing: -1px;
+  font-size: 0.8rem;
+}
+
+/* Add-to-cart button — hq-btn from buttons kit override */
+.add-cart-btn.as-btn-outline {
+  border-color: var(--as-border);
+  color: var(--as-text-secondary);
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.add-cart-btn.as-btn-outline:hover {
+  background: var(--as-primary);
+  border-color: var(--as-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Drawer slide-in — animation kit complementary */
+.as-drawer {
+  transition: right 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modal backdrop blur — overlays kit */
+.as-backdrop {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: hq-fade-in 0.2s ease;
+}
+
+/* Responsive polish */
+@media (max-width: 768px) {
+  .as-hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .as-quickview-btn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .as-card-wishlist {
+    opacity: 1;
+  }
+}
+
+/* Kit Overrides: Navigation Pagination & Breadcrumbs */
+.hq-pagination-link.active {
+  background: var(--as-primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--as-primary) !important;
+}
+
+.hq-pagination-link:hover:not(.disabled):not([aria-disabled="true"]) {
+  border-color: var(--as-primary) !important;
+  color: var(--as-primary) !important;
+}
+
+.hq-breadcrumbs-link:hover {
+  color: var(--as-primary) !important;
+}
+
+.hq-tabs-trigger.active {
+  color: var(--as-primary) !important;
+  border-bottom-color: var(--as-primary) !important;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Toast Notifications — overlays kit theme override
+------------------------------------------------------------- */
+.hq-toast-container {
+  top: 5rem;
+}
+
+.hq-toast {
+  background: #FFFFFF;
+  border: 1px solid var(--as-border);
+  color: var(--as-text-primary);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-radius: var(--as-radius);
+  min-width: 320px;
+  font-family: var(--as-font);
+}
+
+.hq-toast-title {
+  color: var(--as-text-primary);
+  font-size: 0.8125rem;
+}
+
+.hq-toast-message {
+  color: var(--as-text-secondary);
+  font-size: 0.78125rem;
+}
+
+.hq-toast.success { border-left: 3px solid #10B981; }
+.hq-toast.success .hq-toast-icon { color: #10B981; }
+
+.hq-toast.error { border-left: 3px solid #EF4444; }
+.hq-toast.error .hq-toast-icon { color: #EF4444; }
+
+.hq-toast.warning { border-left: 3px solid #F59E0B; }
+.hq-toast.warning .hq-toast-icon { color: #F59E0B; }
+
+.hq-toast.info { border-left: 3px solid var(--as-primary); }
+.hq-toast.info .hq-toast-icon { color: var(--as-primary); }
+
+.hq-toast-close {
+  color: var(--as-text-muted);
+  min-width: 28px;
+  min-height: 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--as-radius-sm);
+}
+
+.hq-toast-close:hover {
+  color: var(--as-text-primary);
+  background: var(--as-bg-subtle);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Skeleton Loading — data-display kit
+------------------------------------------------------------- */
+.as-skeleton-card {
+  background: linear-gradient(90deg, #F4F4F5 25%, #E4E4E7 50%, #F4F4F5 75%);
+  background-size: 200% 100%;
+  animation: hq-skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: var(--as-radius);
+  aspect-ratio: 16 / 9;
+}
+
+.as-skeleton-text {
+  background: linear-gradient(90deg, #F4F4F5 25%, #E4E4E7 50%, #F4F4F5 75%);
+  background-size: 200% 100%;
+  animation: hq-skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  height: 0.875rem;
+  margin-bottom: 0.4rem;
+}
+
+.as-skeleton-text.short { width: 60%; }
+.as-skeleton-text.xs { width: 40%; height: 0.75rem; }
+
+/* -------------------------------------------------------------
+   Kit Polish: Button Loading — buttons kit hq-btn-loading
+------------------------------------------------------------- */
+.add-cart-btn.is-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.add-cart-btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  border: 2px solid var(--as-primary);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: hq-btn-spin 0.6s linear infinite;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Tooltips — overlays kit theme for light UI
+------------------------------------------------------------- */
+.as-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.as-tooltip-wrap .as-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #18181B;
+  color: #FFFFFF;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--as-radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 3000;
+  letter-spacing: 0.02em;
+}
+
+.as-tooltip-wrap .as-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #18181B;
+}
+
+.as-tooltip-wrap:hover .as-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Progress Bar — data-display kit theme override
+------------------------------------------------------------- */
+.hq-progress {
+  background: var(--as-border-light);
+}
+
+.hq-progress-bar {
+  background: linear-gradient(90deg, var(--as-primary), #FF8C42);
+}
+
+/* Publish wizard step progress */
+.as-publish-progress {
+  height: 4px;
+  border-radius: var(--as-radius-pill);
+  background: var(--as-border-light);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.as-publish-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--as-primary), #FF8C42);
+  border-radius: var(--as-radius-pill);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Form Inputs — enhanced focus transitions
+------------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+select,
+textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--as-primary) !important;
+  box-shadow: 0 0 0 3px rgba(255, 96, 0, 0.1);
+}
+
+/* Range slider accent */
+input[type="range"] {
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Filter Sidebar — cards kit interaction
+------------------------------------------------------------- */
+aside.hq-card label:has(input[type="radio"]) {
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--as-radius-sm);
+  transition: background 0.15s ease;
+}
+
+aside.hq-card label:has(input[type="radio"]):hover {
+  background: var(--as-bg-subtle);
+}
+
+aside.hq-card label:has(input[type="radio"]:checked) {
+  background: var(--as-primary-light);
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Badge overrides for light theme
+------------------------------------------------------------- */
+.hq-badge.success {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.hq-badge.primary {
+  background: var(--as-primary-light);
+  color: var(--as-primary);
+}
+
+.hq-badge.warning {
+  background: #FFFBEB;
+  color: #D97706;
+}
+
+.hq-badge.error {
+  background: var(--as-danger-bg);
+  color: var(--as-danger-text);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Footer link hover — animations kit
+------------------------------------------------------------- */
+.as-footer a {
+  transition: color 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+}
+
+.as-footer a:hover {
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+/* Footer column headings subtle glow */
+.as-footer div[style*="font-weight: 700"] {
+  letter-spacing: 0.02em;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Scroll Reveal — animations kit utility
+------------------------------------------------------------- */
+.as-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--anim-ease-smooth), transform 0.5s var(--anim-ease-smooth);
+}
+
+.as-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children reveals */
+.as-reveal-stagger > .as-reveal:nth-child(1) { transition-delay: 0.05s; }
+.as-reveal-stagger > .as-reveal:nth-child(2) { transition-delay: 0.1s; }
+.as-reveal-stagger > .as-reveal:nth-child(3) { transition-delay: 0.15s; }
+.as-reveal-stagger > .as-reveal:nth-child(4) { transition-delay: 0.2s; }
+.as-reveal-stagger > .as-reveal:nth-child(5) { transition-delay: 0.25s; }
+
+/* -------------------------------------------------------------
+   Kit Polish: Table hover — data-display kit light override
+------------------------------------------------------------- */
+.hq-table {
+  background: #FFFFFF;
+}
+
+.hq-table thead {
+  background: var(--as-bg-subtle);
+}
+
+.hq-table th {
+  color: var(--as-text-secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom-color: var(--as-border);
+}
+
+.hq-table td {
+  color: var(--as-text-primary);
+  border-bottom-color: var(--as-border-light);
+  font-size: 0.8125rem;
+}
+
+.hq-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.hq-table tbody tr:hover {
+  background: var(--as-bg-subtle);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Drawer / Cart — smoother slide + glass blur
+------------------------------------------------------------- */
+.as-drawer {
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.18);
+  border-left: 1px solid var(--as-border-light);
+}
+
+/* Cart item hover */
+.as-drawer [style*="border: 1px solid"] {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.as-drawer [style*="border: 1px solid"]:hover {
+  border-color: var(--as-primary) !important;
+  box-shadow: 0 2px 8px rgba(255, 96, 0, 0.08);
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Auth page glass input glow
+------------------------------------------------------------- */
+.hq-glass-modal-input:focus {
+  border-color: var(--as-primary) !important;
+  box-shadow: 0 0 0 3px rgba(255, 96, 0, 0.15), 0 0 20px rgba(255, 96, 0, 0.05) !important;
+}
+
+/* Auth tab indicator transition */
+.hq-tabs-trigger {
+  transition: color 0.2s ease, border-bottom-color 0.2s ease, background 0.15s ease;
+}
+
+/* -------------------------------------------------------------
+   Kit Polish: Selection color
+------------------------------------------------------------- */
+::selection {
+  background: rgba(255, 96, 0, 0.2);
+  color: #18181B;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
 }

@@ -82,6 +82,11 @@ export function addToCart(assetId) {
   return true;
 }
 
+export function isInCart(assetId) {
+  const cart = getCart();
+  return cart.some(item => item.id === assetId);
+}
+
 export function removeFromCart(assetId) {
   let cart = getCart();
   cart = cart.filter(item => item.id !== assetId);
@@ -170,55 +175,55 @@ export function checkoutCart() {
   return true;
 }
 
-// Toast Notifications (Clean Professional Style)
+// Toast Notifications — uses hq-toast from overlays kit
 export function showToast(message, type = "success") {
   let container = document.getElementById("as-toast-container");
   if (!container) {
     container = document.createElement("div");
     container.id = "as-toast-container";
-    container.style.position = "fixed";
-    container.style.bottom = "1.5rem";
-    container.style.right = "1.5rem";
+    container.className = "hq-toast-container";
     container.style.zIndex = "99999";
-    container.style.display = "flex";
-    container.style.flexDirection = "column";
-    container.style.gap = "0.5rem";
-    container.style.pointerEvents = "none";
     document.body.appendChild(container);
   }
 
-  const toast = document.createElement("div");
-  toast.style.pointerEvents = "auto";
-  toast.style.display = "flex";
-  toast.style.alignItems = "center";
-  toast.style.gap = "0.6rem";
-  toast.style.padding = "0.75rem 1rem";
-  toast.style.borderRadius = "6px";
-  toast.style.background = "#18181B";
-  toast.style.border = "1px solid #27272A";
-  toast.style.color = "#FFFFFF";
-  toast.style.boxShadow = "0 8px 24px rgba(0,0,0,0.2)";
-  toast.style.fontSize = "0.8125rem";
-  toast.style.fontWeight = "500";
-  toast.style.fontFamily = "var(--as-font, sans-serif)";
+  const icons = {
+    success: `<svg class="hq-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg>`,
+    error:   `<svg class="hq-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`,
+    warning: `<svg class="hq-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+    info:    `<svg class="hq-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`,
+  };
 
-  const iconSvg = type === "error" 
-    ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`
-    : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg>`;
+  const toastEl = document.createElement("div");
+  toastEl.className = `hq-toast ${type}`;
 
-  toast.innerHTML = `
-    <span>${iconSvg}</span>
-    <span>${message}</span>
+  const title = type === 'success' ? 'Success' : type === 'error' ? 'Error' : type === 'warning' ? 'Warning' : 'Info';
+
+  toastEl.innerHTML = `
+    ${icons[type] || icons.info}
+    <div class="hq-toast-content">
+      <div class="hq-toast-title">${title}</div>
+      <div class="hq-toast-message">${message}</div>
+    </div>
+    <button class="hq-toast-close" aria-label="Dismiss notification">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
   `;
 
-  container.appendChild(toast);
+  toastEl.querySelector(".hq-toast-close").onclick = () => {
+    toastEl.style.opacity = "0";
+    toastEl.style.transform = "translateX(100%)";
+    toastEl.style.transition = "all 0.25s ease";
+    setTimeout(() => toastEl.remove(), 250);
+  };
+
+  container.appendChild(toastEl);
 
   setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(-10px)";
-    toast.style.transition = "all 0.3s ease";
-    setTimeout(() => toast.remove(), 300);
-  }, 3500);
+    toastEl.style.opacity = "0";
+    toastEl.style.transform = "translateX(100%)";
+    toastEl.style.transition = "all 0.3s ease";
+    setTimeout(() => toastEl.remove(), 300);
+  }, 4000);
 }
 
 // Initial cart badge update

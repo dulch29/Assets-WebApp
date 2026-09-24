@@ -19,41 +19,39 @@
   <nav id="store-subnav"></nav>
 
   <!-- Main Dashboard Container -->
-  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+  <main class="as-section-enter" style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
 
-    <!-- User Profile Header -->
-    <div
-      style="background: var(--as-bg-subtle); border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <div
-          style="width: 52px; height: 52px; border-radius: 50%; background: #18181B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem;">
+    <!-- User Profile Header (cards & data-display kit) -->
+    <div class="hq-card"
+      style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 1.25rem;">
+        <div class="hq-avatar"
+          style="width: 56px; height: 56px; border-radius: 50%; background: #18181B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; border: 2px solid #FF6000;">
           <span id="user-avatar-initials">U</span>
         </div>
         <div>
-          <h1 id="user-name" style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin: 0 0 0.2rem 0;">Creator
-            Account</h1>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+            <h1 id="user-name" style="font-size: 1.35rem; font-weight: 700; color: #18181B; margin: 0;">Creator Account</h1>
+            <span class="hq-badge success" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">Verified Dev</span>
+          </div>
           <div id="user-email" style="color: var(--as-text-muted); font-size: 0.8125rem;">developer@unity.com</div>
         </div>
       </div>
       <div style="display: flex; gap: 0.75rem;">
         <a href="publish.html" class="as-btn as-btn-primary as-btn-sm">Sell New Asset</a>
-        <button id="dashboard-logout-btn" class="as-btn as-btn-outline as-btn-sm" style="color: var(--as-danger);">Sign
-          Out</button>
+        <button id="dashboard-logout-btn" class="as-btn as-btn-outline as-btn-sm" style="color: var(--as-danger); border-color: rgba(239,68,68,0.3);">Sign Out</button>
       </div>
     </div>
 
-    <!-- Dashboard Tabs -->
-    <div style="display: flex; border-bottom: 1px solid var(--as-border); margin-bottom: 2rem; gap: 2rem;">
-      <button class="dash-tab active" data-tab="tab-assets"
-        style="background: none; border: none; padding: 0.75rem 0; font-size: 0.875rem; font-weight: 600; color: var(--as-primary); border-bottom: 2px solid var(--as-primary); cursor: pointer;">
-        My Assets (<span id="library-count-badge">0</span>)
+    <!-- Dashboard Tabs (navigation kit hq-tabs-list) -->
+    <div class="hq-tabs-list" style="margin-bottom: 2.25rem; border-bottom: 2px solid var(--as-border);">
+      <button class="hq-tabs-trigger dash-tab active" data-tab="tab-assets">
+        My Library (<span id="library-count-badge">0</span>)
       </button>
-      <button class="dash-tab" data-tab="tab-listings"
-        style="background: none; border: none; padding: 0.75rem 0; font-size: 0.875rem; font-weight: 500; color: var(--as-text-muted); border-bottom: 2px solid transparent; cursor: pointer;">
+      <button class="hq-tabs-trigger dash-tab" data-tab="tab-listings">
         My Listings (<span id="listings-count-badge">0</span>)
       </button>
-      <button class="dash-tab" data-tab="tab-settings"
-        style="background: none; border: none; padding: 0.75rem 0; font-size: 0.875rem; font-weight: 500; color: var(--as-text-muted); border-bottom: 2px solid transparent; cursor: pointer;">
+      <button class="hq-tabs-trigger dash-tab" data-tab="tab-settings">
         Account Settings
       </button>
     </div>
@@ -65,26 +63,23 @@
       </div>
       <div id="purchased-empty"
         style="display: none; text-align: center; padding: 4rem 2rem; background: var(--as-bg-subtle); border-radius: var(--as-radius); border: 1px dashed var(--as-border);">
-        <h3 style="font-size: 1.1rem; font-weight: 700; color: #18181B; margin-bottom: 0.5rem;">No purchased assets yet
-        </h3>
-        <p style="color: var(--as-text-muted); font-size: 0.8125rem; margin-bottom: 1.25rem;">Explore the marketplace to
-          download game-ready assets.</p>
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #18181B; margin-bottom: 0.5rem;">No purchased assets yet</h3>
+        <p style="color: var(--as-text-muted); font-size: 0.8125rem; margin-bottom: 1.25rem;">Explore the marketplace to download game-ready assets.</p>
         <a href="browse.html" class="as-btn as-btn-primary as-btn-sm">Browse Catalog</a>
       </div>
     </section>
 
-    <!-- TAB 2: User Listings Table -->
+    <!-- TAB 2: User Listings Table (data-display kit hq-table) -->
     <section id="tab-listings" class="dash-content-panel" style="display: none;">
-      <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8125rem;">
+      <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden; background: #FFFFFF; box-shadow: 0 4px 16px rgba(0,0,0,0.02);">
+        <table class="hq-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8125rem; background: #FFFFFF;">
           <thead style="background: var(--as-bg-subtle); border-bottom: 1px solid var(--as-border);">
             <tr>
-              <th style="padding: 0.85rem 1rem; color: var(--as-text-secondary); font-weight: 600;">Asset</th>
-              <th style="padding: 0.85rem 1rem; color: var(--as-text-secondary); font-weight: 600;">Category</th>
-              <th style="padding: 0.85rem 1rem; color: var(--as-text-secondary); font-weight: 600;">Price</th>
-              <th style="padding: 0.85rem 1rem; color: var(--as-text-secondary); font-weight: 600;">Rating</th>
-              <th style="padding: 0.85rem 1rem; color: var(--as-text-secondary); font-weight: 600; text-align: right;">
-                Action</th>
+              <th style="padding: 0.85rem 1rem; color: #18181B; font-weight: 600;">Asset</th>
+              <th style="padding: 0.85rem 1rem; color: #18181B; font-weight: 600;">Category</th>
+              <th style="padding: 0.85rem 1rem; color: #18181B; font-weight: 600;">Price</th>
+              <th style="padding: 0.85rem 1rem; color: #18181B; font-weight: 600;">Rating</th>
+              <th style="padding: 0.85rem 1rem; color: #18181B; font-weight: 600; text-align: right;">Action</th>
             </tr>
           </thead>
           <tbody id="listings-table-body">
@@ -99,35 +94,28 @@
       </div>
     </section>
 
-    <!-- TAB 3: Settings -->
+    <!-- TAB 3: Settings (forms kit) -->
     <section id="tab-settings" class="dash-content-panel" style="display: none;">
-      <div
-        style="max-width: 580px; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 2rem;">
-        <h2 style="font-size: 1.15rem; font-weight: 700; color: #18181B; margin-bottom: 1.5rem;">Profile & Account
-          Details</h2>
+      <div class="hq-card"
+        style="max-width: 580px; background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+        <h2 style="font-size: 1.15rem; font-weight: 700; color: #18181B; margin: 0 0 1.5rem 0;">Profile & Account Details</h2>
 
         <form id="profile-settings-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
-          <div>
-            <label
-              style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Display
-              Name</label>
-            <input type="text" id="setting-name" value="Indie Developer"
+          <div class="hq-form-group" style="margin-bottom: 0;">
+            <label class="hq-label" for="setting-name" style="font-size: 0.8125rem; font-weight: 600; color: #27272A;">Display Name</label>
+            <input type="text" id="setting-name" class="hq-input hq-input-sm" value="Indie Developer"
               style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
           </div>
 
-          <div>
-            <label
-              style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Email
-              Address</label>
-            <input type="email" id="setting-email" value="developer@unity.com"
+          <div class="hq-form-group" style="margin-bottom: 0;">
+            <label class="hq-label" for="setting-email" style="font-size: 0.8125rem; font-weight: 600; color: #27272A;">Email Address</label>
+            <input type="email" id="setting-email" class="hq-input hq-input-sm" value="developer@unity.com"
               style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
           </div>
 
-          <div>
-            <label
-              style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Studio
-              / Publisher Bio</label>
-            <textarea id="setting-bio" rows="3"
+          <div class="hq-form-group" style="margin-bottom: 0;">
+            <label class="hq-label" for="setting-bio" style="font-size: 0.8125rem; font-weight: 600; color: #27272A;">Studio / Publisher Bio</label>
+            <textarea id="setting-bio" class="hq-textarea" rows="3"
               style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none; font-family: var(--as-font);">Developing indie titles and verified assets.</textarea>
           </div>
 
@@ -169,22 +157,15 @@
     document.getElementById("dashboard-logout-btn").onclick = logout;
 
     // Tab switcher
+    // Tab switcher (navigation kit hq-tabs)
     const tabs = document.querySelectorAll(".dash-tab");
     const panels = document.querySelectorAll(".dash-content-panel");
 
     tabs.forEach(tab => {
       tab.onclick = () => {
-        tabs.forEach(t => {
-          t.style.color = "var(--as-text-muted)";
-          t.style.borderBottomColor = "transparent";
-          t.style.fontWeight = "500";
-          t.classList.remove("active");
-        });
+        tabs.forEach(t => t.classList.remove("active"));
         panels.forEach(p => p.style.display = "none");
 
-        tab.style.color = "var(--as-primary)";
-        tab.style.borderBottomColor = "var(--as-primary)";
-        tab.style.fontWeight = "600";
         tab.classList.add("active");
 
         const targetId = tab.getAttribute("data-tab");

@@ -7,7 +7,7 @@
   <meta name="description" content="Sign in with your account to access downloads and publisher tools." />
   <link rel="stylesheet" href="css/store.css" />
 </head>
-<body style="background: var(--as-bg-canvas);">
+<body style="background: radial-gradient(ellipse at 60% 0%, #1a0a00 0%, #0a0a0d 55%, #030305 100%); min-height: 100vh;">
 
   <!-- Top Dark Navbar & Subnav -->
   <header id="store-header"></header>
@@ -15,74 +15,69 @@
   <!-- Auth Container -->
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 1.5rem;">
     
-    <div style="width: 100%; max-width: 400px; background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 2.5rem 2rem; box-shadow: var(--as-shadow);">
-      
+    <!-- Auth Glass Panel -->
+    <div class="hq-glass-modal-content hq-scale-up" style="max-width: 420px; width: 100%; margin: 0 auto;">
+
       <!-- Brand Logo -->
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="font-weight: 800; font-size: 1.25rem; color: #111827; margin-bottom: 0.25rem;">HandGun ID</div>
-        <div id="auth-subtitle" style="font-size: 0.8125rem; color: var(--as-text-muted);">Sign in to access HandGun Store</div>
+      <div class="hq-slide-down" style="text-align: center; margin-bottom: 2rem;">
+        <div style="font-weight: 800; font-size: 1.5rem; color: #FFFFFF; margin-bottom: 0.35rem; letter-spacing: -0.02em;">HandGun
+          <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(255,96,0,0.2); color: #FF771C; border: 1px solid rgba(255,96,0,0.4); padding: 0.15rem 0.45rem; border-radius: 4px; vertical-align: middle;">ID</span>
+        </div>
+        <div id="auth-subtitle" style="font-size: 0.8125rem; color: rgba(255,255,255,0.55);">Sign in to access HandGun Store</div>
       </div>
 
-      <!-- Tab Switcher -->
-      <div style="display: flex; border-bottom: 1px solid var(--as-border); margin-bottom: 1.75rem;">
-        <button id="tab-login" style="flex: 1; padding: 0.6rem 0; font-size: 0.875rem; font-weight: 600; color: var(--as-primary); border: none; background: none; border-bottom: 2px solid var(--as-primary); cursor: pointer;">
-          Sign In
-        </button>
-        <button id="tab-register" style="flex: 1; padding: 0.6rem 0; font-size: 0.875rem; font-weight: 500; color: var(--as-text-muted); border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer;">
-          Create Account
-        </button>
+      <!-- Tab Switcher — navigation kit tabs -->
+      <div class="hq-tabs-list" style="margin-bottom: 1.75rem; border-bottom-color: rgba(255,255,255,0.12);">
+        <button id="tab-login" class="hq-tabs-trigger active" style="flex: 1; justify-content: center;">Sign In</button>
+        <button id="tab-register" class="hq-tabs-trigger" style="flex: 1; justify-content: center;">Create Account</button>
       </div>
 
       <!-- Google Sign In -->
       <div style="margin-bottom: 1.5rem;">
-        <button id="google-auth-btn" type="button" class="as-btn as-btn-outline" style="width: 100%; justify-content: center; font-size: 0.8125rem; padding: 0.6rem;">
+        <button id="google-auth-btn" type="button" class="hq-glass-modal-btn hq-glass-modal-btn-secondary" style="width: 100%;">
+          <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right: 0.5rem;"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Continue with Google
         </button>
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0.5rem; color: var(--as-text-muted); font-size: 0.75rem;">
-          <div style="flex: 1; height: 1px; background: var(--as-border);"></div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin: 1.25rem 0 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.75rem;">
+          <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.12);"></div>
           <span>OR</span>
-          <div style="flex: 1; height: 1px; background: var(--as-border);"></div>
+          <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.12);"></div>
         </div>
       </div>
 
-      <!-- LOGIN FORM -->
-      <form id="login-form" style="display: flex; flex-direction: column; gap: 1rem;">
-        <div>
-          <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Email</label>
-          <input type="email" id="login-email" required value="developer@unity.com" style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+      <!-- LOGIN FORM — glass-modal kit -->
+      <form id="login-form" class="hq-glass-modal-form">
+        <div class="hq-glass-modal-field">
+          <label class="hq-glass-modal-label" for="login-email">Email</label>
+          <input type="email" id="login-email" class="hq-glass-modal-input" required value="developer@unity.com" placeholder="you@example.com" />
         </div>
-
-        <div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
-            <label style="font-size: 0.8125rem; font-weight: 600; color: #27272A;">Password</label>
-            <a href="#" onclick="alert('Demo mode: any password is valid'); return false;" style="font-size: 0.75rem; color: var(--as-primary); text-decoration: none;">Forgot?</a>
+        <div class="hq-glass-modal-field">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label class="hq-glass-modal-label" for="login-password">Password</label>
+            <a href="#" onclick="alert('Demo mode: any password is valid'); return false;" style="font-size: 0.75rem; color: var(--accent-primary, #00b4d8); text-decoration: none;">Forgot?</a>
           </div>
-          <input type="password" id="login-password" required value="password123" style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+          <input type="password" id="login-password" class="hq-glass-modal-input" required value="password123" placeholder="Enter password" />
         </div>
-
-        <button type="submit" class="as-btn as-btn-primary" style="width: 100%; padding: 0.65rem; margin-top: 0.5rem;">
+        <button type="submit" class="hq-glass-modal-btn hq-glass-modal-btn-primary" style="margin-top: 0.5rem;">
           Sign In
         </button>
       </form>
 
-      <!-- REGISTER FORM -->
-      <form id="register-form" style="display: none; flex-direction: column; gap: 1rem;">
-        <div>
-          <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Username</label>
-          <input type="text" id="reg-name" placeholder="DevCreator" required style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+      <!-- REGISTER FORM — glass-modal kit -->
+      <form id="register-form" class="hq-glass-modal-form" style="display: none;">
+        <div class="hq-glass-modal-field">
+          <label class="hq-glass-modal-label" for="reg-name">Username</label>
+          <input type="text" id="reg-name" class="hq-glass-modal-input" placeholder="DevCreator" required />
         </div>
-
-        <div>
-          <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Email</label>
-          <input type="email" id="reg-email" placeholder="dev@company.com" required style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+        <div class="hq-glass-modal-field">
+          <label class="hq-glass-modal-label" for="reg-email">Email</label>
+          <input type="email" id="reg-email" class="hq-glass-modal-input" placeholder="dev@company.com" required />
         </div>
-
-        <div>
-          <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Password</label>
-          <input type="password" id="reg-password" placeholder="At least 6 characters" required style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+        <div class="hq-glass-modal-field">
+          <label class="hq-glass-modal-label" for="reg-password">Password</label>
+          <input type="password" id="reg-password" class="hq-glass-modal-input" placeholder="At least 6 characters" required />
         </div>
-
-        <button type="submit" class="as-btn as-btn-primary" style="width: 100%; padding: 0.65rem; margin-top: 0.5rem;">
+        <button type="submit" class="hq-glass-modal-btn hq-glass-modal-btn-primary" style="margin-top: 0.5rem;">
           Create Account
         </button>
       </form>
@@ -91,7 +86,7 @@
   </main>
 
   <!-- Clean Footer -->
-  <footer class="as-footer">
+  <footer class="as-footer" style="border-top-color: rgba(255,255,255,0.06);">
     <div style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;">
       <div style="font-weight: 800; color: #FFFFFF;">HandGun <span style="font-size: 0.75rem; color: #FF6000; font-weight: 600;">ASSETS</span></div>
       <div style="font-size: 0.75rem; color: #71717A;">© 2026 HandGun Asset Store. All rights reserved.</div>
@@ -118,22 +113,14 @@
 
     function setMode(isLogin) {
       if (isLogin) {
-        tabLogin.style.color = "var(--as-primary)";
-        tabLogin.style.borderBottomColor = "var(--as-primary)";
-        tabLogin.style.fontWeight = "600";
-        tabRegister.style.color = "var(--as-text-muted)";
-        tabRegister.style.borderBottomColor = "transparent";
-        tabRegister.style.fontWeight = "500";
+        tabLogin.classList.add("active");
+        tabRegister.classList.remove("active");
         loginForm.style.display = "flex";
         registerForm.style.display = "none";
         subtitle.textContent = "Sign in to access the Asset Store";
       } else {
-        tabRegister.style.color = "var(--as-primary)";
-        tabRegister.style.borderBottomColor = "var(--as-primary)";
-        tabRegister.style.fontWeight = "600";
-        tabLogin.style.color = "var(--as-text-muted)";
-        tabLogin.style.borderBottomColor = "transparent";
-        tabLogin.style.fontWeight = "500";
+        tabRegister.classList.add("active");
+        tabLogin.classList.remove("active");
         registerForm.style.display = "flex";
         loginForm.style.display = "none";
         subtitle.textContent = "Create an account to publish and collect assets";

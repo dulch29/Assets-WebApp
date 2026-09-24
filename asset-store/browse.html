@@ -19,7 +19,7 @@
   <nav id="store-subnav"></nav>
 
   <!-- Main Catalog Layout -->
-  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+  <main class="as-section-enter" style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
 
     <!-- Top Bar: Results Count & Sort -->
     <div
@@ -48,8 +48,8 @@
     <div style="display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start;">
 
       <!-- Filter Sidebar -->
-      <aside
-        style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.25rem; position: sticky; top: 120px;">
+      <aside class="hq-card"
+        style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.25rem; position: sticky; top: 120px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--as-border-light);">
           <span style="font-size: 0.875rem; font-weight: 700; color: #18181B;">Filters</span>
@@ -147,7 +147,15 @@
       <!-- Main Catalog Results -->
       <section>
         <div id="catalog-grid" class="as-grid-row" style="grid-template-columns: repeat(4, 1fr);">
-          <!-- Injected by JS -->
+          <!-- Skeleton placeholders (data-display kit) -->
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+          <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
         </div>
 
         <!-- Empty state -->
@@ -159,13 +167,14 @@
           <button id="empty-reset-btn" class="as-btn as-btn-primary as-btn-sm">Reset Filters</button>
         </div>
 
-        <!-- Pagination -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 3.5rem;">
-          <button class="as-btn as-btn-outline as-btn-sm" disabled style="opacity: 0.5;">Previous</button>
-          <button class="as-btn as-btn-primary as-btn-sm">1</button>
-          <button class="as-btn as-btn-outline as-btn-sm">2</button>
-          <button class="as-btn as-btn-outline as-btn-sm">Next</button>
-        </div>
+        <!-- Pagination (navigation kit) -->
+        <nav class="hq-pagination" aria-label="Catalog pagination" style="margin-top: 3.5rem;">
+          <a href="#" class="hq-pagination-link disabled" aria-disabled="true">&larr; Prev</a>
+          <a href="#" class="hq-pagination-link active" aria-current="page">1</a>
+          <a href="#" class="hq-pagination-link">2</a>
+          <a href="#" class="hq-pagination-link">3</a>
+          <a href="#" class="hq-pagination-link">Next &rarr;</a>
+        </nav>
       </section>
 
     </div>
@@ -186,7 +195,7 @@
     import { initCommonUI } from "./js/common-ui.js";
     import { ICONS } from "./js/icons.js";
     import { filterAssets } from "./js/data.js";
-    import { addToCart } from "./js/store.js";
+    import { addToCart, toggleWishlist, isInWishlist } from "./js/store.js";
 
     const urlParams = new URLSearchParams(window.location.search);
     const initialQuery = urlParams.get("q") || "";
@@ -219,6 +228,7 @@
             asset.category === 'vfx' ? ICONS.sparkles :
               asset.category === 'tools' ? ICONS.wrench : ICONS.layout;
 
+      const inWish = isInWishlist(asset.id);
       const fullStars = Math.floor(asset.rating);
       const starsStr = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
 
@@ -229,6 +239,16 @@
               <img src="${asset.image}" alt="${asset.title}" class="as-card-img" loading="lazy" />
             </a>
             ${asset.category === '3d' ? `<span class="as-card-tag">3D</span>` : ''}
+
+            <!-- Quick View Overlay Button (glass-modal kit) -->
+            <button class="as-quickview-btn" data-id="${asset.id}">
+              Quick View
+            </button>
+
+            <!-- Wishlist Heart Button -->
+            <button class="as-card-wishlist wishlist-btn" data-id="${asset.id}" title="Wishlist">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="${inWish ? '#FF6000' : 'none'}" stroke="${inWish ? '#FF6000' : 'currentColor'}" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+            </button>
           </div>
           <div class="as-card-content">
             <div class="as-card-cat">
@@ -248,11 +268,11 @@
               <span class="as-price-current">$${asset.price.toFixed(2)}</span>
               ${asset.originalPrice ? `
                 <span class="as-price-original">$${asset.originalPrice.toFixed(2)}</span>
-                <span class="as-discount-badge">${asset.discount || '-50%'}</span>
+                <span class="as-discount-badge as-pulse-badge">${asset.discount || '-50%'}</span>
               ` : ''}
               ${asset.timer ? `<span class="as-timer-badge">${asset.timer}</span>` : ''}
             </div>
-            <button class="add-cart-btn as-btn as-btn-outline as-btn-sm" data-id="${asset.id}" style="margin-top: 0.6rem; width: 100%; border-color: #E4E4E7; font-size: 0.75rem;">
+            <button class="add-cart-btn as-btn as-btn-outline as-btn-sm" data-id="${asset.id}" style="margin-top: 0.6rem; width: 100%;">
               Add to cart
             </button>
           </div>
@@ -308,9 +328,22 @@
         const id = btn.getAttribute("data-id");
         addToCart(id);
       }
+
+      const wishBtn = e.target.closest(".wishlist-btn");
+      if (wishBtn) {
+        e.preventDefault();
+        const id = wishBtn.getAttribute("data-id");
+        const active = toggleWishlist(id);
+        const svg = wishBtn.querySelector("svg");
+        if (svg) {
+          svg.setAttribute("fill", active ? "#FF6000" : "none");
+          svg.setAttribute("stroke", active ? "#FF6000" : "currentColor");
+        }
+      }
     });
 
-    applyFilters();
+    // Brief delay to show skeleton loading
+    setTimeout(() => applyFilters(), 350);
   </script>
 </body>
 

@@ -276,14 +276,91 @@
             padding-left: clamp(2.5rem, 5vw, 3rem);
         }
 
-        /* ===================================
+        .hq-btn {
+            appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: var(--font-body);
+            font-weight: 600;
+            line-height: 1.5;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: clamp(0.75rem, 1.5vw, 0.875rem) clamp(1.25rem, 2vw, 1.5rem);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
 
-[Content continues but truncated for length - this matches the original Write attempt with all form components including textarea, select, checkbox, radio, layouts, etc.]
+        .hq-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.12);
+        }
 
-===================================*/
+        .hq-btn:focus-visible {
+            box-shadow: var(--shadow-focus);
+        }
+
+        .hq-btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), #5B85FF);
+            color: #F8FAFF;
+            box-shadow: 0 10px 25px rgba(59, 109, 255, 0.35);
+        }
+
+        .hq-btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-primary-hover), var(--accent-primary));
+        }
     </style>
 </head>
 <body>
-    <!-- Full body content from original attempt -->
+    <main class="demo-container">
+        <header class="demo-header">
+            <h1 class="demo-title">Form UI Kit</h1>
+            <p class="demo-subtitle">Accessible, dark-mode form components for web projects, student portals, and product flows.</p>
+        </header>
+
+        <section class="demo-section">
+            <h2 class="section-title">Core form fields</h2>
+            <p class="section-description">Use these patterns for signups, logins, contact forms, and admin workflows.</p>
+
+            <div class="form-grid">
+                <form>
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="full-name">Full name <span class="hq-label-required">*</span></label>
+                        <input class="hq-input" id="full-name" type="text" placeholder="Jane Doe">
+                        <span class="hq-helper-text">This will appear on your public profile.</span>
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="email">Email <span class="hq-label-required">*</span></label>
+                        <input class="hq-input" id="email" type="email" placeholder="jane@example.com">
+                    </div>
+
+                    <div class="hq-form-group has-error">
+                        <label class="hq-label" for="project-email">Work email <span class="hq-label-required">*</span></label>
+                        <input class="hq-input" id="project-email" type="email" value="jane@invalid" aria-invalid="true">
+                        <span class="hq-error-text">Please enter a valid email address.</span>
+                    </div>
+
+                    <div class="hq-form-group has-success">
+                        <label class="hq-label" for="username">Username <span class="hq-label-required">*</span></label>
+                        <input class="hq-input" id="username" type="text" value="jane_doe" aria-invalid="false">
+                        <span class="hq-success-text">Username is available.</span>
+                    </div>
+
+                    <div class="hq-form-group">
+                        <label class="hq-label" for="message">Message</label>
+                        <textarea class="hq-input" id="message" rows="5" placeholder="Tell us about your project..."></textarea>
+                    </div>
+
+                    <button class="hq-btn hq-btn-primary" type="submit">Create account</button>
+                </form>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

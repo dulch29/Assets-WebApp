@@ -3,7 +3,7 @@
 
 import { ICONS } from "./icons.js";
 import { CATEGORIES } from "./data.js";
-import { getCart, removeFromCart, getCartTotal, checkoutCart, updateCartBadge } from "./store.js";
+import { getCart, removeFromCart, getCartTotal, checkoutCart, updateCartBadge, findAsset, addToCart } from "./store.js";
 import { updateNavState } from "./auth.js";
 
 export function initCommonUI(activeCategory = 'all', activeNav = '') {
@@ -13,6 +13,8 @@ export function initCommonUI(activeCategory = 'all', activeNav = '') {
   updateNavState();
   updateCartBadge();
   setupCartEvents();
+  setupScrollReveal();
+  setupAddToCartLoading();
 }
 
 function renderHeader(activeCategory, activeNav) {
@@ -38,14 +40,20 @@ function renderHeader(activeCategory, activeNav) {
 
       <!-- Right Action Icons -->
       <div class="as-nav-actions">
-        <button id="store-cart-btn" class="as-icon-btn" aria-label="Cart" title="Shopping Cart">
-          ${ICONS.cart}
-          <span id="nav-cart-badge" class="as-cart-badge" style="display: none;">0</span>
-        </button>
+        <div class="as-tooltip-wrap">
+          <button id="store-cart-btn" class="as-icon-btn" aria-label="Cart">
+            ${ICONS.cart}
+            <span id="nav-cart-badge" class="as-cart-badge" style="display: none;">0</span>
+          </button>
+          <span class="as-tooltip">Shopping Cart</span>
+        </div>
 
-        <a href="browse.html" class="as-icon-btn" aria-label="Browse Grid" title="Browse Catalog">
-          ${ICONS.grid}
-        </a>
+        <div class="as-tooltip-wrap">
+          <a href="browse.html" class="as-icon-btn" aria-label="Browse Grid">
+            ${ICONS.grid}
+          </a>
+          <span class="as-tooltip">Browse Catalog</span>
+        </div>
 
         <div id="nav-auth-container"></div>
       </div>
@@ -210,6 +218,159 @@ function setupCartEvents() {
   if (backdrop) backdrop.onclick = closeCartDrawer;
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeCartDrawer();
+    if (e.key === "Escape") {
+      closeCartDrawer();
+      closeQuickView();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const qvBtn = e.target.closest(".as-quickview-btn");
+    if (qvBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = qvBtn.getAttribute("data-id");
+      openQuickView(id);
+    }
   });
 }
+
+export function openQuickView(assetId) {
+  const asset = findAsset(assetId);
+  if (!asset) return;
+
+  let modalBackdrop = document.getElementById("as-quickview-backdrop");
+  if (!modalBackdrop) {
+    modalBackdrop = document.createElement("div");
+    modalBackdrop.id = "as-quickview-backdrop";
+    modalBackdrop.className = "hq-modal-backdrop";
+    modalBackdrop.style.display = "none";
+    modalBackdrop.style.zIndex = "10000";
+    modalBackdrop.innerHTML = `
+      <div id="as-quickview-modal" class="hq-glass-modal-content hq-scale-up" style="max-width: 680px; width: 92%; padding: 1.75rem; position: relative; max-height: 90vh; overflow-y: auto; background: rgba(18, 20, 29, 0.96); border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); border-radius: 16px;">
+        <button id="as-quickview-close" aria-label="Close" style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.2s;">✕</button>
+        <div id="as-quickview-body"></div>
+      </div>
+    `;
+    document.body.appendChild(modalBackdrop);
+
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeQuickView();
+    });
+    document.getElementById("as-quickview-close").onclick = closeQuickView;
+  }
+
+  const fullStars = Math.floor(asset.rating || 5);
+  const starsStr = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+
+  const body = document.getElementById("as-quickview-body");
+  body.innerHTML = `
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+      <div>
+        <div style="position: relative; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <img src="${asset.image}" alt="${asset.title}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+          ${asset.category === '3d' ? `<span class="as-card-tag" style="position: absolute; top: 0.5rem; left: 0.5rem;">3D</span>` : ''}
+          ${asset.isSale ? `<span class="as-discount-badge as-pulse-badge" style="position: absolute; top: 0.5rem; right: 0.5rem;">${asset.discount || '-50%'}</span>` : ''}
+        </div>
+        <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.75rem; color: rgba(255,255,255,0.7);">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.35rem;">
+            <span>Category:</span>
+            <span style="color: #fff; font-weight: 600;">${asset.categoryLabel}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.35rem;">
+            <span>Publisher:</span>
+            <span style="color: #fff; font-weight: 600;">${asset.publisher}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.35rem;">
+            <span>File Size:</span>
+            <span style="color: #fff; font-weight: 600;">${asset.fileSize || '142 MB'}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Compatibility:</span>
+            <span style="color: #fff; font-weight: 600;">${asset.supportedEngines || 'Unity 2022+ / Unreal 5'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; height: 100%;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin: 0 0 0.5rem; line-height: 1.3;">
+          ${asset.title}
+        </h2>
+        
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; font-size: 0.8125rem;">
+          <span class="as-stars" style="color: #F59E0B;">${starsStr}</span>
+          <span style="font-weight: 600; color: #FFFFFF;">${asset.rating}</span>
+          <span style="color: rgba(255,255,255,0.5);">(${asset.reviewsCount || 0} reviews)</span>
+        </div>
+
+        <p style="font-size: 0.8125rem; line-height: 1.6; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; flex: 1;">
+          ${asset.description || 'Production-ready game development asset with complete materials, LODs, and documentation.'}
+        </p>
+
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+            <span style="font-family: var(--as-font-mono); font-size: 1.4rem; font-weight: 800; color: #FFFFFF;">$${asset.price.toFixed(2)}</span>
+            ${asset.originalPrice ? `<span style="font-family: var(--as-font-mono); font-size: 0.875rem; text-decoration: line-through; color: rgba(255,255,255,0.4);">$${asset.originalPrice.toFixed(2)}</span>` : ''}
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button id="as-qv-add-cart" class="hq-glass-modal-btn hq-glass-modal-btn-primary" style="width: 100%; cursor: pointer; padding: 0.65rem;">
+            Add to Cart
+          </button>
+          <a href="asset.html?id=${asset.id}" class="hq-btn hq-btn-outline" style="text-align: center; text-decoration: none; padding: 0.55rem; border-color: rgba(255,255,255,0.2); color: #fff; font-size: 0.8125rem; border-radius: 8px;">
+            View Full Asset Details &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("as-qv-add-cart").onclick = () => {
+    addToCart(asset.id);
+    closeQuickView();
+  };
+
+  modalBackdrop.style.display = "flex";
+}
+
+export function closeQuickView() {
+  const modalBackdrop = document.getElementById("as-quickview-backdrop");
+  if (modalBackdrop) modalBackdrop.style.display = "none";
+}
+
+// Scroll Reveal — animations kit utility
+// Observes .as-reveal elements and adds .visible when they enter the viewport
+function setupScrollReveal() {
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show everything
+    document.querySelectorAll('.as-reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.as-reveal').forEach(el => observer.observe(el));
+}
+
+// Add-to-cart loading spinner — buttons kit hq-btn-loading pattern
+function setupAddToCartLoading() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-cart-btn');
+    if (!btn || btn.classList.contains('is-loading')) return;
+
+    // Show spinner briefly before the cart logic processes
+    btn.classList.add('is-loading');
+    setTimeout(() => {
+      btn.classList.remove('is-loading');
+    }, 600);
+  }, true); // capture phase to run before other handlers
+}
+

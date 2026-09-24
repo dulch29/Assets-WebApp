@@ -9,6 +9,7 @@ const LOCAL_USERS_DB_KEY = "hq_asset_store_registered_users";
 // Default guest state
 let currentUser = null;
 const listeners = [];
+let _dropdownListenerAdded = false;
 
 // Initialize Auth
 async function initAuth() {
@@ -238,9 +239,12 @@ export function updateNavState() {
         userMenu.style.display = userMenu.style.display === "block" ? "none" : "block";
       });
 
-      document.addEventListener("click", () => {
-        userMenu.style.display = "none";
-      });
+      if (!_dropdownListenerAdded) {
+        document.addEventListener("click", () => {
+          userMenu.style.display = "none";
+        });
+        _dropdownListenerAdded = true;
+      }
     }
 
     if (logoutBtn) {

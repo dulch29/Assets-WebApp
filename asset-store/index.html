@@ -39,47 +39,68 @@
     </div>
 
     <!-- Section 1: Featured 3D & Environments -->
-    <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+    <section class="as-section-enter" style="margin-bottom: 3.5rem;">
+      <div class="as-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
         <div>
-          <span style="font-size: 0.75rem; font-weight: 800; color: var(--as-primary); text-transform: uppercase; letter-spacing: 0.5px;">HandGun Highlights</span>
-          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Featured 3D & Templates</h2>
+          <span class="as-section-label">HandGun Highlights</span>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Featured 3D &amp; Templates</h2>
         </div>
-        <a href="browse.html" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">View all assets →</a>
+        <a href="browse.html" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">View all assets &rarr;</a>
       </div>
       <div id="popular-grid" class="as-grid-row">
-        <!-- Injected by JS -->
+        <!-- Skeleton placeholders (data-display kit) -->
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
       </div>
     </section>
 
+    <!-- Flash Sale Alert Banner (overlays kit hq-alert) -->
+    <div class="hq-alert info" style="background: var(--as-primary-light); border-color: rgba(255,96,0,0.25); color: var(--as-primary); margin-bottom: 1.5rem; border-radius: var(--as-radius);">
+      <svg class="hq-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+      <div class="hq-alert-content">
+        <div class="hq-alert-title" style="color: #CC4E00;">Flash Sale Active</div>
+        <div class="hq-alert-message" style="color: var(--as-text-secondary);">Save up to 60% on selected assets. Deals refresh every 48 hours.</div>
+      </div>
+    </div>
+
     <!-- Section 2: Special Deals & Discounts (Pulse Badges from animation-kit) -->
-    <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+    <section class="as-section-enter" style="margin-bottom: 3.5rem;">
+      <div class="as-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
         <div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <span class="as-discount-badge as-pulse-badge" style="background: var(--as-primary); color: #FFFFFF; font-weight: 800;">SPECIAL OFFER</span>
             <span style="font-size: 0.8125rem; color: var(--as-text-muted);">Up to 60% Off</span>
           </div>
-          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Flash Deals & Discounts</h2>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Flash Deals &amp; Discounts</h2>
         </div>
-        <a href="browse.html?sale=true" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">See all deals →</a>
+        <a href="browse.html?sale=true" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">See all deals &rarr;</a>
       </div>
       <div id="sale-grid" class="as-grid-row">
-        <!-- Injected by JS -->
+        <!-- Skeleton placeholders -->
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
       </div>
     </section>
 
     <!-- Section 3: Tools, Shaders & Audio -->
-    <section>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+    <section class="as-section-enter">
+      <div class="as-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
         <div>
-          <span style="font-size: 0.75rem; font-weight: 800; color: var(--as-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Engine Plugins & Music</span>
-          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Tools & Audio Suites</h2>
+          <span class="as-section-label">Engine Plugins &amp; Music</span>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Tools &amp; Audio Suites</h2>
         </div>
-        <a href="browse.html?category=tools" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">Explore tools →</a>
+        <a href="browse.html?category=tools" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">Explore tools &rarr;</a>
       </div>
       <div id="tools-grid" class="as-grid-row">
-        <!-- Injected by JS -->
+        <!-- Skeleton placeholders -->
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
+        <div class="as-card"><div class="as-skeleton-card"></div><div style="padding: 0.75rem 0.25rem;"><div class="as-skeleton-text short"></div><div class="as-skeleton-text"></div><div class="as-skeleton-text xs"></div></div></div>
       </div>
     </section>
 
@@ -134,7 +155,7 @@
   <script type="module">
     import { initCommonUI } from "./js/common-ui.js";
     import { ICONS } from "./js/icons.js";
-    import { MOCK_ASSETS } from "./js/data.js";
+    import { MOCK_ASSETS, getFeaturedAssets, getSaleAssets } from "./js/data.js";
     import { addToCart, toggleWishlist, isInWishlist } from "./js/store.js";
 
     initCommonUI('all', 'home');
@@ -198,14 +219,12 @@
       `;
     }
 
-    // Populate Featured Assets (1 to 4)
-    document.getElementById("popular-grid").innerHTML = MOCK_ASSETS.slice(0, 4).map(renderCard).join('');
-
-    // Populate Deals (4 to 8)
-    document.getElementById("sale-grid").innerHTML = MOCK_ASSETS.slice(4, 8).map(renderCard).join('');
-
-    // Populate Tools (8 to 12)
-    document.getElementById("tools-grid").innerHTML = MOCK_ASSETS.slice(8, 12).map(renderCard).join('');
+    // Simulate loading with skeleton → real content transition
+    setTimeout(() => {
+      document.getElementById("popular-grid").innerHTML = getFeaturedAssets().slice(0, 4).map(renderCard).join('');
+      document.getElementById("sale-grid").innerHTML = getSaleAssets().slice(0, 4).map(renderCard).join('');
+      document.getElementById("tools-grid").innerHTML = MOCK_ASSETS.filter(a => a.category === 'tools').slice(0, 4).map(renderCard).join('');
+    }, 400);
 
     // Event Delegation
     document.addEventListener("click", (e) => {

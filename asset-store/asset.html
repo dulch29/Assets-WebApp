@@ -18,14 +18,24 @@
   <nav id="store-subnav"></nav>
 
   <!-- Main Asset View -->
-  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+  <main class="as-section-enter" style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
 
-    <!-- Breadcrumb -->
-    <div style="margin-bottom: 1.5rem; font-size: 0.8125rem; color: var(--as-text-muted);">
-      <a href="index.html" style="color: var(--as-text-muted); text-decoration: none;">Store</a> /
-      <a href="browse.html" style="color: var(--as-text-muted); text-decoration: none;">Assets</a> /
-      <span id="asset-breadcrumb-title" style="color: var(--as-text-primary); font-weight: 500;">Asset Detail</span>
-    </div>
+    <!-- Breadcrumb (navigation kit) -->
+    <nav aria-label="Breadcrumbs" style="margin-bottom: 1.5rem;">
+      <ol class="hq-breadcrumbs" style="padding: 0; margin: 0; list-style: none;">
+        <li class="hq-breadcrumbs-item">
+          <a href="index.html" class="hq-breadcrumbs-link">Store</a>
+          <span class="hq-breadcrumbs-separator">/</span>
+        </li>
+        <li class="hq-breadcrumbs-item">
+          <a href="browse.html" class="hq-breadcrumbs-link">Assets</a>
+          <span class="hq-breadcrumbs-separator">/</span>
+        </li>
+        <li class="hq-breadcrumbs-item" aria-current="page">
+          <span id="asset-breadcrumb-title" style="color: var(--as-text-primary); font-weight: 600;">Asset Detail</span>
+        </li>
+      </ol>
+    </nav>
 
     <!-- 2-Column Showcase Layout -->
     <div
@@ -34,7 +44,7 @@
       <!-- Left: Gallery Preview + Details -->
       <div>
         <div
-          style="border-radius: var(--as-radius); overflow: hidden; background: #E4E4E7; border: 1px solid var(--as-border); aspect-ratio: 16 / 9; margin-bottom: 1rem;">
+          style="border-radius: var(--as-radius); overflow: hidden; background: #E4E4E7; border: 1px solid var(--as-border); aspect-ratio: 16 / 9; margin-bottom: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
           <img id="main-preview-img" src="" alt="Asset Preview" style="width: 100%; height: 100%; object-fit: cover;" />
         </div>
 
@@ -43,7 +53,7 @@
         </div>
 
         <!-- Description & Tech Specs -->
-        <div style="border-top: 1px solid var(--as-border); padding-top: 2rem;">
+        <div class="as-reveal" style="border-top: 1px solid var(--as-border); padding-top: 2rem;">
           <h2 style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin-bottom: 1rem;">Description</h2>
           <p id="asset-full-desc"
             style="color: var(--as-text-secondary); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9375rem;"></p>
@@ -53,9 +63,9 @@
             style="color: var(--as-text-secondary); font-size: 0.875rem; line-height: 1.8; padding-left: 1.25rem; margin-bottom: 2.5rem;">
           </ul>
 
-          <!-- Specs Table -->
-          <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+          <!-- Specs Table (data-display kit) -->
+          <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <table class="hq-table" style="width: 100%; border-collapse: collapse; font-size: 0.8125rem; background: #FFFFFF;">
               <tbody>
                 <tr style="border-bottom: 1px solid var(--as-border-light); background: var(--as-bg-subtle);">
                   <td style="color: var(--as-text-muted); width: 180px; padding: 0.75rem 1rem;">Version</td>
@@ -81,9 +91,9 @@
 
       </div>
 
-      <!-- Right: Action & Pricing Box -->
-      <div
-        style="position: sticky; top: 120px; background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem; box-shadow: var(--as-shadow);">
+      <!-- Right: Action & Pricing Box (cards kit) -->
+      <div class="hq-card"
+        style="position: sticky; top: 120px; background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.05);">
 
         <div style="margin-bottom: 0.75rem;">
           <span id="asset-badge-cat" class="as-pill-btn"
@@ -104,7 +114,7 @@
           </div>
           <div style="text-align: right;">
             <div style="font-weight: 700; font-size: 0.875rem; color: #18181B;">
-              <span id="asset-stars-view" class="as-stars">★★★★★</span>
+              <span id="asset-stars-view" class="as-stars" style="color: #F59E0B;">★★★★★</span>
               <span id="asset-rating">4.9</span>
             </div>
             <div style="font-size: 0.75rem; color: var(--as-text-muted);">(<span id="asset-reviews-count">128</span>
@@ -121,7 +131,7 @@
               style="font-family: var(--as-font-mono); font-size: 1.75rem; font-weight: 800; color: #18181B;">$0.00</span>
             <span id="asset-old-price"
               style="font-family: var(--as-font-mono); font-size: 0.9375rem; color: var(--as-text-muted); text-decoration: line-through; display: none;">$0.00</span>
-            <span id="asset-discount-tag" class="as-discount-badge" style="display: none;">-50%</span>
+            <span id="asset-discount-tag" class="as-discount-badge as-pulse-badge" style="display: none;">-50%</span>
           </div>
         </div>
 
@@ -147,8 +157,56 @@
 
     </div>
 
+    <!-- Verified Developer Reviews (cards kit - hq-card-testimonial) -->
+    <section style="margin-bottom: 4rem;">
+      <div class="as-reveal" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem;">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin: 0 0 0.25rem 0;">Developer Reviews</h2>
+          <span style="font-size: 0.8125rem; color: var(--as-text-muted);">Verified buyers rating for this release</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="as-stars" style="font-size: 1.1rem; color: #F59E0B;">★★★★★</span>
+          <span style="font-weight: 700; color: #18181B; font-size: 1rem;">4.9 / 5.0</span>
+        </div>
+      </div>
+
+      <div class="as-reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div class="hq-card-testimonial as-reveal" style="background: #FFFFFF; border: 1px solid var(--as-border); box-shadow: 0 4px 16px rgba(0,0,0,0.04); color: #18181B; padding: 1.5rem; border-radius: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: #FF6000; color: #FFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">AK</div>
+              <div>
+                <div style="font-size: 0.875rem; font-weight: 700; color: #18181B;">Alex K.</div>
+                <div style="font-size: 0.75rem; color: var(--as-text-muted);">Lead Technical Artist • Verified Buyer</div>
+              </div>
+            </div>
+            <div class="as-stars" style="color: #F59E0B; font-size: 0.875rem;">★★★★★</div>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--as-text-secondary); line-height: 1.6; margin: 0;">
+            "Incredible asset quality. Rigging and shader setup worked out of the box in Unity URP and HDRP. Saved our indie team at least two weeks of modeling and texturing time."
+          </p>
+        </div>
+
+        <div class="hq-card-testimonial as-reveal" style="background: #FFFFFF; border: 1px solid var(--as-border); box-shadow: 0 4px 16px rgba(0,0,0,0.04); color: #18181B; padding: 1.5rem; border-radius: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: #2563EB; color: #FFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">MT</div>
+              <div>
+                <div style="font-size: 0.875rem; font-weight: 700; color: #18181B;">Marcus T.</div>
+                <div style="font-size: 0.75rem; color: var(--as-text-muted);">Solo Game Dev • Verified Buyer</div>
+              </div>
+            </div>
+            <div class="as-stars" style="color: #F59E0B; font-size: 0.875rem;">★★★★★</div>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--as-text-secondary); line-height: 1.6; margin: 0;">
+            "Super clean hierarchy, great LODs, and very responsive publisher support. Highly recommended for any serious production pipeline."
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Related Assets -->
-    <section>
+    <section class="as-reveal">
       <h2 style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin-bottom: 1.25rem;">More from this publisher
       </h2>
       <div id="publisher-more-grid" class="as-grid-row">
@@ -253,11 +311,18 @@
           <a href="asset.html?id=${a.id}">
             <img src="${a.image}" alt="${a.title}" class="as-card-img" loading="lazy" />
           </a>
+          <button class="as-quickview-btn" data-id="${a.id}">
+            Quick View
+          </button>
         </div>
         <div class="as-card-content">
+          <div class="as-card-cat">
+            <span>${a.categoryLabel}</span>
+          </div>
           <a href="asset.html?id=${a.id}" class="as-card-title">${a.title}</a>
           <div class="as-card-price-row">
             <span class="as-price-current">$${a.price.toFixed(2)}</span>
+            ${a.isSale ? `<span class="as-discount-badge as-pulse-badge">${a.discount || '-50%'}</span>` : ''}
           </div>
         </div>
       </div>
