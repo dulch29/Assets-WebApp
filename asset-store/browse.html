@@ -342,6 +342,21 @@
       }
     });
 
+    // Pagination interaction
+    document.querySelectorAll(".hq-pagination-link").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (link.classList.contains("disabled") || link.hasAttribute("disabled")) return;
+        document.querySelectorAll(".hq-pagination-link").forEach(l => {
+          l.classList.remove("active");
+          l.removeAttribute("aria-current");
+        });
+        link.classList.add("active");
+        link.setAttribute("aria-current", "page");
+        window.scrollTo({ top: Math.max(0, document.getElementById("catalog-grid").offsetTop - 120), behavior: "smooth" });
+      });
+    });
+
     // Brief delay to show skeleton loading
     setTimeout(() => applyFilters(), 350);
   </script>

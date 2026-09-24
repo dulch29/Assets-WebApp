@@ -1,5 +1,3 @@
-User instruction: 'im really busy right now im just gonna let u do every kit' - Autonomous build of Layout Kit CSS. No external importers, no API, pure CSS utility classes for grid/flexbox/spacing. Static CSS file imported via link tag in HTML demos.
-
 /* Layout Kit - Production-Ready Grid & Container System */
 :root {
     --layout-surface-1: #05070C;

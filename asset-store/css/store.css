@@ -1,8 +1,19 @@
 /* HQ Asset Store - Professional Marketplace Design System */
 /* Inspired by Unity Asset Store & Unreal Fab */
 
-/* Load all 10 UI Kits */
-@import url('../kits/kits.css');
+/* Load all 12 UI Kits directly */
+@import url('../kits/utilities.css');
+@import url('../kits/layout.css');
+@import url('../kits/animations.css');
+@import url('../kits/buttons.css');
+@import url('../kits/cards.css');
+@import url('../kits/forms.css');
+@import url('../kits/data-display.css');
+@import url('../kits/glass-card.css');
+@import url('../kits/glass-modal.css');
+@import url('../kits/glass-navbar.css');
+@import url('../kits/navigation.css');
+@import url('../kits/overlays.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
 
 :root {
@@ -819,28 +830,67 @@ body {
   }
 }
 
-/* Kit Overrides: Navigation Pagination & Breadcrumbs */
-button.hq-pagination-link {
-  background: none;
-  border: none;
-  font: inherit;
+/* -------------------------------------------------------------
+   Kit Polish: Navigation Pagination & Breadcrumbs
+------------------------------------------------------------- */
+.hq-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  list-style: none;
+}
+
+.hq-pagination-link,
+button.hq-pagination-link,
+a.hq-pagination-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 0.9rem !important;
+  border-radius: var(--as-radius) !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--as-border) !important;
+  color: var(--as-text-secondary) !important;
+  font-family: var(--as-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none !important;
   cursor: pointer;
-  padding: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  line-height: 1;
+  box-sizing: border-box;
 }
 
-button.hq-pagination-link[disabled] {
-  cursor: default;
+.hq-pagination-link:hover:not(.disabled):not([disabled]):not([aria-disabled="true"]):not(.active) {
+  background: var(--as-bg-subtle) !important;
+  border-color: var(--as-primary) !important;
+  color: var(--as-primary) !important;
+  transform: translateY(-1px);
 }
 
-.hq-pagination-link.active {
+.hq-pagination-link.active,
+.hq-pagination-link[aria-current="page"] {
   background: var(--as-primary) !important;
   color: #FFFFFF !important;
   border-color: var(--as-primary) !important;
+  box-shadow: 0 2px 8px rgba(255, 96, 0, 0.35);
 }
 
-.hq-pagination-link:hover:not(.disabled):not([aria-disabled="true"]) {
-  border-color: var(--as-primary) !important;
-  color: var(--as-primary) !important;
+.hq-pagination-link.disabled,
+.hq-pagination-link[disabled],
+.hq-pagination-link[aria-disabled="true"] {
+  background: var(--as-bg-subtle) !important;
+  border-color: var(--as-border-light) !important;
+  color: #A1A1AA !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  pointer-events: none;
+  transform: none !important;
 }
 
 .hq-breadcrumbs-link:hover {
@@ -1215,16 +1265,125 @@ aside.hq-card label:has(input[type="radio"]:checked) {
 }
 
 /* -------------------------------------------------------------
-   Kit Polish: Auth page glass input glow
+   Kit Polish: Auth Page & Glass Modal UI
 ------------------------------------------------------------- */
-.hq-glass-modal-input:focus {
-  border-color: var(--as-primary) !important;
-  box-shadow: 0 0 0 3px rgba(255, 96, 0, 0.15), 0 0 20px rgba(255, 96, 0, 0.05) !important;
+.hq-glass-modal-content {
+  background: rgba(24, 24, 27, 0.82) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45) !important;
+  color: #FFFFFF !important;
 }
 
-/* Auth tab indicator transition */
-.hq-tabs-trigger {
-  transition: color 0.2s ease, border-bottom-color 0.2s ease, background 0.15s ease;
+.hq-glass-modal-content .hq-tabs-list {
+  display: flex !important;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  margin-bottom: 1.75rem;
+}
+
+.hq-glass-modal-content .hq-tabs-trigger {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: var(--as-font);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 4px 4px 0 0;
+  box-shadow: none !important;
+}
+
+.hq-glass-modal-content .hq-tabs-trigger:hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.hq-glass-modal-content .hq-tabs-trigger.active {
+  color: #FF6000 !important;
+  border-bottom: 2px solid #FF6000 !important;
+  background: transparent !important;
+}
+
+.hq-glass-modal-label {
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.hq-glass-modal-input {
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  font-family: var(--as-font) !important;
+  font-size: 0.875rem !important;
+  color: #FFFFFF !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+.hq-glass-modal-input:focus {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #FF6000 !important;
+  box-shadow: 0 0 0 3px rgba(255, 96, 0, 0.25), 0 0 20px rgba(255, 96, 0, 0.08) !important;
+}
+
+.hq-glass-modal-input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.hq-glass-modal-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px !important;
+  font-family: var(--as-font);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
+}
+
+.hq-glass-modal-btn-primary {
+  background: #FF6000 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(255, 96, 0, 0.3);
+}
+
+.hq-glass-modal-btn-primary:hover:not(:disabled) {
+  background: #E55600 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 96, 0, 0.45);
+}
+
+.hq-glass-modal-btn-secondary {
+  background: #FFFFFF !important;
+  color: #18181B !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hq-glass-modal-btn-secondary:hover:not(:disabled) {
+  background: #F4F4F5 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* -------------------------------------------------------------
