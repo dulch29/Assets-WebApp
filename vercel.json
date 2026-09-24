@@ -1,7 +1,21 @@
 {
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/", "destination": "/asset-store/index.html" },
+    { "source": "/css/:match*", "destination": "/asset-store/css/:match*" },
+    { "source": "/js/:match*", "destination": "/asset-store/js/:match*" },
+    { "source": "/browse", "destination": "/asset-store/browse.html" },
+    { "source": "/browse.html", "destination": "/asset-store/browse.html" },
+    { "source": "/asset", "destination": "/asset-store/asset.html" },
+    { "source": "/asset.html", "destination": "/asset-store/asset.html" },
+    { "source": "/auth", "destination": "/asset-store/auth.html" },
+    { "source": "/auth.html", "destination": "/asset-store/auth.html" },
+    { "source": "/account", "destination": "/asset-store/account.html" },
+    { "source": "/account.html", "destination": "/asset-store/account.html" },
+    { "source": "/publish", "destination": "/asset-store/publish.html" },
+    { "source": "/publish.html", "destination": "/asset-store/publish.html" },
     { "source": "/store", "destination": "/asset-store/index.html" },
-    { "source": "/store/:path*", "destination": "/asset-store/:path*" }
+    { "source": "/store/:path*", "destination": "/asset-store/:path*" },
+    { "source": "/kits-overview", "destination": "/index.html" }
   ]
 }
