@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Assets — HandGun Asset Store</title>
+  <meta name="description"
+    content="Search and filter verified 3D models, shaders, audio packs, web UI kits, and game development frameworks on HandGun." />
+  <link rel="stylesheet" href="css/store.css" />
+</head>
+
+<body>
+
+  <!-- Top Dark Navbar & Subnav -->
+  <header id="store-header"></header>
+
+  <!-- Category Pills Bar -->
+  <nav id="store-subnav"></nav>
+
+  <!-- Main Catalog Layout -->
+  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+
+    <!-- Top Bar: Results Count & Sort -->
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--as-border);">
+      <div>
+        <h1 id="browse-title" style="font-size: 1.35rem; font-weight: 700; color: #18181B; margin: 0 0 0.25rem 0;">
+          Browse Assets</h1>
+        <div id="browse-count" style="font-size: 0.8125rem; color: var(--as-text-muted);">Showing 12 results</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <label for="sort-select" style="font-size: 0.8125rem; color: var(--as-text-secondary); font-weight: 500;">Sort
+          by:</label>
+        <select id="sort-select"
+          style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius-sm); padding: 0.45rem 1.75rem 0.45rem 0.75rem; font-size: 0.8125rem; color: #18181B; outline: none; cursor: pointer;">
+          <option value="featured">Popularity</option>
+          <option value="rating">Rating</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Title</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 2-Column Sidebar + Grid -->
+    <div style="display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start;">
+
+      <!-- Filter Sidebar -->
+      <aside
+        style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.25rem; position: sticky; top: 120px;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--as-border-light);">
+          <span style="font-size: 0.875rem; font-weight: 700; color: #18181B;">Filters</span>
+          <button id="reset-filters-btn"
+            style="background: none; border: none; font-size: 0.75rem; color: var(--as-primary); cursor: pointer; font-weight: 600;">Reset
+            all</button>
+        </div>
+
+        <!-- Keyword search -->
+        <div style="margin-bottom: 1.5rem;">
+          <label
+            style="display: block; font-size: 0.75rem; font-weight: 600; color: #52525B; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px;">Search</label>
+          <input type="text" id="filter-search-input" placeholder="Search keywords..."
+            style="width: 100%; padding: 0.45rem 0.65rem; border: 1px solid var(--as-border); border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+        </div>
+
+        <!-- Category radios -->
+        <div style="margin-bottom: 1.5rem;">
+          <label
+            style="display: block; font-size: 0.75rem; font-weight: 600; color: #52525B; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px;">Category</label>
+          <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="all" checked style="accent-color: var(--as-primary);" /> All
+              Assets
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="3d" style="accent-color: var(--as-primary);" /> 3D Models
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="2d" style="accent-color: var(--as-primary);" /> 2D Art
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="tools" style="accent-color: var(--as-primary);" /> Tools &
+              Scripts
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="vfx" style="accent-color: var(--as-primary);" /> VFX &
+              Shaders
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="templates" style="accent-color: var(--as-primary);" />
+              Templates
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="cat-filter" value="audio" style="accent-color: var(--as-primary);" /> Audio
+            </label>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+            <label
+              style="font-size: 0.75rem; font-weight: 600; color: #52525B; text-transform: uppercase; letter-spacing: 0.5px;">Max
+              Price</label>
+            <span id="price-slider-val"
+              style="font-family: var(--as-font-mono); font-size: 0.8125rem; font-weight: 700; color: #18181B;">$100</span>
+          </div>
+          <input type="range" id="price-range" min="0" max="100" step="5" value="100"
+            style="width: 100%; accent-color: var(--as-primary);" />
+        </div>
+
+        <!-- Rating Filter -->
+        <div>
+          <label
+            style="display: block; font-size: 0.75rem; font-weight: 600; color: #52525B; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Rating</label>
+          <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="rating-filter" value="0" checked style="accent-color: var(--as-primary);" /> Any
+              rating
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="rating-filter" value="4.5" style="accent-color: var(--as-primary);" /> ★ 4.5 and
+              up
+            </label>
+            <label
+              style="font-size: 0.8125rem; color: #27272A; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="rating-filter" value="4.8" style="accent-color: var(--as-primary);" /> ★ 4.8 and
+              up
+            </label>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Main Catalog Results -->
+      <section>
+        <div id="catalog-grid" class="as-grid-row" style="grid-template-columns: repeat(4, 1fr);">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Empty state -->
+        <div id="catalog-empty"
+          style="display: none; text-align: center; padding: 4rem 2rem; background: var(--as-bg-subtle); border-radius: var(--as-radius); border: 1px dashed var(--as-border);">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #18181B; margin-bottom: 0.5rem;">No assets found</h3>
+          <p style="color: var(--as-text-muted); font-size: 0.8125rem; margin-bottom: 1.25rem;">Try relaxing your
+            filters or searching with different keywords.</p>
+          <button id="empty-reset-btn" class="as-btn as-btn-primary as-btn-sm">Reset Filters</button>
+        </div>
+
+        <!-- Pagination -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 3.5rem;">
+          <button class="as-btn as-btn-outline as-btn-sm" disabled style="opacity: 0.5;">Previous</button>
+          <button class="as-btn as-btn-primary as-btn-sm">1</button>
+          <button class="as-btn as-btn-outline as-btn-sm">2</button>
+          <button class="as-btn as-btn-outline as-btn-sm">Next</button>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="as-footer">
+    <div
+      style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-weight: 800; color: #FFFFFF;">HandGun <span style="font-size: 0.75rem; color: #FF6000; font-weight: 600;">ASSETS</span></div>
+      <div style="font-size: 0.75rem; color: #71717A;">© 2026 HandGun Asset Store. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { initCommonUI } from "./js/common-ui.js";
+    import { ICONS } from "./js/icons.js";
+    import { filterAssets } from "./js/data.js";
+    import { addToCart } from "./js/store.js";
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialQuery = urlParams.get("q") || "";
+    const initialCat = urlParams.get("category") || "all";
+    const initialSale = urlParams.get("sale") === "true";
+
+    initCommonUI(initialCat, 'browse');
+
+    const searchInput = document.getElementById("filter-search-input");
+    const priceSlider = document.getElementById("price-range");
+    const priceVal = document.getElementById("price-slider-val");
+    const sortSelect = document.getElementById("sort-select");
+    const catalogGrid = document.getElementById("catalog-grid");
+    const emptyState = document.getElementById("catalog-empty");
+    const countLabel = document.getElementById("browse-count");
+    const titleLabel = document.getElementById("browse-title");
+
+    if (initialQuery) {
+      searchInput.value = initialQuery;
+      titleLabel.textContent = `Search results for "${initialQuery}"`;
+    }
+
+    const targetRadio = document.querySelector(`input[name="cat-filter"][value="${initialCat}"]`);
+    if (targetRadio) targetRadio.checked = true;
+
+    function renderCard(asset) {
+      const catIcon = asset.category === '3d' ? ICONS.cube :
+        asset.category === '2d' ? ICONS.image :
+          asset.category === 'audio' ? ICONS.headphones :
+            asset.category === 'vfx' ? ICONS.sparkles :
+              asset.category === 'tools' ? ICONS.wrench : ICONS.layout;
+
+      const fullStars = Math.floor(asset.rating);
+      const starsStr = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+
+      return `
+        <div class="as-card">
+          <div class="as-card-media">
+            <a href="asset.html?id=${asset.id}">
+              <img src="${asset.image}" alt="${asset.title}" class="as-card-img" loading="lazy" />
+            </a>
+            ${asset.category === '3d' ? `<span class="as-card-tag">3D</span>` : ''}
+          </div>
+          <div class="as-card-content">
+            <div class="as-card-cat">
+              ${catIcon}
+              <span>${asset.categoryLabel}</span>
+            </div>
+            <a href="asset.html?id=${asset.id}" class="as-card-title" title="${asset.title}">
+              ${asset.title}
+            </a>
+            <div class="as-card-rating">
+              <span class="as-stars">${starsStr}</span>
+              <span style="font-weight: 600; color: #18181B;">${asset.rating}</span>
+              <span style="color: #71717A;">(${asset.reviewsCount})</span>
+            </div>
+            <div class="as-card-publisher">${asset.publisher}</div>
+            <div class="as-card-price-row">
+              <span class="as-price-current">$${asset.price.toFixed(2)}</span>
+              ${asset.originalPrice ? `
+                <span class="as-price-original">$${asset.originalPrice.toFixed(2)}</span>
+                <span class="as-discount-badge">${asset.discount || '-50%'}</span>
+              ` : ''}
+              ${asset.timer ? `<span class="as-timer-badge">${asset.timer}</span>` : ''}
+            </div>
+            <button class="add-cart-btn as-btn as-btn-outline as-btn-sm" data-id="${asset.id}" style="margin-top: 0.6rem; width: 100%; border-color: #E4E4E7; font-size: 0.75rem;">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyFilters() {
+      const category = document.querySelector('input[name="cat-filter"]:checked')?.value || 'all';
+      const query = searchInput.value.trim();
+      const maxPrice = parseFloat(priceSlider.value);
+      const minRating = parseFloat(document.querySelector('input[name="rating-filter"]:checked')?.value || '0');
+      const sortBy = sortSelect.value;
+
+      priceVal.textContent = `$${maxPrice}`;
+
+      const filtered = filterAssets({ category, query, maxPrice, minRating, sortBy });
+      countLabel.textContent = `Showing ${filtered.length} results`;
+
+      if (filtered.length === 0) {
+        catalogGrid.innerHTML = "";
+        emptyState.style.display = "block";
+      } else {
+        emptyState.style.display = "none";
+        catalogGrid.innerHTML = filtered.map(renderCard).join('');
+      }
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    priceSlider.addEventListener("input", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
+
+    document.querySelectorAll('input[name="cat-filter"]').forEach(r => r.addEventListener("change", applyFilters));
+    document.querySelectorAll('input[name="rating-filter"]').forEach(r => r.addEventListener("change", applyFilters));
+
+    document.getElementById("reset-filters-btn")?.addEventListener("click", () => {
+      searchInput.value = "";
+      priceSlider.value = "100";
+      document.querySelector('input[name="cat-filter"][value="all"]').checked = true;
+      document.querySelector('input[name="rating-filter"][value="0"]').checked = true;
+      sortSelect.value = "featured";
+      applyFilters();
+    });
+
+    document.getElementById("empty-reset-btn")?.addEventListener("click", () => {
+      document.getElementById("reset-filters-btn").click();
+    });
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".add-cart-btn");
+      if (btn) {
+        e.preventDefault();
+        const id = btn.getAttribute("data-id");
+        addToCart(id);
+      }
+    });
+
+    applyFilters();
+  </script>
+</body>
+
+</html>

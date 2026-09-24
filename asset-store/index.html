@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HandGun — Developer & Game Asset Marketplace</title>
+  <meta name="description" content="Discover 3D models, game templates, web UI kits, shaders, and audio on HandGun." />
+  <link rel="stylesheet" href="css/store.css" />
+</head>
+<body>
+
+  <!-- Top Dark Navbar & Subnav with #FF6000 Accents -->
+  <header id="store-header"></header>
+
+  <!-- Category Pills Bar with Grid/List Mode Switcher (ลูกเล่น from layout-kit) -->
+  <nav id="store-subnav"></nav>
+
+  <!-- Main Marketplace Container -->
+  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+
+    <!-- Real Game Dev Hero Spotlight -->
+    <div class="as-hero-spotlight" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=85');">
+      <div class="as-hero-overlay"></div>
+      <div class="as-hero-content">
+        <span class="as-hero-badge">Asset of the Month</span>
+        <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1.15; margin: 0 0 0.75rem 0; color: #FFFFFF;">
+          Stylized Fantasy RPG World & Castles
+        </h1>
+        <p style="color: #D1D5DB; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0; max-width: 560px;">
+          Over 350 modular castle pieces, ancient stone ruins, stylized foliar shaders, and village props ready for Unity, Unreal, and WebGL.
+        </p>
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <a href="asset.html?id=asset-1" class="as-btn as-btn-primary as-btn-lg">View Package — $29.99</a>
+          <button class="as-quickview-btn as-btn as-btn-secondary as-btn-lg" data-id="asset-1" style="position: static; transform: none; opacity: 1;">
+            Quick Preview
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: Featured 3D & Environments -->
+    <section style="margin-bottom: 3.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--as-primary); text-transform: uppercase; letter-spacing: 0.5px;">HandGun Highlights</span>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Featured 3D & Templates</h2>
+        </div>
+        <a href="browse.html" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">View all assets →</a>
+      </div>
+      <div id="popular-grid" class="as-grid-row">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+    <!-- Section 2: Special Deals & Discounts (Pulse Badges from animation-kit) -->
+    <section style="margin-bottom: 3.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="as-discount-badge as-pulse-badge" style="background: var(--as-primary); color: #FFFFFF; font-weight: 800;">SPECIAL OFFER</span>
+            <span style="font-size: 0.8125rem; color: var(--as-text-muted);">Up to 60% Off</span>
+          </div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Flash Deals & Discounts</h2>
+        </div>
+        <a href="browse.html?sale=true" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">See all deals →</a>
+      </div>
+      <div id="sale-grid" class="as-grid-row">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+    <!-- Section 3: Tools, Shaders & Audio -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--as-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Engine Plugins & Music</span>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: #111827; margin: 0.2rem 0 0;">Tools & Audio Suites</h2>
+        </div>
+        <a href="browse.html?category=tools" style="color: var(--as-primary); font-size: 0.8125rem; font-weight: 700; text-decoration: none;">Explore tools →</a>
+      </div>
+      <div id="tools-grid" class="as-grid-row">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="as-footer">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem;">
+          <svg style="width: 24px; height: 24px; color: var(--as-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          <div style="font-weight: 800; font-size: 1.25rem; color: #FFFFFF; letter-spacing: -0.02em;">HandGun <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(255, 96, 0, 0.16); color: #FF771C; border: 1px solid rgba(255, 96, 0, 0.35); padding: 0.15rem 0.45rem; border-radius: 4px; vertical-align: middle;">Asset Store</span></div>
+        </div>
+        <p style="color: #9CA3AF; max-width: 380px; margin: 0; line-height: 1.5;">
+          The premier developer asset store for web, indie games, and digital creators. Built entirely with the 10 UI Kits.
+        </p>
+      </div>
+      <div style="display: flex; gap: 3rem; font-size: 0.8125rem;">
+        <div>
+          <div style="color: #FFFFFF; font-weight: 700; margin-bottom: 0.75rem;">Categories</div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="browse.html?category=3d">3D Models & Renders</a>
+            <a href="browse.html?category=templates">Game Templates</a>
+            <a href="browse.html?category=2d">2D & UI Kits</a>
+            <a href="browse.html?category=tools">Tools & Plugins</a>
+          </div>
+        </div>
+        <div>
+          <div style="color: #FFFFFF; font-weight: 700; margin-bottom: 0.75rem;">Creators</div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="publish.html">Submit Your Assets</a>
+            <a href="account.html">My Asset Library</a>
+            <a href="auth.html">Account Sign In</a>
+          </div>
+        </div>
+        <div>
+          <div style="color: #FFFFFF; font-weight: 700; margin-bottom: 0.75rem;">Platform</div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="../index.html">UI Kits Documentation</a>
+            <a href="browse.html">Catalog Search</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width: 1440px; margin: 2.5rem auto 0; padding: 1.5rem 1.5rem 0; border-top: 1px solid #26272B; display: flex; justify-content: space-between; align-items: center; color: #6B7280;">
+      <span>© 2026 HandGun. Signature #FF6000 Edition.</span>
+      <span>Antigravity Pair Programming Showcase</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { initCommonUI } from "./js/common-ui.js";
+    import { ICONS } from "./js/icons.js";
+    import { MOCK_ASSETS } from "./js/data.js";
+    import { addToCart, toggleWishlist, isInWishlist } from "./js/store.js";
+
+    initCommonUI('all', 'home');
+
+    function renderCard(asset) {
+      const catIcon = asset.category === '3d' ? ICONS.cube :
+                      asset.category === '2d' ? ICONS.image :
+                      asset.category === 'audio' ? ICONS.headphones :
+                      asset.category === 'vfx' ? ICONS.sparkles :
+                      asset.category === 'tools' ? ICONS.wrench : ICONS.layout;
+
+      const inWish = isInWishlist(asset.id);
+      const fullStars = Math.floor(asset.rating);
+      const starsStr = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+
+      return `
+        <div class="as-card">
+          <div class="as-card-media">
+            <a href="asset.html?id=${asset.id}">
+              <img src="${asset.image}" alt="${asset.title}" class="as-card-img" loading="lazy" />
+            </a>
+            ${asset.category === '3d' ? `<span class="as-card-tag">3D</span>` : ''}
+            
+            <!-- Quick View Overlay Button (ลูกเล่น from glassmorphism/modal kit) -->
+            <button class="as-quickview-btn" data-id="${asset.id}">
+              Quick View
+            </button>
+
+            <!-- Wishlist Heart Button -->
+            <button class="as-card-wishlist wishlist-btn" data-id="${asset.id}" title="Wishlist">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="${inWish ? '#FF6000' : 'none'}" stroke="${inWish ? '#FF6000' : 'currentColor'}" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+            </button>
+          </div>
+
+          <div class="as-card-content">
+            <div class="as-card-cat">
+              ${catIcon}
+              <span>${asset.categoryLabel}</span>
+            </div>
+            <a href="asset.html?id=${asset.id}" class="as-card-title" title="${asset.title}">
+              ${asset.title}
+            </a>
+            <div class="as-card-rating">
+              <span class="as-stars">${starsStr}</span>
+              <span style="font-weight: 700; color: #111827;">${asset.rating}</span>
+              <span style="color: var(--as-text-muted);">(${asset.reviewsCount})</span>
+            </div>
+            <div class="as-card-publisher">${asset.publisher}</div>
+            <div class="as-card-price-row">
+              <span class="as-price-current">$${asset.price.toFixed(2)}</span>
+              ${asset.originalPrice ? `
+                <span class="as-price-original">$${asset.originalPrice.toFixed(2)}</span>
+                <span class="as-discount-badge">${asset.discount || '-50%'}</span>
+              ` : ''}
+            </div>
+            <button class="add-cart-btn as-btn as-btn-outline as-btn-sm" data-id="${asset.id}" style="margin-top: 0.75rem; width: 100%;">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Populate Featured Assets (1 to 4)
+    document.getElementById("popular-grid").innerHTML = MOCK_ASSETS.slice(0, 4).map(renderCard).join('');
+
+    // Populate Deals (4 to 8)
+    document.getElementById("sale-grid").innerHTML = MOCK_ASSETS.slice(4, 8).map(renderCard).join('');
+
+    // Populate Tools (8 to 12)
+    document.getElementById("tools-grid").innerHTML = MOCK_ASSETS.slice(8, 12).map(renderCard).join('');
+
+    // Event Delegation
+    document.addEventListener("click", (e) => {
+      const cartBtn = e.target.closest(".add-cart-btn");
+      if (cartBtn) {
+        e.preventDefault();
+        const id = cartBtn.getAttribute("data-id");
+        addToCart(id);
+      }
+
+      const wishBtn = e.target.closest(".wishlist-btn");
+      if (wishBtn) {
+        e.preventDefault();
+        const id = wishBtn.getAttribute("data-id");
+        const active = toggleWishlist(id);
+        const svg = wishBtn.querySelector("svg");
+        if (svg) {
+          svg.setAttribute("fill", active ? "#FF6000" : "none");
+          svg.setAttribute("stroke", active ? "#FF6000" : "currentColor");
+        }
+      }
+    });
+  </script>
+</body>
+</html>

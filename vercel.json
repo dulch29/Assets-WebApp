@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/store", "destination": "/asset-store/index.html" },
+    { "source": "/store/:path*", "destination": "/asset-store/:path*" }
+  ]
+}

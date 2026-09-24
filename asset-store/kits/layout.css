@@ -1,0 +1,137 @@
+User instruction: 'im really busy right now im just gonna let u do every kit' - Autonomous build of Layout Kit CSS. No external importers, no API, pure CSS utility classes for grid/flexbox/spacing. Static CSS file imported via link tag in HTML demos.
+
+/* Layout Kit - Production-Ready Grid & Container System */
+:root {
+    --layout-surface-1: #05070C;
+    --layout-surface-2: #0A0D12;
+    --layout-surface-3: #0F131C;
+    --layout-surface-4: #161D2B;
+    --layout-accent-cyan: #38BDF8;
+    --layout-accent-emerald: #6EE7B7;
+    --layout-text-primary: rgba(255, 255, 255, 0.95);
+    --layout-text-secondary: rgba(255, 255, 255, 0.70);
+    --layout-space-xs: 0.25rem;
+    --layout-space-sm: 0.5rem;
+    --layout-space-md: 1rem;
+    --layout-space-lg: 1.5rem;
+    --layout-space-xl: 2rem;
+    --layout-space-2xl: 3rem;
+    --layout-space-3xl: 4rem;
+    --layout-max-width: 1400px;
+    --layout-gap: 1.5rem;
+}
+
+.hq-container {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--layout-space-lg);
+}
+
+.hq-container-sm { max-width: 640px; }
+.hq-container-md { max-width: 768px; }
+.hq-container-lg { max-width: 1024px; }
+.hq-container-xl { max-width: 1280px; }
+.hq-container-full { max-width: 100%; }
+
+.hq-grid {
+    display: grid;
+    gap: var(--layout-gap);
+}
+
+.hq-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.hq-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.hq-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.hq-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.hq-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+.hq-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+@media (max-width: 768px) {
+    .hq-grid-cols-2, .hq-grid-cols-3, .hq-grid-cols-4, .hq-grid-cols-6, .hq-grid-cols-12 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hq-grid-cols-3, .hq-grid-cols-4, .hq-grid-cols-6, .hq-grid-cols-12 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.hq-col-span-1 { grid-column: span 1; }
+.hq-col-span-2 { grid-column: span 2; }
+.hq-col-span-3 { grid-column: span 3; }
+.hq-col-span-4 { grid-column: span 4; }
+.hq-col-span-6 { grid-column: span 6; }
+.hq-col-span-12 { grid-column: span 12; }
+
+.hq-flex { display: flex; }
+.hq-flex-col { flex-direction: column; }
+.hq-flex-row { flex-direction: row; }
+.hq-flex-wrap { flex-wrap: wrap; }
+
+.hq-justify-start { justify-content: flex-start; }
+.hq-justify-center { justify-content: center; }
+.hq-justify-end { justify-content: flex-end; }
+.hq-justify-between { justify-content: space-between; }
+
+.hq-items-start { align-items: flex-start; }
+.hq-items-center { align-items: center; }
+.hq-items-end { align-items: flex-end; }
+.hq-items-stretch { align-items: stretch; }
+
+.hq-gap-xs { gap: var(--layout-space-xs); }
+.hq-gap-sm { gap: var(--layout-space-sm); }
+.hq-gap-md { gap: var(--layout-space-md); }
+.hq-gap-lg { gap: var(--layout-space-lg); }
+.hq-gap-xl { gap: var(--layout-space-xl); }
+
+.hq-m-0 { margin: 0; }
+.hq-m-sm { margin: var(--layout-space-sm); }
+.hq-m-md { margin: var(--layout-space-md); }
+.hq-m-lg { margin: var(--layout-space-lg); }
+.hq-m-xl { margin: var(--layout-space-xl); }
+
+.hq-mt-0 { margin-top: 0; }
+.hq-mt-sm { margin-top: var(--layout-space-sm); }
+.hq-mt-md { margin-top: var(--layout-space-md); }
+.hq-mt-lg { margin-top: var(--layout-space-lg); }
+.hq-mt-xl { margin-top: var(--layout-space-xl); }
+
+.hq-mb-0 { margin-bottom: 0; }
+.hq-mb-sm { margin-bottom: var(--layout-space-sm); }
+.hq-mb-md { margin-bottom: var(--layout-space-md); }
+.hq-mb-lg { margin-bottom: var(--layout-space-lg); }
+.hq-mb-xl { margin-bottom: var(--layout-space-xl); }
+
+.hq-p-0 { padding: 0; }
+.hq-p-sm { padding: var(--layout-space-sm); }
+.hq-p-md { padding: var(--layout-space-md); }
+.hq-p-lg { padding: var(--layout-space-lg); }
+.hq-p-xl { padding: var(--layout-space-xl); }
+
+.hq-px-sm { padding-left: var(--layout-space-sm); padding-right: var(--layout-space-sm); }
+.hq-px-md { padding-left: var(--layout-space-md); padding-right: var(--layout-space-md); }
+.hq-px-lg { padding-left: var(--layout-space-lg); padding-right: var(--layout-space-lg); }
+
+.hq-py-sm { padding-top: var(--layout-space-sm); padding-bottom: var(--layout-space-sm); }
+.hq-py-md { padding-top: var(--layout-space-md); padding-bottom: var(--layout-space-md); }
+.hq-py-lg { padding-top: var(--layout-space-lg); padding-bottom: var(--layout-space-lg); }
+
+.hq-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--layout-surface-4), transparent);
+    margin: var(--layout-space-2xl) 0;
+}
+
+.hq-section {
+    padding: var(--layout-space-3xl) 0;
+}
+
+.hq-hide-mobile { display: block; }
+.hq-hide-desktop { display: none; }
+
+@media (max-width: 768px) {
+    .hq-hide-mobile { display: none; }
+    .hq-hide-desktop { display: block; }
+}

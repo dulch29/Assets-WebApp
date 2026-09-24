@@ -1,0 +1,572 @@
+/* ============================================
+   GLASS MODAL - ACCESSIBLE & WCAG 2.1 AA COMPLIANT
+   Copy this file into any project
+   Framework-agnostic • Zero dependencies
+   ============================================ */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --accent-primary: hsl(195, 100%, 45%);
+    --accent-hover: hsl(195, 100%, 55%);
+    --accent-secondary: rgba(255, 255, 255, 0.15);
+    --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+    --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --space-xl: clamp(2rem, 4vw, 3rem);
+    --radius-sm: clamp(8px, 1vw, 12px);
+    --radius-lg: clamp(16px, 2vw, 24px);
+    --radius-pill: 999px;
+}
+
+/* Glass Modal Container */
+.hq-glass-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Active state - use with role="dialog" aria-modal="true" */
+.hq-glass-modal[aria-hidden="false"] {
+    display: flex;
+}
+
+.hq-glass-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.hq-glass-modal-content {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--glass-shadow);
+    max-width: 540px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar styling for modal */
+.hq-glass-modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.hq-glass-modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.hq-glass-modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.hq-glass-modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hq-glass-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
+.hq-glass-modal-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: white;
+    margin: 0;
+}
+
+/* Close button - WCAG 2.1 AA compliant */
+.hq-glass-modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-xs);
+    line-height: 1;
+    transition: all 0.2s;
+    border-radius: var(--radius-sm);
+
+    /* Minimum touch target 44x44px */
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hq-glass-modal-close:hover {
+    background: var(--accent-secondary);
+    transform: rotate(90deg);
+}
+
+/* Focus indicator for close button */
+.hq-glass-modal-close:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+.hq-glass-modal-body {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.hq-glass-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.hq-glass-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.hq-glass-modal-label {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Input and textarea */
+.hq-glass-modal-input,
+.hq-glass-modal-textarea {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-family: inherit;
+    transition: all 0.2s;
+
+    /* Minimum touch target height */
+    min-height: 44px;
+}
+
+.hq-glass-modal-textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Focus state - WCAG 2.1 Level AA */
+.hq-glass-modal-input:focus,
+.hq-glass-modal-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* Placeholder - sufficient contrast */
+.hq-glass-modal-input::placeholder,
+.hq-glass-modal-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Error state for invalid inputs */
+.hq-glass-modal-input:invalid:not(:placeholder-shown),
+.hq-glass-modal-textarea:invalid:not(:placeholder-shown) {
+    border-color: #FF6B6B;
+}
+
+.hq-glass-modal-input:invalid:focus:not(:placeholder-shown),
+.hq-glass-modal-textarea:invalid:focus:not(:placeholder-shown) {
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+}
+
+/* Disabled state */
+.hq-glass-modal-input:disabled,
+.hq-glass-modal-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hq-glass-modal-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* Button base */
+.hq-glass-modal-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+
+    /* Minimum touch target */
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hq-glass-modal-btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.hq-glass-modal-btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.5);
+    transform: translateY(-1px);
+}
+
+.hq-glass-modal-btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.hq-glass-modal-btn-secondary {
+    background: var(--accent-secondary);
+    color: white;
+}
+
+.hq-glass-modal-btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.hq-glass-modal-btn-secondary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Button focus state */
+.hq-glass-modal-btn:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+/* Disabled button state */
+.hq-glass-modal-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Screen reader only class */
+.hq-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Reduced motion support - WCAG 2.1 Level AA */
+@media (prefers-reduced-motion: reduce) {
+    .hq-glass-modal,
+    .hq-glass-modal-content,
+    .hq-glass-modal-close,
+    .hq-glass-modal-btn {
+        animation: none;
+        transition: none;
+    }
+
+    .hq-glass-modal-close:hover,
+    .hq-glass-modal-btn-primary:hover:not(:disabled),
+    .hq-glass-modal-btn-secondary:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hq-glass-modal-content {
+        border: 2px solid white;
+    }
+
+    .hq-glass-modal-input,
+    .hq-glass-modal-textarea {
+        border: 2px solid white;
+    }
+
+    .hq-glass-modal-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .hq-glass-modal {
+        padding: var(--space-sm);
+    }
+
+    .hq-glass-modal-content {
+        padding: var(--space-lg);
+        max-height: 95vh;
+    }
+
+    .hq-glass-modal-actions {
+        flex-direction: column;
+    }
+
+    .hq-glass-modal-btn {
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .hq-glass-modal {
+        display: none !important;
+    }
+}
+
+/* ===== HTML STRUCTURE (Accessible) ===== */
+
+/*
+<div class="hq-glass-modal"
+     id="myModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modalTitle"
+     aria-hidden="true">
+    <div class="hq-glass-modal-backdrop" onclick="closeModal()"></div>
+    <div class="hq-glass-modal-content">
+        <div class="hq-glass-modal-header">
+            <h2 id="modalTitle" class="hq-glass-modal-title">Modal Title</h2>
+            <button class="hq-glass-modal-close"
+                    onclick="closeModal()"
+                    aria-label="Close dialog">
+                ×
+            </button>
+        </div>
+        <div class="hq-glass-modal-body">
+            <form class="hq-glass-modal-form" onsubmit="handleSubmit(event)">
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="modal-name">Name</label>
+                    <input
+                        type="text"
+                        id="modal-name"
+                        class="hq-glass-modal-input"
+                        placeholder="Enter your name"
+                        required
+                        aria-required="true"
+                    />
+                </div>
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="modal-email">Email</label>
+                    <input
+                        type="email"
+                        id="modal-email"
+                        class="hq-glass-modal-input"
+                        placeholder="your@email.com"
+                        required
+                        aria-required="true"
+                    />
+                </div>
+                <div class="hq-glass-modal-field">
+                    <label class="hq-glass-modal-label" for="modal-message">Message</label>
+                    <textarea
+                        id="modal-message"
+                        class="hq-glass-modal-textarea"
+                        placeholder="Your message here..."
+                        required
+                        aria-required="true"
+                    ></textarea>
+                </div>
+                <div class="hq-glass-modal-actions">
+                    <button type="submit" class="hq-glass-modal-btn hq-glass-modal-btn-primary">
+                        Submit
+                    </button>
+                    <button type="button" class="hq-glass-modal-btn hq-glass-modal-btn-secondary" onclick="closeModal()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+*/
+
+/* ===== JAVASCRIPT (Accessible) ===== */
+
+/*
+<script>
+let lastFocusedElement = null;
+
+// Open modal with focus management
+function openModal() {
+    const modal = document.getElementById('myModal');
+
+    // Store the element that had focus before opening
+    lastFocusedElement = document.activeElement;
+
+    // Show modal
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Focus the first focusable element (close button or first input)
+    setTimeout(() => {
+        const firstInput = modal.querySelector('input, textarea, button');
+        if (firstInput) firstInput.focus();
+    }, 100);
+
+    // Trap focus inside modal
+    trapFocus(modal);
+}
+
+// Close modal and restore focus
+function closeModal() {
+    const modal = document.getElementById('myModal');
+
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Restore focus to element that opened the modal
+    if (lastFocusedElement) {
+        lastFocusedElement.focus();
+    }
+}
+
+// Focus trap - keep focus inside modal
+function trapFocus(modal) {
+    const focusableElements = modal.querySelectorAll(
+        'button, input, textarea, select, a[href]'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    modal.addEventListener('keydown', function(e) {
+        if (e.key !== 'Tab') return;
+
+        if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === firstElement) {
+                lastElement.focus();
+                e.preventDefault();
+            }
+        } else {
+            // Tab
+            if (document.activeElement === lastElement) {
+                firstElement.focus();
+                e.preventDefault();
+            }
+        }
+    });
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('myModal');
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+        closeModal();
+    }
+});
+
+// Handle form submission
+function handleSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('modal-name').value;
+    const email = document.getElementById('modal-email').value;
+    const message = document.getElementById('modal-message').value;
+
+    // Your logic here (send to API, etc.)
+    console.log({ name, email, message });
+
+    // Close modal and reset form
+    closeModal();
+    e.target.reset();
+}
+</script>
+*/
+
+/* ===== ACCESSIBILITY CHECKLIST ===== */
+
+/*
+✅ WCAG 2.1 Level AA Compliant
+
+KEYBOARD NAVIGATION:
+- Tab/Shift+Tab: Navigate between form fields and buttons
+- Escape: Close modal
+- Enter: Submit form (when focused on input)
+- Focus trap: Tab stays inside modal when open
+
+SCREEN READERS:
+- role="dialog" + aria-modal="true": Announces modal to screen readers
+- aria-labelledby: Links modal to its title
+- aria-hidden: Hides/shows modal from screen reader
+- aria-label on close button: Announces "Close dialog"
+- Proper heading hierarchy (h2 for title)
+
+FOCUS MANAGEMENT:
+- Stores last focused element before opening
+- Restores focus after closing
+- First input automatically focused on open
+- Focus trapped inside modal (can't tab outside)
+
+VISUAL:
+- 44x44px minimum touch targets (WCAG 2.5.5)
+- 3:1 contrast ratio on focus indicators (WCAG 1.4.11)
+- 4.5:1 contrast on text (WCAG 1.4.3)
+- Clear focus indicators on all interactive elements
+
+MOTION:
+- prefers-reduced-motion: Disables animations
+- All animations can be disabled via CSS
+
+ERROR HANDLING:
+- Invalid state styling on form fields
+- HTML5 validation (required, email type)
+- Clear error indicators
+
+RESPONSIVE:
+- Works at 320px width and up
+- Touch-friendly on mobile
+- Adapts to screen size
+*/

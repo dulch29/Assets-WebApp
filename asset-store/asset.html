@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asset Details — HandGun Asset Store</title>
+  <meta name="description" content="View specifications, screenshots, reviews, and licensing for this digital asset on HandGun." />
+  <link rel="stylesheet" href="css/store.css" />
+</head>
+
+<body>
+
+  <!-- Top Dark Navbar & Subnav -->
+  <header id="store-header"></header>
+
+  <!-- Category Pills Bar -->
+  <nav id="store-subnav"></nav>
+
+  <!-- Main Asset View -->
+  <main style="max-width: 1440px; margin: 0 auto; padding: 2rem 1.5rem 5rem; width: 100%;">
+
+    <!-- Breadcrumb -->
+    <div style="margin-bottom: 1.5rem; font-size: 0.8125rem; color: var(--as-text-muted);">
+      <a href="index.html" style="color: var(--as-text-muted); text-decoration: none;">Store</a> /
+      <a href="browse.html" style="color: var(--as-text-muted); text-decoration: none;">Assets</a> /
+      <span id="asset-breadcrumb-title" style="color: var(--as-text-primary); font-weight: 500;">Asset Detail</span>
+    </div>
+
+    <!-- 2-Column Showcase Layout -->
+    <div
+      style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(360px, 1fr); gap: 3rem; align-items: start; margin-bottom: 4rem;">
+
+      <!-- Left: Gallery Preview + Details -->
+      <div>
+        <div
+          style="border-radius: var(--as-radius); overflow: hidden; background: #E4E4E7; border: 1px solid var(--as-border); aspect-ratio: 16 / 9; margin-bottom: 1rem;">
+          <img id="main-preview-img" src="" alt="Asset Preview" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+
+        <div id="thumb-strip" style="display: flex; gap: 0.75rem; overflow-x: auto; margin-bottom: 2.5rem;">
+          <!-- Thumbnails injected by JS -->
+        </div>
+
+        <!-- Description & Tech Specs -->
+        <div style="border-top: 1px solid var(--as-border); padding-top: 2rem;">
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin-bottom: 1rem;">Description</h2>
+          <p id="asset-full-desc"
+            style="color: var(--as-text-secondary); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9375rem;"></p>
+
+          <h3 style="font-size: 1rem; font-weight: 700; color: #18181B; margin-bottom: 0.75rem;">Technical Details</h3>
+          <ul id="asset-features-list"
+            style="color: var(--as-text-secondary); font-size: 0.875rem; line-height: 1.8; padding-left: 1.25rem; margin-bottom: 2.5rem;">
+          </ul>
+
+          <!-- Specs Table -->
+          <div style="border: 1px solid var(--as-border); border-radius: var(--as-radius); overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem;">
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--as-border-light); background: var(--as-bg-subtle);">
+                  <td style="color: var(--as-text-muted); width: 180px; padding: 0.75rem 1rem;">Version</td>
+                  <td id="spec-version" style="font-weight: 600; color: #18181B; padding: 0.75rem 1rem;">1.0.0</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--as-border-light);">
+                  <td style="color: var(--as-text-muted); padding: 0.75rem 1rem;">File size</td>
+                  <td id="spec-filesize" style="font-weight: 600; color: #18181B; padding: 0.75rem 1rem;">250 MB</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--as-border-light); background: var(--as-bg-subtle);">
+                  <td style="color: var(--as-text-muted); padding: 0.75rem 1rem;">Release date</td>
+                  <td id="spec-date" style="font-weight: 600; color: #18181B; padding: 0.75rem 1rem;">Sep 2026</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--as-text-muted); padding: 0.75rem 1rem;">License</td>
+                  <td style="color: #10B981; font-weight: 600; padding: 0.75rem 1rem;">Standard HandGun Asset Store EULA
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Action & Pricing Box -->
+      <div
+        style="position: sticky; top: 120px; background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 1.75rem; box-shadow: var(--as-shadow);">
+
+        <div style="margin-bottom: 0.75rem;">
+          <span id="asset-badge-cat" class="as-pill-btn"
+            style="font-size: 0.75rem; padding: 0.2rem 0.5rem; pointer-events: none;">3D Models</span>
+        </div>
+
+        <h1 id="asset-title"
+          style="font-size: 1.35rem; font-weight: 700; color: #18181B; line-height: 1.3; margin: 0 0 0.75rem 0;">
+          Asset Title
+        </h1>
+
+        <!-- Publisher & Rating -->
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--as-border-light);">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--as-text-muted);">Publisher</div>
+            <div id="publisher-name" style="font-size: 0.875rem; font-weight: 600; color: #18181B;">Studio</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: 700; font-size: 0.875rem; color: #18181B;">
+              <span id="asset-stars-view" class="as-stars">★★★★★</span>
+              <span id="asset-rating">4.9</span>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--as-text-muted);">(<span id="asset-reviews-count">128</span>
+              ratings)</div>
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div style="margin-bottom: 1.25rem;">
+          <div style="font-size: 0.75rem; color: var(--as-text-muted); margin-bottom: 0.25rem;">Single Entity License
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+            <span id="asset-price"
+              style="font-family: var(--as-font-mono); font-size: 1.75rem; font-weight: 800; color: #18181B;">$0.00</span>
+            <span id="asset-old-price"
+              style="font-family: var(--as-font-mono); font-size: 0.9375rem; color: var(--as-text-muted); text-decoration: line-through; display: none;">$0.00</span>
+            <span id="asset-discount-tag" class="as-discount-badge" style="display: none;">-50%</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem;">
+          <button id="add-to-cart-btn" class="as-btn as-btn-primary as-btn-lg" style="width: 100%;">
+            Add to Cart
+          </button>
+          <button id="wishlist-btn" class="as-btn as-btn-outline" style="width: 100%;">
+            <span id="wishlist-icon"></span> <span id="wishlist-text">Add to Wishlist</span>
+          </button>
+        </div>
+
+        <!-- Features list -->
+        <div
+          style="background: var(--as-bg-subtle); border-radius: var(--as-radius-sm); padding: 0.85rem; font-size: 0.78125rem; color: var(--as-text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
+          <div>• Instant digital download upon purchase</div>
+          <div>• Free lifetime updates included</div>
+          <div>• Verified engine compatibility</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Related Assets -->
+    <section>
+      <h2 style="font-size: 1.25rem; font-weight: 700; color: #18181B; margin-bottom: 1.25rem;">More from this publisher
+      </h2>
+      <div id="publisher-more-grid" class="as-grid-row">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="as-footer">
+    <div
+      style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-weight: 800; color: #FFFFFF;">HandGun <span style="font-size: 0.75rem; color: #FF6000; font-weight: 600;">ASSETS</span></div>
+      <div style="font-size: 0.75rem; color: #71717A;">© 2026 HandGun Asset Store. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { initCommonUI } from "./js/common-ui.js";
+    import { ICONS } from "./js/icons.js";
+    import { findAsset, addToCart, toggleWishlist, isInWishlist } from "./js/store.js";
+    import { MOCK_ASSETS } from "./js/data.js";
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const assetId = urlParams.get("id") || "asset-1";
+    const asset = findAsset(assetId) || MOCK_ASSETS[0];
+
+    initCommonUI(asset.category, 'browse');
+
+    document.title = `${asset.title} — HandGun Asset Store`;
+    document.getElementById("asset-breadcrumb-title").textContent = asset.title;
+    document.getElementById("asset-title").textContent = asset.title;
+    document.getElementById("asset-badge-cat").textContent = asset.categoryLabel;
+    document.getElementById("main-preview-img").src = asset.image;
+
+    if (asset.isSale) {
+      const oldPrice = document.getElementById("asset-old-price");
+      oldPrice.style.display = "inline";
+      oldPrice.textContent = `$${asset.originalPrice.toFixed(2)}`;
+      const disc = document.getElementById("asset-discount-tag");
+      disc.style.display = "inline";
+      disc.textContent = asset.discount || "-50%";
+    }
+
+    document.getElementById("publisher-name").textContent = asset.publisher;
+    document.getElementById("asset-rating").textContent = asset.rating;
+    document.getElementById("asset-reviews-count").textContent = asset.reviewsCount;
+    document.getElementById("asset-price").textContent = `$${asset.price.toFixed(2)}`;
+    document.getElementById("asset-full-desc").textContent = asset.description || asset.shortDesc;
+
+    document.getElementById("spec-version").textContent = asset.version || "1.0.0";
+    document.getElementById("spec-filesize").textContent = asset.fileSize || "150 MB";
+    document.getElementById("spec-date").textContent = asset.releaseDate || "Sep 2026";
+
+    const fullStars = Math.floor(asset.rating);
+    document.getElementById("asset-stars-view").textContent = "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+
+    // Populate Features
+    const featuresList = document.getElementById("asset-features-list");
+    if (asset.features && asset.features.length) {
+      featuresList.innerHTML = asset.features.map(f => `<li>${f}</li>`).join('');
+    }
+
+    // Thumbnails
+    document.getElementById("thumb-strip").innerHTML = `
+      <div style="border-radius: var(--as-radius-sm); overflow: hidden; width: 100px; height: 60px; border: 2px solid var(--as-primary); cursor: pointer;">
+        <img src="${asset.image}" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+    `;
+
+    // Wishlist UI
+    const wishlistBtn = document.getElementById("wishlist-btn");
+    const wishlistIcon = document.getElementById("wishlist-icon");
+    const wishlistText = document.getElementById("wishlist-text");
+
+    function updateWishlistUI() {
+      const inWishlist = isInWishlist(asset.id);
+      wishlistIcon.innerHTML = inWishlist
+        ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="#EF4444" stroke="#EF4444" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>`
+        : `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>`;
+      wishlistText.textContent = inWishlist ? "In Wishlist" : "Add to Wishlist";
+    }
+    updateWishlistUI();
+
+    wishlistBtn.onclick = () => {
+      toggleWishlist(asset.id);
+      updateWishlistUI();
+    };
+
+    document.getElementById("add-to-cart-btn").onclick = () => {
+      addToCart(asset.id);
+    };
+
+    // Related Assets
+    const moreGrid = document.getElementById("publisher-more-grid");
+    const otherAssets = MOCK_ASSETS.filter(a => a.id !== asset.id).slice(0, 5);
+    moreGrid.innerHTML = otherAssets.map(a => `
+      <div class="as-card">
+        <div class="as-card-media">
+          <a href="asset.html?id=${a.id}">
+            <img src="${a.image}" alt="${a.title}" class="as-card-img" loading="lazy" />
+          </a>
+        </div>
+        <div class="as-card-content">
+          <a href="asset.html?id=${a.id}" class="as-card-title">${a.title}</a>
+          <div class="as-card-price-row">
+            <span class="as-price-current">$${a.price.toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  </script>
+</body>
+
+</html>

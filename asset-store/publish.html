@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publish Asset — HandGun Asset Store</title>
+  <meta name="description"
+    content="Submit your 3D models, tools, shaders, web UI kits, and game templates for publishing on HandGun Asset Store." />
+  <link rel="stylesheet" href="css/store.css" />
+</head>
+
+<body>
+
+  <!-- Top Dark Navbar & Subnav -->
+  <header id="store-header"></header>
+
+  <!-- Category Pills Bar -->
+  <nav id="store-subnav"></nav>
+
+  <!-- Main Publisher Form Wizard -->
+  <main style="max-width: 800px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; width: 100%;">
+
+    <div style="margin-bottom: 2rem;">
+      <h1 style="font-size: 1.5rem; font-weight: 700; color: #18181B; margin: 0 0 0.35rem 0;">Submit an Asset</h1>
+      <p style="color: var(--as-text-muted); font-size: 0.875rem; margin: 0;">Fill out the metadata, uploads, and
+        pricing specifications for your package.</p>
+    </div>
+
+    <!-- Stepper Navigation -->
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--as-border); padding-bottom: 1.25rem; margin-bottom: 2rem;">
+      <div id="step-nav-1" class="step-nav-item active"
+        style="font-size: 0.8125rem; font-weight: 600; color: var(--as-primary);">
+        1. General Info
+      </div>
+      <div style="color: var(--as-border);">→</div>
+      <div id="step-nav-2" class="step-nav-item"
+        style="font-size: 0.8125rem; font-weight: 500; color: var(--as-text-muted);">
+        2. Media & Files
+      </div>
+      <div style="color: var(--as-border);">→</div>
+      <div id="step-nav-3" class="step-nav-item"
+        style="font-size: 0.8125rem; font-weight: 500; color: var(--as-text-muted);">
+        3. Pricing & License
+      </div>
+      <div style="color: var(--as-border);">→</div>
+      <div id="step-nav-4" class="step-nav-item"
+        style="font-size: 0.8125rem; font-weight: 500; color: var(--as-text-muted);">
+        4. Review & Submit
+      </div>
+    </div>
+
+    <!-- Wizard Card -->
+    <div
+      style="background: #FFFFFF; border: 1px solid var(--as-border); border-radius: var(--as-radius); padding: 2rem; box-shadow: var(--as-shadow-sm);">
+      <form id="publish-wizard-form">
+
+        <!-- STEP 1: General Info -->
+        <div id="step-content-1" class="wizard-step">
+          <h2 style="font-size: 1.05rem; font-weight: 700; color: #18181B; margin: 0 0 1.25rem 0;">General Information
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Package
+                Name *</label>
+              <input type="text" id="pub-title" placeholder="e.g. Modular Sci-Fi Corridor Kit" required
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Category
+                *</label>
+              <select id="pub-category"
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none; background: #FFFFFF; cursor: pointer;">
+                <option value="3d">3D Models</option>
+                <option value="2d">2D Art</option>
+                <option value="tools">Tools & Scripts</option>
+                <option value="vfx">VFX & Shaders</option>
+                <option value="audio">Audio</option>
+                <option value="templates">Templates</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Short
+                Summary *</label>
+              <input type="text" id="pub-tagline" placeholder="Brief one-line summary of what is included" required
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Detailed
+                Description *</label>
+              <textarea id="pub-description" rows="4"
+                placeholder="Detail specifications, polygons, texture sizes, supported pipelines..." required
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none; font-family: var(--as-font);"></textarea>
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Tags
+                (comma separated)</label>
+              <input type="text" id="pub-tags" placeholder="Modular, Rigged, PBR, Sci-Fi"
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none;" />
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+            <button type="button" class="wizard-next-btn as-btn as-btn-primary" data-next="2">Next: Media & Files
+              →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Media & Files -->
+        <div id="step-content-2" class="wizard-step" style="display: none;">
+          <h2 style="font-size: 1.05rem; font-weight: 700; color: #18181B; margin: 0 0 1.25rem 0;">Media & Package Files
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Cover
+                Artwork (16:9)</label>
+              <div id="cover-dropzone"
+                style="border: 2px dashed var(--as-border); border-radius: var(--as-radius); padding: 2rem; text-align: center; cursor: pointer; background: var(--as-bg-subtle);">
+                <div
+                  style="font-size: 0.875rem; font-weight: 600; color: var(--as-text-primary); margin-bottom: 0.25rem;">
+                  Click to generate high-resolution store banner</div>
+                <div style="font-size: 0.75rem; color: var(--as-text-muted);">Standard 640x360 PNG / SVG format</div>
+              </div>
+              <input type="hidden" id="pub-image-url" value="" />
+              <div id="cover-preview-box" style="margin-top: 1rem; display: none; text-align: center;">
+                <img id="cover-preview-img" src="" alt="Preview"
+                  style="max-height: 160px; border-radius: 4px; border: 1px solid var(--as-border);" />
+              </div>
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Package
+                File (.unitypackage or .zip)</label>
+              <div
+                style="border: 1px solid var(--as-border); border-radius: var(--as-radius-sm); padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--as-bg-subtle);">
+                <div>
+                  <div style="font-size: 0.8125rem; font-weight: 600; color: #18181B;">package_build_v1.0.unitypackage
+                  </div>
+                  <div style="font-size: 0.75rem; color: var(--as-text-muted);">184 MB • Ready for deployment</div>
+                </div>
+                <span
+                  style="font-size: 0.7rem; font-weight: 700; color: #10B981; background: #ECFDF5; padding: 2px 8px; border-radius: 4px;">ATTACHED</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="wizard-prev-btn as-btn as-btn-outline" data-prev="1">← Back</button>
+            <button type="button" class="wizard-next-btn as-btn as-btn-primary" data-next="3">Next: Pricing →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Pricing -->
+        <div id="step-content-3" class="wizard-step" style="display: none;">
+          <h2 style="font-size: 1.05rem; font-weight: 700; color: #18181B; margin: 0 0 1.25rem 0;">Pricing & Terms</h2>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">Price
+                (USD) *</label>
+              <input type="number" id="pub-price" min="0" max="999" step="0.5" value="19.99"
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.9375rem; font-family: var(--as-font-mono); font-weight: 700; outline: none;" />
+              <div style="font-size: 0.75rem; color: var(--as-text-muted); margin-top: 0.25rem;">Set to 0 for free
+                distribution.</div>
+            </div>
+
+            <div>
+              <label
+                style="display: block; font-size: 0.8125rem; font-weight: 600; color: #27272A; margin-bottom: 0.35rem;">License
+                Agreement</label>
+              <select
+                style="width: 100%; border: 1px solid var(--as-border); padding: 0.55rem 0.75rem; border-radius: var(--as-radius-sm); font-size: 0.8125rem; outline: none; background: #FFFFFF; cursor: pointer;">
+                <option>Standard HandGun Asset Store EULA</option>
+                <option>Multi-Seat Studio License</option>
+              </select>
+            </div>
+
+            <div
+              style="border: 1px solid var(--as-border); border-radius: var(--as-radius-sm); padding: 0.85rem; background: var(--as-bg-subtle);">
+              <label
+                style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: #27272A; cursor: pointer;">
+                <input type="checkbox" id="pub-sale-toggle" style="accent-color: var(--as-primary);" />
+                <span>Enroll in launch discount (50% Off during first week)</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="wizard-prev-btn as-btn as-btn-outline" data-prev="2">← Back</button>
+            <button type="button" class="wizard-next-btn as-btn as-btn-primary" data-next="4">Next: Review →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Review -->
+        <div id="step-content-4" class="wizard-step" style="display: none;">
+          <h2 style="font-size: 1.05rem; font-weight: 700; color: #18181B; margin: 0 0 1.25rem 0;">Review Submission
+          </h2>
+
+          <div
+            style="border: 1px solid var(--as-border); border-radius: var(--as-radius-sm); padding: 1.25rem; margin-bottom: 1.5rem; background: var(--as-bg-subtle);">
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
+              <img id="review-thumb" src="" alt="Thumbnail"
+                style="width: 90px; height: 50px; object-fit: cover; border-radius: 4px;" />
+              <div>
+                <div id="review-title" style="font-size: 1rem; font-weight: 700; color: #18181B;">Package Title</div>
+                <div id="review-meta" style="font-size: 0.75rem; color: var(--as-text-muted);">Category • $19.99</div>
+              </div>
+            </div>
+            <p id="review-desc"
+              style="font-size: 0.8125rem; color: var(--as-text-secondary); margin: 0; line-height: 1.5;"></p>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="wizard-prev-btn as-btn as-btn-outline" data-prev="3">← Back</button>
+            <button type="submit" class="as-btn as-btn-primary">Submit for Release</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="as-footer">
+    <div
+      style="max-width: 1440px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-weight: 800; color: #FFFFFF;">HandGun <span style="font-size: 0.75rem; color: #FF6000; font-weight: 600;">ASSETS</span></div>
+      <div style="font-size: 0.75rem; color: #71717A;">© 2026 HandGun Asset Store. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { initCommonUI } from "./js/common-ui.js";
+    import { saveListing, showToast } from "./js/store.js";
+
+    initCommonUI('all', 'publish');
+
+    let currentStep = 1;
+
+    function makeCustomCover(title, category) {
+      return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="%231E293B"/><rect width="640" height="360" fill="none" stroke="%23334155" stroke-width="2"/><g transform="translate(40, 200)"><rect x="-16" y="-30" width="540" height="100" rx="4" fill="rgba(0,0,0,0.7)"/><text x="10" y="10" font-family="-apple-system,sans-serif" font-weight="800" font-size="24" fill="%23ffffff">${encodeURIComponent(title || "Custom Package")}</text><text x="10" y="40" font-family="-apple-system,sans-serif" font-weight="600" font-size="12" fill="%2394A3B8">${encodeURIComponent(category.toUpperCase())} • VERIFIED ASSET</text></g></svg>`;
+    }
+
+    const dropzone = document.getElementById("cover-dropzone");
+    const previewBox = document.getElementById("cover-preview-box");
+    const previewImg = document.getElementById("cover-preview-img");
+
+    dropzone.onclick = () => {
+      const title = document.getElementById("pub-title").value || "New Custom Asset";
+      const cat = document.getElementById("pub-category").value;
+      const svg = makeCustomCover(title, cat);
+      document.getElementById("pub-image-url").value = svg;
+      previewImg.src = svg;
+      previewBox.style.display = "block";
+      showToast("Store cover banner generated.", "success");
+    };
+
+    function goToStep(step) {
+      document.querySelectorAll(".wizard-step").forEach(s => s.style.display = "none");
+      document.getElementById(`step-content-${step}`).style.display = "block";
+
+      for (let i = 1; i <= 4; i++) {
+        const navItem = document.getElementById(`step-nav-${i}`);
+        if (i === step) {
+          navItem.style.color = "var(--as-primary)";
+          navItem.style.fontWeight = "600";
+        } else if (i < step) {
+          navItem.style.color = "#10B981";
+          navItem.style.fontWeight = "600";
+        } else {
+          navItem.style.color = "var(--as-text-muted)";
+          navItem.style.fontWeight = "500";
+        }
+      }
+      currentStep = step;
+
+      if (step === 4) populateReview();
+    }
+
+    document.querySelectorAll(".wizard-next-btn").forEach(btn => {
+      btn.onclick = () => {
+        const next = parseInt(btn.getAttribute("data-next"));
+        if (currentStep === 1 && !document.getElementById("pub-title").value) {
+          showToast("Please enter a package name", "error");
+          return;
+        }
+        if (currentStep === 2 && !document.getElementById("pub-image-url").value) {
+          dropzone.click();
+        }
+        goToStep(next);
+      };
+    });
+
+    document.querySelectorAll(".wizard-prev-btn").forEach(btn => {
+      btn.onclick = () => {
+        const prev = parseInt(btn.getAttribute("data-prev"));
+        goToStep(prev);
+      };
+    });
+
+    function populateReview() {
+      const title = document.getElementById("pub-title").value;
+      const cat = document.getElementById("pub-category").options[document.getElementById("pub-category").selectedIndex].text;
+      const price = parseFloat(document.getElementById("pub-price").value) || 0;
+      const desc = document.getElementById("pub-description").value;
+      const img = document.getElementById("pub-image-url").value;
+
+      document.getElementById("review-thumb").src = img;
+      document.getElementById("review-title").textContent = title;
+      document.getElementById("review-meta").textContent = `${cat} • $${price.toFixed(2)}`;
+      document.getElementById("review-desc").textContent = desc;
+    }
+
+    document.getElementById("publish-wizard-form").onsubmit = (e) => {
+      e.preventDefault();
+      const title = document.getElementById("pub-title").value;
+      const cat = document.getElementById("pub-category").value;
+      const catLabel = document.getElementById("pub-category").options[document.getElementById("pub-category").selectedIndex].text;
+      const price = parseFloat(document.getElementById("pub-price").value) || 0;
+      const desc = document.getElementById("pub-description").value;
+      const shortDesc = document.getElementById("pub-tagline").value;
+      const tags = document.getElementById("pub-tags").value.split(',').map(t => t.trim()).filter(Boolean);
+      let img = document.getElementById("pub-image-url").value || makeCustomCover(title, cat);
+
+      const newAsset = saveListing({
+        title,
+        category: cat,
+        categoryLabel: catLabel,
+        price,
+        description: desc,
+        shortDesc: shortDesc,
+        tags: tags.length ? tags : ["Verified", catLabel],
+        image: img
+      });
+
+      setTimeout(() => {
+        window.location.href = `asset.html?id=${newAsset.id}`;
+      }, 1000);
+    };
+  </script>
+</body>
+
+</html>
