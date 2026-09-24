@@ -16,6 +16,6 @@
     { "source": "/publish.html", "destination": "/asset-store/publish.html" },
     { "source": "/store", "destination": "/asset-store/index.html" },
     { "source": "/store/:path*", "destination": "/asset-store/:path*" },
-    { "source": "/kits-overview", "destination": "/index.html" }
+    { "source": "/kits-overview", "destination": "/asset-store/index.html" }
   ]
 }
