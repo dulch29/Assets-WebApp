@@ -3,7 +3,7 @@
 
 import { ICONS } from "./icons.js";
 import { CATEGORIES } from "./data.js";
-import { getCart, removeFromCart, getCartTotal, checkoutCart, updateCartBadge, findAsset, addToCart } from "./store.js";
+import { getCart, removeFromCart, getCartTotal, checkoutCart, updateCartBadge, findAsset, addToCart, getAllStoreAssets } from "./store.js";
 import { updateNavState } from "./auth.js";
 
 export function initCommonUI(activeCategory = 'all', activeNav = '') {
@@ -15,6 +15,7 @@ export function initCommonUI(activeCategory = 'all', activeNav = '') {
   setupCartEvents();
   setupScrollReveal();
   setupAddToCartLoading();
+  setupSearchAutocomplete();
 }
 
 function renderHeader(activeCategory, activeNav) {
@@ -32,10 +33,11 @@ function renderHeader(activeCategory, activeNav) {
 
       <!-- Search Input with Blue Search Button -->
       <form id="store-search-form" class="as-search-wrap" onsubmit="event.preventDefault(); window.location.href='browse.html?q=' + encodeURIComponent(this.querySelector('input').value);">
-        <input type="text" class="as-search-input" placeholder="Search for assets" />
+        <input type="text" id="as-search-input" class="as-search-input" placeholder="Search for assets" autocomplete="off" />
         <button type="submit" class="as-search-btn" aria-label="Search">
           ${ICONS.search}
         </button>
+        <div id="as-search-dropdown" class="hq-glass-card as-search-dropdown" style="display: none;"></div>
       </form>
 
       <!-- Right Action Icons -->
@@ -372,5 +374,61 @@ function setupAddToCartLoading() {
       btn.classList.remove('is-loading');
     }, 600);
   }, true); // capture phase to run before other handlers
+}
+
+function setupSearchAutocomplete() {
+  const input = document.getElementById("as-search-input");
+  const dropdown = document.getElementById("as-search-dropdown");
+  if (!input || !dropdown) return;
+
+  const allAssets = getAllStoreAssets();
+
+  input.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    if (query.length < 1) {
+      dropdown.style.display = "none";
+      return;
+    }
+
+    const matches = allAssets.filter(a => 
+      a.title.toLowerCase().includes(query) || 
+      a.categoryLabel.toLowerCase().includes(query)
+    ).slice(0, 5); // show up to 5 matches
+
+    if (matches.length === 0) {
+      dropdown.innerHTML = `<div style="padding: 1rem; color: var(--as-text-muted); font-size: 0.8125rem; text-align: center;">No assets found for "${query}"</div>`;
+      dropdown.style.display = "block";
+      return;
+    }
+
+    dropdown.innerHTML = matches.map(asset => `
+      <a href="asset.html?id=${asset.id}" class="as-search-result-item">
+        <img src="${asset.image}" alt="${asset.title}" class="as-search-result-img" />
+        <div class="as-search-result-info">
+          <div class="as-search-result-title">${asset.title}</div>
+          <div class="as-search-result-meta">
+            <span class="as-search-result-cat">${asset.categoryLabel}</span>
+            <span class="as-search-result-price" style="color: var(--as-primary); font-weight: 700;">${asset.price === 0 ? 'Free' : '$' + asset.price.toFixed(2)}</span>
+          </div>
+        </div>
+      </a>
+    `).join('');
+    
+    dropdown.style.display = "block";
+  });
+
+  // Hide when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
+  // Re-show on focus if there's text
+  input.addEventListener("focus", () => {
+    if (input.value.trim().length > 0) {
+      input.dispatchEvent(new Event('input'));
+    }
+  });
 }
 
