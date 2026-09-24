@@ -820,6 +820,18 @@ body {
 }
 
 /* Kit Overrides: Navigation Pagination & Breadcrumbs */
+button.hq-pagination-link {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+button.hq-pagination-link[disabled] {
+  cursor: default;
+}
+
 .hq-pagination-link.active {
   background: var(--as-primary) !important;
   color: #FFFFFF !important;

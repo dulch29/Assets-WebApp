@@ -342,6 +342,7 @@
       const desc = document.getElementById("pub-description").value;
       const shortDesc = document.getElementById("pub-tagline").value;
       const tags = document.getElementById("pub-tags").value.split(',').map(t => t.trim()).filter(Boolean);
+      const license = document.getElementById("publish-license").value;
       let img = document.getElementById("pub-image-url").value || makeCustomCover(title, cat);
 
       const newAsset = saveListing({
@@ -352,7 +353,8 @@
         description: desc,
         shortDesc: shortDesc,
         tags: tags.length ? tags : ["Verified", catLabel],
-        image: img
+        image: img,
+        license
       });
 
       setTimeout(() => {

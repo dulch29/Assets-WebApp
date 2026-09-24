@@ -241,7 +241,8 @@ export function updateNavState() {
 
       if (!_dropdownListenerAdded) {
         document.addEventListener("click", () => {
-          userMenu.style.display = "none";
+          const m = document.getElementById("nav-user-menu");
+          if (m) m.style.display = "none";
         });
         _dropdownListenerAdded = true;
       }
