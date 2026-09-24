@@ -150,7 +150,7 @@ export const MOCK_ASSETS = [
       "Dynamic autumn leaf fall and snowfall particle VFX",
       "Single master palette texture for lightning-fast GPU batching"
     ],
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "asset-6",
@@ -234,7 +234,7 @@ export const MOCK_ASSETS = [
       "Seed synchronization for competitive multiplayer matches",
       "Clean, fully documented C# source code included"
     ],
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "asset-9",
